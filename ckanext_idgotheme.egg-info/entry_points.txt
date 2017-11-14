@@ -1,7 +1,0 @@
-
-        [ckan.plugins]
-        idgotheme=ckanext.idgotheme.plugin:IdgothemePlugin
-
-        [babel.extractors]
-        ckan = ckan.lib.extract:extract_ckan
-    
