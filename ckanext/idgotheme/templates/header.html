@@ -1,0 +1,110 @@
+{% ckan_extends %}
+
+{% block header_wrapper %}
+{% block header_account %}
+  <header class="account-masthead">
+    <div class="container-fluid">
+      {% block header_account_container_content %}
+      	{{ super() }}
+	  {% endblock %}
+    </div>
+  </header>
+{% endblock %}
+
+
+
+{% set url_site_wp = 'https://www-rec.datasud.fr' %}
+{% set url_publier = 'https://publier-rec.datasud.fr' %}
+
+
+<header class="navbar navbar-static-top masthead">
+  {% block header_debug %}
+    {% if g.debug and not g.debug_supress_header %}
+      <div class="debug">Controller : {{ c.controller }}<br/>Action : {{ c.action }}</div>
+    {% endif %}
+  {% endblock %}
+  <div class="container-fluid">
+    <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+
+	<div class="header_espaces">
+		<a href="#" class="documentaire">
+			Espace <br><span>documentaire</span>
+    	</a>
+    	<a href="http://datasud.readthedocs.io/fr/latest/" class="dev">
+			Espace <br><span>developpeurs</span>
+		</a>
+	</div>
+	
+
+    {# The .header-image class hides the main text and uses image replacement for the title #}
+    <hgroup class="{{ g.header_class }} pull-left">
+      <a class="navbar-brand btn logo" href="{{ url_site_wp }}"></a>
+      <a class="logo_header" href="http://www.regionpaca.fr/" target="blank_"><img src="{{ url_site_wp }}/wp-content/themes/crigepaca/assets/images/logo_region_paca.jpg" alt="Region Paca" title="Region Paca"></a>
+      <a class="logo_header" href="http://www.crige-paca.org/" target="blank_"><img src="{{ url_site_wp }}/wp-content/themes/crigepaca/assets/images/logo_crige.jpg" alt="Crige Paca" title="Crige Paca"></a>
+    </hgroup>
+  </div>
+
+  <div class="navigation-top">
+	<div class="wrap">
+		<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Top Menu">
+			<!-- RESPONSIVE : A intégrer quand menu final sera décidé
+			<button class="menu-toggle" aria-controls="top-menu" aria-expanded="false">Menu</button> -->
+			<div class="menu-menu-superieur-container">
+				<ul id="top-menu" class="menu">
+					<li id="menu-item-69" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-8 current_page_item menu-item-69">
+                        <a href="{{ url_site_wp }}">Accueil</a>
+					</li>
+					<li id="menu-item-68" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-68">
+                        <a href="{{ url_site_wp }}/les-donnees-en-region/">Les données en région <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+						<button class="dropdown-toggle" aria-expanded="false"></button>
+						<ul class="sub-menu">
+							<li id="menu-item-88" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-88">
+                                <a href="{{ url_site_wp }}/les-donnees-en-region/la-republique-numerique/">La république numérique</a>
+							</li>
+							<li id="menu-item-87" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-87">
+                                <a href="{{ url_site_wp }}/les-donnees-en-region/presentation-du-projet-et-de-la-plate-forme/">Présentation du projet et de la plate-forme</a>
+							</li>
+							<li id="menu-item-86" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-86">
+                                <a href="{{ url_site_wp }}/les-donnees-en-region/la-donnee-en-region/">La donnée en région</a>
+							</li>
+							<li id="menu-item-85" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-85">
+                                <a href="{{ url_site_wp }}/les-donnees-en-region/la-donnee-en-france/">La donnée en France</a>
+							</li>
+						</ul>		
+					</li>
+					<li id="menu-item-66" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-66">
+                        <a href="{{ url_site_wp }}/trouver-des-donnees/">Trouver des données <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+						<button class="dropdown-toggle" aria-expanded="false"></button>
+                        <ul class="sub-menu">
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                                <a href="/dataset">Données</a>
+                            </li>
+                        	<li class="menu-item menu-item-type-post_type menu-item-object-page">
+                                <a href="/organization">Organisations</a>
+                            </li>
+							<li class="menu-item menu-item-type-post_type menu-item-object-page">
+                                <a href="/group">Thématiques</a>
+                            </li>
+						</ul>	
+                    </li>
+                    <li id="menu-item-67" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-67">
+                        <a href="{{ url_site_wp }}/publier-des-donnees/">Publier des données</a>
+                    </li>
+                    <li id="menu-item-70" class="bleu menu-item menu-item-type-custom menu-item-object-custom menu-item-70">
+                        <a href="{{ url_publier }}">S’inscrire / Publier</a>
+					</li>
+				</ul>
+			</div>
+		</nav><!-- #site-navigation -->
+	</div><!-- .wrap -->
+  </div>
+
+</header>
+{% endblock %}
+
+
+
