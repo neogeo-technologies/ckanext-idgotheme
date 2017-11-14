@@ -93,4 +93,16 @@ ENV/
 # mdedit
 */static/libs/mdedit
 
+# OSX
 .DS_Store
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+sdist/
+*.egg-info/
+.installed.cfg
+*.egg
