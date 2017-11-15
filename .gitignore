@@ -106,3 +106,6 @@ sdist/
 *.egg-info/
 .installed.cfg
 *.egg
+
+# VI
+*.swp
