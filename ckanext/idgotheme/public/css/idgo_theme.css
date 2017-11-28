@@ -2,9 +2,47 @@ body {
     background: #ffffff;
 }
 
-a:active, a:hover {
-	text-decoration:none;
+
+/* Ajouts 27/11 */ 
+Article {
+background-color: #FFFFFF;
+padding:30px;
 }
+
+a {
+	color: #002880;
+}
+
+.search-form h2 {
+	font-size: 20px;
+	color: #002880;
+}
+
+.media-grid {
+	margin: 0;
+}
+
+.nav-item.active>a,.nav-aside li.active a {
+	background-color: #002880;
+}
+
+.dataset-heading {
+	font-size:15px;
+	line-height:0.8;
+}
+
+.search-form .search-input.search-giant input {
+	padding:10px;
+}
+
+.label,.badge {
+	text-shadow: none;
+}
+
+.module-resource {
+    padding:40px;
+}    
+/* Fin */
 
 .wrap {
     max-width: 1200px;
@@ -24,7 +62,7 @@ a:active, a:hover {
 
 [role=main] .primary {
     float: right;
-    padding-left: 50px;
+    padding-left: 20px;
 }
 
 [role=main] .secondary {
@@ -482,12 +520,10 @@ header .navigation-top #top-menu li.bleu a:before{
 
 
 .module-heading {
-    color: black;
-    font-weight: bolder;
+    color: #002880;
     border-top: none;
-	border-bottom: solid 2px #fdba13;
-/*    background: url(https://png.pngtree.com/thumb_back/fh260/back_pic/03/95/04/5757eb8d28d1012.jpg);*/
-    background-color: #dddddd;
+    border-top-width: medium;
+	border-bottom: solid 2px #002880;
     text-transform: uppercase;
 }
 
@@ -498,7 +534,7 @@ header .navigation-top #top-menu li.bleu a:before{
 
 .dataset-item {
     border-bottom: none;
-    border-left: 5px solid #dddddd;
+    border-left: 2px solid #002880;
     padding: 10px 25px !important;
     margin-bottom: 35px;
     border-radius: 3px;
@@ -512,11 +548,21 @@ header .navigation-top #top-menu li.bleu a:before{
 
 
 .secondary .nav-facet .nav-item a:hover {
-background-color: #02297f26;
-color: #111111;
-font-weight: bold;
-font-style: italic;
+    background-color: #02297f26;
+    color: #002880;
+    font-weight: bold;
+    font-style: italic;
 }
+
+.nav-item.active>a span, .nav-aside li.active a span {
+    display: inline;
+    white-space: normal;
+}
+
+.nav-item.active>a:before, .nav-aside li.active a:before {
+    background-image: none;
+}
+
 
 .search-form .search-input.search-giant button {
     margin-top: -14px;
@@ -525,32 +571,17 @@ font-style: italic;
 
 /*** Tags clickables - Type de donnees ***/ 
 .label[data-format=donnees-ouvertes] {
-    background-color: #fdba13;
+    background-color: #FF6660;
 }
 .label[data-format=donnees-geographiques] {
-    background-color: #02297f;
+    background-color: #002880;
 }
 .label[data-format=donnees-intelligentes] {
-    background-color: #fb554f;
+    background-color: #FFBA13;
 }
-
-/*
-.dataset-item ul {
-    display: inline;
-}
-*/
-/*
-.dataset-datatype {
-    float: right;
-    margin-left: 4px;
-}
-*/
 
 .dataset-format a {
     background: #999999 !important;
-}
-.dataset-datatype a {
-    background: #187794 !important;
 }
 
 
@@ -600,7 +631,10 @@ font-style: italic;
 /******************************************************************************************************
  >>> FOOTER
  ******************************************************************************************************/
-
+footer a:active, footer a:hover {
+    text-decoration:none;
+}
+    
 .site-footer {
 	background: #ffffff;
 	padding: 0;
