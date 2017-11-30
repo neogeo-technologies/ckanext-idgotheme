@@ -1,0 +1,771 @@
+body {
+    background: #ffffff;
+}
+
+
+/* Ajouts 27/11 */ 
+Article {
+background-color: #FFFFFF;
+padding:30px;
+}
+
+a {
+	color: #002880;
+}
+
+.search-form h2 {
+	font-size: 20px;
+	color: #002880;
+}
+
+.media-grid {
+	margin: 0;
+}
+
+.nav-item.active>a,.nav-aside li.active a {
+	background-color: #002880;
+}
+
+.dataset-heading {
+	font-size:15px;
+	line-height:0.8;
+}
+
+.search-form .search-input.search-giant input {
+	padding:10px;
+}
+
+.label,.badge {
+	text-shadow: none;
+}
+
+.module-resource {
+    padding:40px;
+}    
+/* Fin */
+
+.wrap {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container-fluid {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.module-content {
+    padding: 0;
+}
+
+[role=main] .primary {
+    float: right;
+    padding-left: 20px;
+}
+
+[role=main] .secondary {
+    margin-top: 20px;
+}
+
+[role=main] {
+    background: #efefef;
+	padding-top: 25px;
+}
+
+
+
+/******************************************************************************************************
+ >>> HEADER
+ ******************************************************************************************************/
+
+
+.account-masthead .account ul li a {
+    color: #222222;
+}
+
+.masthead .container-fluid {
+	height: 86px;
+	padding: 25px 0;
+}
+
+
+
+.logo_header {
+	float: left;
+    margin: 0 2px;
+}
+
+.header-image a:hover, .header-image a:focus {
+    opacity: 0.7;
+}
+
+.account-masthead {
+    color: #000000;
+    background: #ffffff;
+}
+
+
+.masthead {
+    text-align: center;
+    background: rgb(255, 255, 255);
+    min-height: 186px;
+    height: 186px;
+	color: #000;
+}
+
+.masthead .header-image .logo {
+    /*position: absolute;*/
+	float: left;
+    margin: 0 12px 0 0;
+    background-color: #fff;
+    background-image: url(https://www-rec.datasud.fr/wp-content/uploads/2017/11/logo-data-sud.jpg);
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: auto;
+    width:145px;
+    height:78px;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.masthead .nav>li>a {
+	color: #002880;
+	text-shadow: none;
+    text-transform: uppercase;
+}
+
+.masthead .nav>li>a:focus, .masthead .nav>li>a:hover, .masthead .nav>.active>a, .masthead .nav>.active>a:hover, .masthead .nav>.active>a:focus {
+    color: #fff;
+    text-shadow: none;
+}
+
+.masthead .navigation .nav-pills li a:hover, .masthead .navigation .nav-pills li.active a {
+    background-color: #002880;
+}
+
+
+header .header_espaces {
+	display: inline-block;
+	vertical-align: top;
+	float: right;
+}
+header .header_espaces a {
+	background-repeat: no-repeat;
+	background-position: left 10px center;
+	background-size: 30px auto;
+	display: inline-block;
+	vertical-align: top;
+	border: 1px solid #ff554f;
+	border-radius: 10px;
+	padding: 10px 10px 10px 50px;
+	color: #ff554f;
+	font-family: Roboto, sans-serif;
+	font-size: 15px;
+	margin-left: 15px;
+	opacity: 1;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+header .header_espaces a:hover{
+	color: #a7a7a7;
+	border-color:  #e0e0e0;
+}
+header .header_espaces a.documentaire {
+	background-image: url(https://www-rec.datasud.fr/wp-content/themes/crigepaca/assets/images/svg/espace_documentaire_hover.svg);
+}
+header .header_espaces a.documentaire:hover {
+	background-image: url(https://www-rec.datasud.fr/wp-content/themes/crigepaca/assets/images/svg/espace_documentaire.svg);
+	background-repeat: no-repeat;
+	background-position: left 10px center;
+	background-size: 30px auto;
+}
+header .header_espaces a.dev {
+	background-image: url(https://www-rec.datasud.fr/wp-content/themes/crigepaca/assets/images/svg/espace_dev_hover.svg);
+}
+header .header_espaces a.dev:hover {
+	background-image: url(https://www-rec.datasud.fr/wp-content/themes/crigepaca/assets/images/svg/espace_dev.svg);
+	background-repeat: no-repeat;
+	background-position: left 10px center;
+	background-size: 30px auto;
+}
+header .header_espaces a span {
+	text-transform: uppercase;
+}
+
+
+/*** MENU NAVIGATION ***/
+
+.navigation-top {
+	background: #fff;
+	font-size: 16px;
+	font-size: 1rem;
+	position: relative;
+}
+
+.navigation-top .wrap {
+	max-width: 1000px;
+	padding: 0;
+}
+
+.navigation-top a {
+	color: #222;
+	font-weight: 600;
+	-webkit-transition: color 0.2s;
+	transition: color 0.2s;
+}
+
+.navigation-top .current-menu-item > a,
+.navigation-top .current_page_item > a {
+	color: #767676;
+}
+
+.main-navigation {
+	clear: both;
+	display: block;
+}
+
+.main-navigation ul {
+	background: #fff;
+	list-style: none;
+	margin: 0;
+	padding: 0 1.5em;
+	text-align: left;
+}
+
+.js .main-navigation ul,
+.main-navigation .menu-item-has-children > a > .icon,
+.main-navigation .page_item_has_children > a > .icon,
+.main-navigation ul a > .icon {
+/*	display: none;*/
+}
+
+
+.js .main-navigation.toggled-on > div > ul {
+	display: block;
+}
+
+.main-navigation ul > li {
+	position: relative;
+    display: inline-block;
+}
+
+.main-navigation ul > li:hover > ul {
+	-webkit-transform: scale(1, 1);
+	-ms-transform: scale(1, 1);
+	transform: scale(1, 1);
+	opacity: 1;
+}
+
+.main-navigation ul ul {
+	-webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+	position: absolute;
+	top: 50px;
+	z-index: 9999999999;
+	background-color: #fff;
+	border: solid 10px #f0f0f0;
+	margin: 0;
+	-webkit-transform-origin: 0 0;
+	-ms-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: scale(0, 0.25);
+	-ms-transform: scale(0, 0.25);
+	transform: scale(0, 0.25);
+	opacity: 0;
+	-webkit-transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+	transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+	min-width: 300px;
+	padding: 0;
+	border: solid 10px #f0f0f0;
+	left: -3px !important;
+}
+
+.main-navigation ul ul.toggled-on {
+	display: block;
+}
+
+.main-navigation ul ul a {
+padding: 10px 0;
+border-bottom: solid 1px #f0f0f0;
+}
+
+.main-navigation li {
+/*	border-bottom: 1px solid #eee;*/
+	position: relative;
+}
+
+.main-navigation li li {
+	display: block;
+}
+
+.main-navigation li li,
+.main-navigation li:last-child {
+	border: 0;
+}
+
+.main-navigation li li:hover, .main-navigation li li.focus {
+    background: #002880;
+}
+
+.main-navigation a {
+	display: block;
+	padding: 0.5em 0;
+	text-decoration: none;
+}
+
+.main-navigation a:hover {
+	color: #767676;
+}
+
+/* Menu toggle */
+
+.menu-toggle {
+	background-color: transparent;
+	border: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	color: #222;
+	display: none;
+	font-size: 14px;
+	font-size: 0.875rem;
+	font-weight: 800;
+	line-height: 1.5;
+	margin: 1px auto 2px;
+	padding: 1em;
+	text-shadow: none;
+}
+
+/* Display the menu toggle when JavaScript is available. */
+
+.js .menu-toggle {
+	display: block;
+}
+
+.main-navigation.toggled-on ul.nav-menu {
+	display: block;
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus {
+	background-color: transparent;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.menu-toggle:focus {
+	outline: thin solid;
+}
+
+.menu-toggle .icon {
+	margin-right: 0.5em;
+	top: -2px;
+}
+
+.toggled-on .menu-toggle .icon-bars,
+.menu-toggle .icon-close {
+	display: none;
+}
+
+.toggled-on .menu-toggle .icon-close {
+	display: inline-block;
+}
+
+/* Dropdown Toggle */
+
+.dropdown-toggle {
+	background-color: transparent;
+	border: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	color: #222;
+	display: block;
+	font-size: 16px;
+	right: -0.5em;
+	line-height: 1.5;
+	margin: 0 auto;
+	padding: 0.5em;
+	position: absolute;
+	text-shadow: none;
+	top: 0;
+}
+
+.dropdown-toggle:hover,
+.dropdown-toggle:focus {
+	background: transparent;
+}
+
+.dropdown-toggle:focus {
+	outline: thin dotted;
+}
+
+.dropdown-toggle.toggled-on .icon {
+	-ms-transform: rotate(-180deg); /* IE 9 */
+	-webkit-transform: rotate(-180deg); /* Chrome, Safari, Opera */
+	transform: rotate(-180deg);
+}
+
+/* Scroll down arrow */
+
+.site-header .menu-scroll-down {
+	display: none;
+}
+
+
+/*menu*/
+header .navigation-top{
+	position: initial;
+	display: inline-block;
+}
+header .navigation-top .wrap {
+	padding-left: 0;
+	padding-right: 0;
+	width: 1200px;
+	max-width: 100%;
+}
+header .navigation-top .menu-menu-superieur-container {
+	width: auto;
+	float: right;
+	margin: 0 auto;
+}
+header .navigation-top #top-menu a {
+	color: #002880;
+	font-size: 16px;
+	text-transform: uppercase;
+	font-weight: normal;
+	position: relative;
+	z-index: 1;
+	padding: 15px 10px;
+}
+header .navigation-top #top-menu > li > a:before{
+	content: '';
+	background-color: #002880;
+	display: block;
+	height: 7px;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+header .navigation-top #top-menu a:hover {
+	color: #ffffff;
+}
+header .navigation-top #top-menu > li > a:hover:before{
+	bottom: 0;
+	height: 100%;
+}
+/*inscription*/
+header .navigation-top #top-menu > li.bleu > a {
+	background-color: #002880;
+	color: #ffffff;
+	font-family: 'Roboto Slab', serif;
+	font-size: 25px;
+	text-transform: none;
+    padding: 13px 25px 5px 25px;
+	-webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+header .navigation-top #top-menu li.bleu a:before{
+	display: none;
+}
+header .navigation-top #top-menu li.bleu a::after {
+	content: '';
+	position: absolute;
+	bottom: -26px;
+	left: 0px;
+	height: 51px;
+	width: 100%;
+	background-color: #002880;
+	-webkit-transform: skew(0deg, 6deg);
+	-moz-transform: skew(0deg, 6deg);
+	-ms-transform: skew(0deg, 6deg);
+	-o-transform: skew(0deg, 6deg);
+	transform: skew(0deg, 5deg);
+	border-radius: 15px;
+	z-index: -1;
+	right: 0;
+}
+header .navigation-top #top-menu li.bleu a:hover{
+	opacity: 0.9;
+}
+/*active*/
+header .navigation-top #top-menu li.current-menu-item a{
+	font-weight: 600;
+	background-color: #002880;
+	color: #ffffff;
+}
+header .navigation-top #top-menu li.bleu a:before{
+	display: none;
+}
+
+
+
+
+
+/******************************************************************************************************
+ >>> BODY - MAIN
+ ******************************************************************************************************/
+
+
+.module-heading {
+    color: #002880;
+    border-top: none;
+    border-top-width: medium;
+	border-bottom: solid 2px #002880;
+    text-transform: uppercase;
+}
+
+.dataset-heading {
+	border-bottom: dotted 1px #ddd;
+    padding-bottom: 10px;
+}
+
+.dataset-item {
+    border-bottom: none;
+    border-left: 2px solid #002880;
+    padding: 10px 25px !important;
+    margin-bottom: 35px;
+    border-radius: 3px;
+    background: #ffffff;
+	position: relative;
+}
+
+.secondary .nav-facet, .secondary .module-content {
+    background: #ffffff;
+}
+
+
+.secondary .nav-facet .nav-item a:hover {
+    background-color: #02297f26;
+    color: #002880;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.nav-item.active>a span, .nav-aside li.active a span {
+    display: inline;
+    white-space: normal;
+}
+
+.nav-item.active>a:before, .nav-aside li.active a:before {
+    background-image: none;
+}
+
+
+.search-form .search-input.search-giant button {
+    margin-top: -14px;
+}
+
+
+/*** Tags clickables - Type de donnees ***/ 
+.label[data-format=donnees-ouvertes] {
+    background-color: #FF6660;
+}
+.label[data-format=donnees-geographiques] {
+    background-color: #002880;
+}
+.label[data-format=donnees-intelligentes] {
+    background-color: #FFBA13;
+}
+
+.dataset-format a {
+    background: #999999 !important;
+}
+
+
+/*** Bandeau latéral - Support ***/
+.banner-support-wrap {
+	position: absolute;
+    right: 0;
+    top: 0;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    cursor: default;
+}
+
+.banner-support {
+	-webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-transform-origin: top left;
+    -moz-transform-origin: top left;
+    -ms-transform-origin: top left;
+    -o-transform-origin: top left;
+    transform-origin: top left;
+    position: absolute;
+    right: 0;
+    width: 120px;
+    height: 21px;
+    line-height: 22px;
+    text-align: center;
+    top: -18px;
+    right: -54px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    background-color: transparent;
+}
+
+.banner-support[data-format=region-paca] {
+    background-color: #fc7300;
+}
+.banner-support[data-format=crige-paca] {
+    background-color: #6e53b2;
+}
+
+/******************************************************************************************************
+ >>> FOOTER
+ ******************************************************************************************************/
+footer a:active, footer a:hover {
+    text-decoration:none;
+}
+    
+.site-footer {
+	background: #ffffff;
+	padding: 0;
+}
+footer .wrap-footer {
+	margin: 20px auto;
+}
+footer .site-info {
+	background-color: #002880;
+	color: #ffffff;
+	font-family: Roboto, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.4px;
+	text-align: center;
+}
+footer .site-info p {
+	padding: 8px;
+	margin: 0;
+}
+
+/* Twitter  */
+footer .twitter {
+	width: 210px;
+	text-align: center;
+	float: right;
+	margin-right: 10px;
+}
+footer .twitter h2, footer .twitter a {
+	color: #5dabca;
+	text-transform: uppercase;
+	font-size: 18px;
+	font-weight: bold;
+	font-family: Roboto, sans-serif;
+	position: relative;
+	display: inline-block;
+    margin-top: 0px;
+}
+
+footer .twitter h2:after{
+	content: '';
+	display: block;
+	width: 100%;
+	height: 3px;
+	background-color: #5dabca;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -2px;
+}
+footer .twitter a:hover{
+	opacity: 0.7;
+}
+footer .twitter > div, footer .twitter > div > * {
+	display: inline-block;
+	vertical-align: top;
+}
+footer .twitter > div > div {
+	width: calc(100% - 90px);
+    margin-top: 3px;
+}
+footer .twitter > div > div a {
+	display: inline-block;
+	line-height: initial;
+	padding-left: 5px;
+}
+
+/* Liens  */
+footer #menu-menu-footer {
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
+footer #menu-menu-footer li {
+	display: inline-block;
+}
+footer #menu-menu-footer li a {
+	color: #002880;
+    text-transform: uppercase;
+    margin-right: 20px;
+}
+footer #menu-menu-footer li a:active, footer #menu-menu-footer li a:hover {
+	color: #c6c6c6;
+}
+
+footer #menu-menu-footer li i {
+	color: #02297f;
+    margin-right: 10px;
+}
+
+
+
+/******************************************************************************************************
+ >>> Media Queries
+ ******************************************************************************************************/
+/* 20em = 320xp */
+/* Ex: dispostion des images en tête du site */
+@media screen and (min-width: 20em) {
+
+}
+
+/* 30em = 460xp */
+/* Ex: bouton de recherche des données */
+@media screen and (min-width: 30em) {
+
+}
+
+/* 48em = 768xp */
+/* Ex: menu qui passe en accordéon */
+@media screen and (min-width: 48em) {
+
+}
+/* ??  */
+@media screen and ( max-width: 48.875em ) and ( min-width: 48em ) {
+
+}
+
+/* 67em = 1072xp */
+/* Ex: taille des images en en tête du site */
+@media screen and ( min-width: 67em ) {
+
+}
+
+/* 79em = 1264xp */
+/* Ex: menu taille réelle */
+@media screen and ( min-width: 79em ) {
+
+}
+
+
+
+
+
+
+
+
