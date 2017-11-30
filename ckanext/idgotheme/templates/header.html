@@ -1,5 +1,8 @@
 {% ckan_extends %}
 
+{% set url_site_wp = h.idgotheme_get_url_wp() %}
+{% set url_site_publier = h.idgotheme_get_url_publier() %}
+
 {% block header_wrapper %}
 {% block header_account %}
   <header class="account-masthead">
@@ -10,12 +13,6 @@
     </div>
   </header>
 {% endblock %}
-
-
-
-{% set url_site_wp = 'https://www-rec.datasud.fr' %}
-{% set url_publier = 'https://publier-rec.datasud.fr' %}
-
 
 <header class="navbar navbar-static-top masthead">
   {% block header_debug %}
@@ -38,7 +35,6 @@
 			Espace <br><span>developpeurs</span>
 		</a>
 	</div>
-	
 
     {# The .header-image class hides the main text and uses image replacement for the title #}
     <hgroup class="{{ g.header_class }} pull-left">
@@ -74,10 +70,10 @@
 							<li id="menu-item-85" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-85">
                                 <a href="{{ url_site_wp }}/les-donnees-en-region/la-donnee-en-france/">La donnée en France</a>
 							</li>
-						</ul>		
+                        </ul>
 					</li>
 					<li id="menu-item-66" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-66">
-                        <a href="{{ url_site_wp }}/trouver-des-donnees/">Trouver des données <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                        <a href="#">Trouver des données <i class="fa fa-angle-down" aria-hidden="true"></i></a>
 						<button class="dropdown-toggle" aria-expanded="false"></button>
                         <ul class="sub-menu">
                             <li class="menu-item menu-item-type-post_type menu-item-object-page">
@@ -92,10 +88,10 @@
 						</ul>	
                     </li>
                     <li id="menu-item-67" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-67">
-                        <a href="{{ url_site_wp }}/publier-des-donnees/">Publier des données</a>
+                        <a href="{{ url_site_publier }}">Publier des données</a>
                     </li>
                     <li id="menu-item-70" class="bleu menu-item menu-item-type-custom menu-item-object-custom menu-item-70">
-                        <a href="{{ url_publier }}">S’inscrire / Publier</a>
+                        <a href="{{ url_site_publier }}">S’inscrire / Publier</a>
 					</li>
 				</ul>
 			</div>

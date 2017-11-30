@@ -1,8 +1,12 @@
 {% ckan_extends %}
 
+{% block scripts %}
+  {{ super() }}
+  {% resource 'idgotheme/js/sort.js' %}
+{% endblock %}
 
 {% block styles %}
   {{ super() }}
-  <link rel="stylesheet" href="/css/idgo_theme.css" />
-  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400" rel="stylesheet" 
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400" rel="stylesheet">
+  {% resource 'idgotheme/css/idgo_theme.css' %}
 {% endblock %}
