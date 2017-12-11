@@ -57,12 +57,12 @@ a {
 }
 
 .module-content {
-    padding: 0;
+    padding: 20px 0 0 30px !important;
 }
 
 [role=main] .primary {
     float: right;
-    padding-left: 20px;
+/*    padding-left: 20px;*/
 }
 
 [role=main] .secondary {
@@ -87,7 +87,7 @@ a {
 
 .masthead .container-fluid {
 	height: 86px;
-	padding: 25px 0;
+    padding: 25px 0 0 0;
 }
 
 
@@ -110,8 +110,7 @@ a {
 .masthead {
     text-align: center;
     background: rgb(255, 255, 255);
-    min-height: 186px;
-    height: 186px;
+    height: 163px;
 	color: #000;
 }
 
@@ -158,10 +157,10 @@ header .header_espaces a {
 	background-size: 30px auto;
 	display: inline-block;
 	vertical-align: top;
-	border: 1px solid #ff554f;
+	border: 1px solid #e0e0e0;
 	border-radius: 10px;
 	padding: 10px 10px 10px 50px;
-	color: #ff554f;
+	color: #e0e0e0;
 	font-family: Roboto, sans-serif;
 	font-size: 15px;
 	margin-left: 15px;
@@ -172,23 +171,23 @@ header .header_espaces a {
     transition: all 0.4s ease;
 }
 header .header_espaces a:hover{
-	color: #a7a7a7;
-	border-color:  #e0e0e0;
+	color: #ff554f;
+	border-color:  #ff554f;
 }
 header .header_espaces a.documentaire {
-	background-image: url(https://www-rec.datasud.fr/wp-content/themes/crigepaca/assets/images/svg/espace_documentaire_hover.svg);
+    background-image: url(https://www-rec.datasud.fr/wp-content/themes/crigepaca/assets/images/svg/espace_documentaire.svg);
 }
 header .header_espaces a.documentaire:hover {
-	background-image: url(https://www-rec.datasud.fr/wp-content/themes/crigepaca/assets/images/svg/espace_documentaire.svg);
+    background-image: url(https://www-rec.datasud.fr/wp-content/themes/crigepaca/assets/images/svg/espace_documentaire_hover.svg);
 	background-repeat: no-repeat;
 	background-position: left 10px center;
 	background-size: 30px auto;
 }
 header .header_espaces a.dev {
-	background-image: url(https://www-rec.datasud.fr/wp-content/themes/crigepaca/assets/images/svg/espace_dev_hover.svg);
+    background-image: url(https://www-rec.datasud.fr/wp-content/themes/crigepaca/assets/images/svg/espace_dev.svg);
 }
 header .header_espaces a.dev:hover {
-	background-image: url(https://www-rec.datasud.fr/wp-content/themes/crigepaca/assets/images/svg/espace_dev.svg);
+    background-image: url(https://www-rec.datasud.fr/wp-content/themes/crigepaca/assets/images/svg/espace_dev_hover.svg);
 	background-repeat: no-repeat;
 	background-position: left 10px center;
 	background-size: 30px auto;
@@ -233,7 +232,7 @@ header .header_espaces a span {
 	background: #fff;
 	list-style: none;
 	margin: 0;
-	padding: 0 1.5em;
+	padding: 0;
 	text-align: left;
 }
 

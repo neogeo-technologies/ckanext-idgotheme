@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import ckan.plugins as p
 import ckan.plugins.toolkit as toolkit
 from ckan.common import config
@@ -44,6 +46,27 @@ def get_url_publier():
 
 
 
+# Traduction "Groupes" en "Thématiques"
+THEMATIQUE_MIN = u'thématique'
+THEMATIQUE_MAJ = u'Thématique'
+THEMATIQUES_MIN = u'thématiques'
+THEMATIQUES_MAJ= u'Thématiques'
+
+
+def trad_thematique_min():
+    return THEMATIQUE_MIN
+
+def trad_thematique_maj():
+    return THEMATIQUE_MAJ
+
+def trad_thematiques_min():
+    return THEMATIQUES_MIN
+
+def trad_thematiques_maj():
+    return THEMATIQUES_MAJ
+
+
+
 # Plugin
 class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
     p.implements(p.IConfigurer)
@@ -58,7 +81,11 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
     # ITemplateHelpers : Custom Helpers functions
     def get_helpers(self):
         return {'idgotheme_get_url_wp': get_url_wp,
-		'idgotheme_get_url_publier': get_url_publier}
+		'idgotheme_get_url_publier': get_url_publier,
+                'trad_thematique_min' : trad_thematique_min,
+                'trad_thematique_maj' : trad_thematique_maj,
+                'trad_thematiques_min' : trad_thematiques_min,
+                'trad_thematiques_maj' : trad_thematiques_maj}
 
     # IConfigurer
     def update_config(self, config_):
@@ -74,14 +101,14 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
  	return OrderedDict([
                              #Default facets
                              ('organization', toolkit._('Organization')),
-                             ('groups', toolkit._('Groups')),
-                             ('tags', toolkit._('Tags')),
+                             ('groups', u'Thématiques'),
+                             ('tags', 'Mots-cles' ),
                              ('res_format', toolkit._('Formats')),
                              ('license_id', toolkit._('Licence')),
                              #Add new facets
                              ('support', 'Support'),
                              ('datatype', 'Type'),
-                             ('update_frequency', 'Frequence de mise a jour'),
+                             ('update_frequency', u'Fréquence de mise à jour'),
                              ])
 
     # IPackageController
