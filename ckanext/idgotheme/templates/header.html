@@ -4,6 +4,7 @@
 {% set url_site_publier = h.idgotheme_get_url_publier() %}
 
 {% block header_wrapper %}
+{% if c.userobj %}
 {% block header_account %}
   <header class="account-masthead">
     <div class="container-fluid">
@@ -13,93 +14,116 @@
     </div>
   </header>
 {% endblock %}
+{% endif %}
 
-<header class="navbar navbar-static-top masthead">
-  {% block header_debug %}
-    {% if g.debug and not g.debug_supress_header %}
-      <div class="debug">Controller : {{ c.controller }}<br/>Action : {{ c.action }}</div>
-    {% endif %}
-  {% endblock %}
-  <div class="container-fluid">
-    <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-
-	<div class="header_espaces">
-		<a href="#" class="documentaire">
-			Espace <br><span>documentaire</span>
-    	</a>
-    	<a href="http://datasud.readthedocs.io/fr/latest/" class="dev">
-			Espace <br><span>developpeurs</span>
-		</a>
-	</div>
-
-    {# The .header-image class hides the main text and uses image replacement for the title #}
-    <hgroup class="{{ g.header_class }} pull-left">
-      <a class="navbar-brand btn logo" href="{{ url_site_wp }}"></a>
-      <a class="logo_header" href="http://www.regionpaca.fr/" target="blank_"><img src="{{ url_site_wp }}/wp-content/themes/crigepaca/assets/images/logo_region_paca.jpg" alt="Region Paca" title="Region Paca"></a>
-      <a class="logo_header" href="http://www.crige-paca.org/" target="blank_"><img src="{{ url_site_wp }}/wp-content/themes/crigepaca/assets/images/logo_crige.jpg" alt="Crige Paca" title="Crige Paca"></a>
-    </hgroup>
-  </div>
-
-  <div class="navigation-top">
-	<div class="wrap">
-		<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Top Menu">
-			<!-- RESPONSIVE : A intégrer quand menu final sera décidé
-			<button class="menu-toggle" aria-controls="top-menu" aria-expanded="false">Menu</button> -->
-			<div class="menu-menu-superieur-container">
-				<ul id="top-menu" class="menu">
-					<li id="menu-item-69" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-8 current_page_item menu-item-69">
-                        <a href="{{ url_site_wp }}">Accueil</a>
-					</li>
-					<li id="menu-item-68" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-68">
-                        <a href="{{ url_site_wp }}/les-donnees-en-region/">Le projet Datasud <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-						<button class="dropdown-toggle" aria-expanded="false"></button>
-						<ul class="sub-menu">
-							<li id="menu-item-88" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-88">
-                                <a href="{{ url_site_wp }}/les-donnees-en-region/presentation-du-projet-datasud/">Présentation du projet</a>
-							</li>
-							<li id="menu-item-87" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-87">
-                                <a href="{{ url_site_wp }}/qui-sont-les-producteurs/">Qui sont les producteurs ?</a>
-							</li>
-							<li id="menu-item-86" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-86">
-                                <a href="{{ url_site_wp }}/conditions-dutilisation-cgus/">Conditions d'utilisation</a>
-							</li>
-							<li id="menu-item-85" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-85">
-                                <a href="{{ url_site_wp }}/demande-de-donnees/">Demande de données</a>
-							</li>
-                        </ul>
-					</li>
-					<li id="menu-item-66" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-66">
-                        <a href="#">Trouver des données <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-						<button class="dropdown-toggle" aria-expanded="false"></button>
-                        <ul class="sub-menu">
-                            <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                                <a href="/dataset">Données</a>
-                            </li>
-                        	<li class="menu-item menu-item-type-post_type menu-item-object-page">
-                                <a href="/organization">Organisations</a>
-                            </li>
-							<li class="menu-item menu-item-type-post_type menu-item-object-page">
-                                <a href="/group">Thématiques</a>
-                            </li>
-						</ul>	
-                    </li>
-                    <li id="menu-item-67" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-67">
-                        <a href="{{ url_site_publier }}">Publier des données</a>
-                    </li>
-                    <li id="menu-item-70" class="bleu menu-item menu-item-type-custom menu-item-object-custom menu-item-70">
-                        <a href="{{ url_site_publier }}">S’inscrire / Publier</a>
-					</li>
+<div id="page" class="site">
+	<div id="menu_accessibilite">
+		<div class="wrap">
+			<div class="menu-menu-accessibilite-container">
+				<ul id="menu-menu-accessibilite" class="menu">
+					<li id="menu-item-58" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58"><a href="#content">Aller au contenu</a></li>
+					<li id="menu-item-59" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-59"><a href="#top-menu">Aller au menu principal</a></li>
 				</ul>
-			</div>
-		</nav><!-- #site-navigation -->
-	</div><!-- .wrap -->
-  </div>
-
-</header>
+			</div>      
+			<p>Version Bêta</p>
+		</div>
+	</div>
+	<header id="masthead" class="site-header" role="banner">
+  		{% block header_debug %}
+    		{% if g.debug and not g.debug_supress_header %}
+      			<div class="debug">Controller : {{ c.controller }}<br/>Action : {{ c.action }}</div>
+    		{% endif %}
+		{% endblock %}
+        <div class="custom-header">
+			<div class="custom-header-media"></div>	
+			<div class="site-branding">
+				<div class="wrap">
+					<a href="{{ url_site_wp }}" class="custom-logo-link" rel="home" itemprop="url">
+						<img width="149" height="74" src="https://www-rec.datasud.fr/wp-content/uploads/2017/11/logo-data-sud.jpg" class="custom-logo" alt="" itemprop="logo" sizes="100vw" />
+					</a>
+					<div class="site-branding-text">
+						<a href="http://www.regionpaca.fr/" target="blank_">
+							<img src="{{ url_site_wp }}/wp-content/themes/crigepaca/assets/images/logo_region_paca.jpg" alt="Region Paca" title="Region Paca">
+						</a>
+						<a href="http://www.crige-paca.org/" target="blank_">
+							<img src="{{ url_site_wp }}/wp-content/themes/crigepaca/assets/images/logo_crige.jpg" alt="Crige Paca" title="Crige Paca">
+						</a>
+						<h1 class="site-title">
+							<a href="{{ url_site_wp }}" rel="home">DataSud : La plateforme de données régionale en Provence-Alpes-Côte d&#039;Azur</a>
+						</h1>
+						<div class="header_espaces">
+							<a href="http://datasud.readthedocs.io/fr/latest/" class="documentaire">
+								Espace <br><span>documentaire</span>
+							</a>
+							<a href="http://datasud.readthedocs.io/fr/latest/developpeurs/index.html" class="dev">
+								Espace <br><span>developpeurs</span>
+							</a>
+						</div>
+					</div><!-- .site-branding-text -->
+				</div><!-- .wrap -->
+			</div><!-- .site-branding -->
+		</div><!-- .custom-header -->
+		<div class="navigation-top">
+			<div class="wrap">
+				<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Top Menu">
+					<button class="menu-toggle" aria-controls="top-menu" aria-expanded="false">
+						<svg class="icon icon-bars" aria-hidden="true" role="img"> <use href="#icon-bars" xlink:href="#icon-bars"></use></svg>
+						<svg class="icon icon-close" aria-hidden="true" role="img"> <use href="#icon-close" xlink:href="#icon-close"></use> </svg>
+						Menu
+					</button>
+					<div class="menu-menu-superieur-container">
+						<ul id="top-menu" class="menu">
+							<li id="menu-item-69" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-8 current_page_item menu-item-69">
+								<a href="{{ url_site_wp }}">Accueil</a>
+							</li>
+							<li id="menu-item-68" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-68">
+								<a href="{{ url_site_wp }}/les-donnees-en-region/">
+									Le projet DataSud<svg class="icon icon-angle-down" aria-hidden="true" role="img"> <use href="#icon-angle-down" xlink:href="#icon-angle-down"></use> </svg>
+								</a>
+								<ul class="sub-menu">
+									<li id="menu-item-87" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-87">
+										<a href="{{ url_site_wp }}/les-donnees-en-region/presentation-du-projet-datasud/">Présentation du projet</a>
+									</li>
+									<li id="menu-item-156" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-156">
+										<a href="{{ url_site_wp }}/qui-sont-les-producteurs/">Qui sont les producteurs ?</a>
+									</li>
+									<li id="menu-item-152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-152">
+										<a href="{{ url_site_wp }}/conditions-dutilisation-cgus/">Conditions d&#8217;utilisation</a>
+									</li>
+									<li id="menu-item-157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-157">
+										<a href="{{ url_site_wp }}/demande-de-donnees/">Demande de données</a>
+									</li>
+								</ul>
+							</li>
+							<li id="menu-item-92" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-92">
+								<a href="#">Trouver des données<svg class="icon icon-angle-down" aria-hidden="true" role="img"> <use href="#icon-angle-down" xlink:href="#icon-angle-down"></use> </svg></a>
+								<ul class="sub-menu">
+									<li id="menu-item-96" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-96">
+										<a href="/dataset">Données</a>
+									</li>
+									<li id="menu-item-97" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-97">
+										<a href="/organization">Organisations</a>
+									</li>
+									<li id="menu-item-98" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-98">
+										<a href="/group">Thématiques</a>
+									</li>
+								</ul>
+							</li>
+							<li id="menu-item-93" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-93">
+								<a href="{{ url_site_publier }}">Publier des données</a>
+							</li>
+							<li id="menu-item-70" class="bleu menu-item menu-item-type-custom menu-item-object-custom menu-item-70">
+								<a href="{{ url_site_publier }}">S&#8217;inscrire / Publier</a>
+							</li>
+						</ul>
+					</div>
+						
+		        </nav><!-- #site-navigation -->
+            </div><!-- .wrap -->
+       	</div><!-- .navigation-top -->
+	</header><!-- #masthead -->
+</div>  
+  
 {% endblock %}
 
 

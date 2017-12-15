@@ -6,34 +6,11 @@ from ckan.common import config
 from collections import OrderedDict
 import json
 
-#from ckan.common import c
-#from ckantoolkit import (
-#    DefaultDatasetForm,
-#    DefaultGroupForm,
-#    DefaultOrganizationForm,
-#    get_validator,
-#    get_converter,
-#    navl_validate,
-#    add_template_directory,
-#)
-
-#from ckanext.scheming import helpers
-#from ckanext.scheming import loader
-#from ckanext.scheming.errors import SchemingException
-#from ckanext.scheming.validation import (
-#    validators_from_string, scheming_choices, scheming_required,
-#    scheming_multiple_choice, scheming_multiple_choice_output)
-#from ckanext.scheming.logic import (
-#    scheming_dataset_schema_list, scheming_dataset_schema_show,
-#    scheming_group_schema_list, scheming_group_schema_show,
-#    scheming_organization_schema_list, scheming_organization_schema_show,
-#    )
-#from ckanext.scheming.converters import (
-#        convert_from_extras_group, convert_to_json_if_date
-#        )
 from ckanext.scheming.plugins import _SchemingMixin
-#from ckanext.scheming.plugins import DefaultDatasetForm
-#from ckan.lib.plugins import DefaultDatasetForm
+
+import ckan.authz as authz
+
+
 
 
 def get_url_wp():
@@ -73,6 +50,7 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
     p.implements(p.IFacets, inherit=True)
     p.implements(p.IPackageController, inherit=True)
     p.implements(p.ITemplateHelpers)
+    p.implements(p.IAuthFunctions)
 
     SCHEMA_OPTION = 'scheming.dataset_schemas'
     FALLBACK_OPTION = 'scheming.dataset_fallback'
@@ -99,15 +77,13 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
         
         # Ajouter les filtres, dans l'ordre d'affichage sur la page
  	return OrderedDict([
-                             #Default facets
-                             ('organization', toolkit._('Organization')),
+                             ('organization', u'Organisations'),
                              ('groups', u'Thématiques'),
-                             ('tags', 'Mots-cles' ),
-                             ('res_format', toolkit._('Formats')),
-                             ('license_id', toolkit._('Licence')),
-                             #Add new facets
-                             ('support', 'Support'),
-                             ('datatype', 'Type'),
+                             ('datatype', u'Types'),
+                             ('support', u'Supports'),
+                             ('res_format', u'Formats'),
+                             ('license_id', u'Licences'),
+                             ('tags', u'Mots-clés'),
                              ('update_frequency', u'Fréquence de mise à jour'),
                              ])
 

@@ -54,13 +54,19 @@ within_tertiary
               <i class="fa fa-filter" aria-hidden="true"></i>
               {% set title = title or h.get_facet_title(name) %}
               {{ title }}
+              <br>
+              <a id="sortFacetAlpha" class="sort-action sortFacetAlpha"><i class="fa fa-sort" aria-hidden="true"></i> <span>A-Z</span></a>
+              <a id="sortFacetCount" class="sort-action sortFacetCount"><i class="fa fa-sort" aria-hidden="true"></i> <span>1-9</span></a>
+              <a href="{{ h.remove_url_param(name, extras=extras, alternative_url=alternative_url) }}" class="action clear-all-action">
+                <i class="fa fa-times" aria-hidden="true"></i> filtres
+              </a>
             </h2>
           {% endblock %}
           {% block facet_list_items %}
             {% with items = items or h.get_facet_items_dict(name) %}
             {% if items %}
               <nav>
-                <ul class="{{ nav_class or 'unstyled nav nav-simple nav-facet' }}">
+                  <ul class="{{ nav_class or 'unstyled nav nav-simple nav-facet' }}" id="{{name}}" name="facet">
 
                   {% for item in items %}
                     {% set href = h.remove_url_param(name, item.name, extras=extras, alternative_url=alternative_url) if item.active else h.add_url_param(new_params={name: item.name}, extras=extras, alternative_url=alternative_url) %}
