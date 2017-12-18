@@ -6410,6 +6410,11 @@ a.sort-action span {
     text-decoration: underline;	
 }
 
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-submenu:hover>a, .dropdown-submenu:focus>a {
+    color: #fff;
+    background: #02297f;
+}
+
 /******************************************************************************************************
  >>> FOOTER
  ******************************************************************************************************/

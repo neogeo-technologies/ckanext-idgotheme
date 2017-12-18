@@ -50,7 +50,6 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
     p.implements(p.IFacets, inherit=True)
     p.implements(p.IPackageController, inherit=True)
     p.implements(p.ITemplateHelpers)
-    p.implements(p.IAuthFunctions)
 
     SCHEMA_OPTION = 'scheming.dataset_schemas'
     FALLBACK_OPTION = 'scheming.dataset_fallback'
