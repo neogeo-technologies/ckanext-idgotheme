@@ -2678,6 +2678,8 @@ h2.widget-title {
 
 .search-form {
 	position: relative;
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
 .search-form .search-submit {
@@ -6147,6 +6149,10 @@ a {
 .search-form h2 {
     font-size: 20px;
     color: #002880;
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 15px;
+    display: inline-block;
 }
 
 .media-grid {
