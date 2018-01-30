@@ -6098,6 +6098,14 @@ footer .site-info .wrap a{
 
  ******************************************************************************************************
  ******************************************************************************************************/
+/* Ajouts 30/01/18 */
+.span9 .page-header {
+    margin-left: 0px !important;
+}
+.page-header .nav-tabs {
+    margin-top: 10px;
+}
+
 
 /* Ajouts 14/12 */
 body {
@@ -6137,9 +6145,10 @@ a:hover, a:focus {
 }
 
 /* Ajouts 27/11 */
-Article {
-	background-color: #efefef !important;
-    /*padding:30px;*/
+.span9 Article {
+	background-color: #fff !important;
+    padding:0;
+    margin-left: 30px !important;
 }
 
 a {
@@ -6196,6 +6205,7 @@ a {
 
 .primary .module-content {
     padding-left: 30px !important;
+    padding-right: 30px !important;
     padding-top: 0 !important;
     padding-right: 0;
 }
@@ -6274,7 +6284,7 @@ a {
     padding: 10px 25px !important;
     margin-bottom: 35px;
     border-radius: 3px;
-    background: #ffffff;
+    background: #f9f9f9;
     position: relative;
 }
 
