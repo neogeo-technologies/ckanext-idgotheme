@@ -5,13 +5,8 @@ import ckan.plugins.toolkit as toolkit
 from ckan.common import config
 from collections import OrderedDict
 import json
-
 from ckanext.scheming.plugins import _SchemingMixin
-
 import ckan.authz as authz
-
-
-
 
 def get_url_wp():
     url_site_wp = config.get('ckanext.idgotheme.url_site_wp', '')
@@ -21,14 +16,11 @@ def get_url_publier():
     url_site_publier = config.get('ckanext.idgotheme.url_site_publier', '')
     return url_site_publier
 
-
-
 # Traduction "Groupes" en "Thématiques"
 THEMATIQUE_MIN = u'thématique'
 THEMATIQUE_MAJ = u'Thématique'
 THEMATIQUES_MIN = u'thématiques'
 THEMATIQUES_MAJ= u'Thématiques'
-
 
 def trad_thematique_min():
     return THEMATIQUE_MIN
@@ -41,7 +33,6 @@ def trad_thematiques_min():
 
 def trad_thematiques_maj():
     return THEMATIQUES_MAJ
-
 
 
 # Plugin
@@ -90,12 +81,3 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
     def before_index(self, data_dict):
         data_dict['datatype'] = json.loads(data_dict.get('datatype', '[]'))
         return data_dict
-
-
-
-
-
-
-
-
-    

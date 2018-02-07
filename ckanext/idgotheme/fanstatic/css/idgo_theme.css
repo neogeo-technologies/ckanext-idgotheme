@@ -1,3 +1,11 @@
+/******************************************************************************************************
+ ******************************************************************************************************
+
+ **************************************** BASE WORDPRESS **********************************************
+
+ ******************************************************************************************************
+ ******************************************************************************************************/
+
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
@@ -6377,32 +6385,6 @@ a {
 }
 
 
-/* Images Thematiques */
-.media-thematique {
-	text-align: center;
-}
-.media-thematique .container-media-image {
-    width: 50px;
-    height: 55px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: initial;
-}
-.media-thematique .media-image {
-	width: 50px;
-    position: absolute;
-    clip: rect(0, 50px, 55px, 0px);    
-	border-radius: 0;
-}
-.media-thematique .media-heading {
-	padding-top: 0;
-}
-.image-thematique {
-    margin-bottom: 0;
-    position: relative;
-}
-
-
 /* Facet : clear all & sort */
 a.clear-all-action {
     float: right;
@@ -6431,6 +6413,160 @@ a.sort-action span {
     background: #02297f;
 }
 
+
+/*** Thématiques & Organisations : Affichage Grille et Liste  ***/
+
+/* Boutons choix affichage */
+#affich-mode {
+	text-align: right;
+}
+#affich-mode button {
+	color: #02297f;
+	padding: 5px 15px;
+	background: transparent;
+}
+#affich-mode button.active {
+    background: #dddddd;
+}
+
+/* Items : général */
+ul.media-grid {
+    height: auto !important;
+    text-align: center;
+	padding: 10px;
+}
+
+li.media-item {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 23%;
+    float: none;
+    display: inline-block;
+    height: 255px;
+    vertical-align: top;
+	margin-bottom: 11px;
+    margin-top: 0;
+    margin-right: 4px;
+    margin-left: 4px;
+}
+
+.media-item h3 {
+    color: #02297f;
+	margin-top: 0;
+    padding-top: 0;
+}
+
+.media-thematique, .media-organisation {
+    text-align: center;
+}
+.media-thematique .container-media-image {
+    width: 50px;
+    height: 55px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: initial;
+}
+.media-thematique .media-image {
+    width: 50px;
+    position: absolute;
+    clip: rect(0, 50px, 55px, 0px);
+    border-radius: 0;
+}
+.media-thematique .media-heading {
+    padding-top: 0;
+}
+.image-thematique {
+    margin-bottom: 0;
+    position: relative;
+}
+.media-organisation .container-media-image {
+	width: 100%;
+    height: 130px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.media-organisation .container-media-image span {
+	display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+.media-organisation .media-image {
+	max-height: 95%;
+	max-width: 95%;
+    vertical-align: middle;
+}
+.truncate {
+    overflow: hidden;
+}
+.affich-grille .fadetest, .affich-liste .item-description.fadetest {
+    position: relative;
+    line-height: 1.3em;
+    height: 3.9em; /* exactly three lines */
+}
+.affich-grille .fadetest:after, .affich-liste .item-description.fadetest:after {
+  content: "";
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 1.2em;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 99%);
+}
+
+
+/* Items : liste */
+.affich-liste li.media-item {
+    width: 98%;
+    height: 145px;
+	text-align: left;
+}
+.affich-liste .media-item h3 {
+    display: inline-block;
+	margin-left: 20px;
+    width: calc(100% - 210px);
+}
+.affich-liste .media-item .container-media-image {
+	height: 110px;
+    width: 190px;	
+	float: left;
+    display: inline-block;
+    text-align: center;
+}
+.affich-liste .media-thematique img {
+    top: 50px;
+    left: 80px;
+}
+.affich-liste .media-item p {
+    display: inline-block;
+    width: calc(100% - 210px);
+    margin-left: 20px;	
+	margin-bottom: 0;
+}
+.affich-liste .media-item .count {
+	margin-left: 20px;
+    display: inline-block;
+    width: calc(100% - 210px);
+}
+.affich-liste h3.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* Items : grille */
+.affich-grille .organisation-description, .affich-grille .thematique-description {
+    display: none;
+}
+
+.affich-grille .media-thematique {
+    height: 180px;
+}
+
+
+
 /******************************************************************************************************
  >>> FOOTER
  ******************************************************************************************************/
@@ -6450,6 +6586,15 @@ footer #menu-menu-footer li i {
 /******************************************************************************************************
  >>> MEDIA QUERIES
  ******************************************************************************************************/
+@media only screen and (max-width: 960px) {
+	li.media-item {
+    	width: 31%;
+		font-size: 12px;
+	}
+	li.media-item .media-heading {
+		font-size: 16px;	
+	}
+}
 
 @media screen and (min-width: 48em) {
 	.custom-logo-link {
@@ -6458,8 +6603,6 @@ footer #menu-menu-footer li i {
 	li {
     	line-height: 1.5 !important;
 	}
-}
-@media screen and (min-width: 48em) {
     body, button, input, select, textarea {
         font-size: 14px;
         line-height: 1.5;
@@ -6472,6 +6615,7 @@ footer #menu-menu-footer li i {
     	margin-left: 30px;
 	}
 }
+
 @media only screen and (max-width: 767px) {
 	.module-content {
 		padding: 0 15px !important;
@@ -6485,4 +6629,40 @@ footer #menu-menu-footer li i {
 	.toolbar .breadcrumb .home {
     	display: initial;
 	}
+	li.media-item {
+        width: 47%;
+    }
+	.affich-liste .media-item .container-media-image {
+        width: 160px;
+    }
+    .affich-liste .media-item h3, .affich-liste .media-item p, .affich-liste .media-item .count {
+        width: calc(100% - 180px);
+    }
 }
+
+@media only screen and (max-width: 460px) {
+	li.media-item {
+        width: 98%;
+		font-size: 11px;
+    }
+	.affich-liste li.media-item {
+	    height: 120px;
+	}	
+	li.media-item .media-heading {
+        font-size: 14px;
+    }
+	.affich-liste .media-item .container-media-image {
+	    width: 130px;
+	    height: 95px;
+	}
+	.affich-liste .media-item h3, .affich-liste .media-item p, .affich-liste .media-item .count {
+	    width: calc(100% - 150px);
+	}
+    .affich-grille li.media-item {
+        height: 180px;
+    }
+    .affich-grille .media-item .container-media-image {
+        height: 80px;
+    }
+}
+

@@ -15,11 +15,11 @@
     </div>
   {% endblock %}
   {% block title %}
-    <h3 class="media-heading">{{ group.display_name }}</h3>
+    <h3 class="media-heading truncate fadetest">{{ group.display_name }}</h3>
   {% endblock %}
   {% block description %}
     {% if group.description %}
-      <p>{{ h.markdown_extract(group.description, extract_length=80) }}</p>
+      <p class="thematique-description item-description truncate fadetest">{{ group.description }}</p>
     {% endif %}
   {% endblock %}
   {% block datasets %}
