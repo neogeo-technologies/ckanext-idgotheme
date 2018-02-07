@@ -6455,6 +6455,7 @@ li.media-item {
     color: #02297f;
 	margin-top: 0;
     padding-top: 0;
+    hyphens: none;
 }
 
 .media-thematique, .media-organisation {
