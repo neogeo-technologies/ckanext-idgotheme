@@ -28,47 +28,13 @@
       {% if res.has_views or res.url_type == 'upload' %}
         <i class="fa fa-arrow-circle-o-down"></i>
       	{{ _('Download') }}
+      {% else %}
+        <!-- S'applique aux urls référencées (même comportement) -->
+        <i class="fa fa-arrow-circle-o-down"></i>
+        {{ _('Download') }}
       {% endif %}
     </a>
   </div>
-<!--  <div class="dropdown btn-group">
-    <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-      <i class="fa fa-share"></i>
-      {{ _('Explore') }}
-      <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
-      {% block resource_item_explore_links %}
-      <li>
-        <a href="{{ h.url_for(controller='package', action='resource_views', id=pkg.name, resource_id=res.id) }}">
-            <i class="fa fa-bar-chart-o"></i>
-            {{ _('Views') }}
-        </a>
-      </li>
-      {% if res.url and h.is_url(res.url) %}
-      <li>
-        <a href="{{ res.url }}" class="resource-url-analytics" target="_blank">
-          {% if res.has_views or res.url_type == 'upload' %}
-            <i class="fa fa-arrow-circle-o-down"></i>
-            {{ _('Download') }}
-          {% else %}
-            <i class="fa fa-external-link"></i>
-            {{ _('Go to resource') }}
-          {% endif %}
-        </a>
-      </li>
-      {% endif %}
-      {% if can_edit %}
-      <li>
-        <a href="{{ h.url_for(controller='package', action='resource_edit', id=pkg.name, resource_id=res.id) }}">
-          <i class="fa fa-pencil-square-o"></i>
-          {{ _('Edit') }}
-        </a>
-      </li>
-      {% endif %}
-      {% endblock %}
-    </ul>
-  </div> -->
   {% endif %}
   {% endblock %}
 </li>
