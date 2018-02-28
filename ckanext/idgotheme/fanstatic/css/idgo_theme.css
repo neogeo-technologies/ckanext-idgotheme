@@ -1128,15 +1128,6 @@ td {
 	padding: 0.4em;
 }
 
-th:first-child,
-td:first-child {
-	padding-left: 0;
-}
-
-th:last-child,
-td:last-child {
-	padding-right: 0;
-}
 
 /*--------------------------------------------------------------
 10.0 Links
