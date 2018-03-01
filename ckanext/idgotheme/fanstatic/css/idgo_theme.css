@@ -6177,7 +6177,7 @@ a {
 }
 
 .search-form .search-input.search-giant input {
-    padding:10px;
+    padding: 10px 45px 10px 10px;
 }
 
 .label,.badge {
@@ -6223,6 +6223,17 @@ a {
 /*    padding-top: 25px;*/
 }
 
+/* Ajouts 01/03/2018 */ 
+.popover .popover-content {
+    word-break: break-word;
+}
+.simple-input .field #field-user-search {
+    margin: 0;
+    padding-right: 23px;
+}
+.simple-input .field .btn-search {
+    right: 5px;
+}
 
 /******************************************************************************************************
  >>> HEADER
@@ -6312,6 +6323,7 @@ a {
 
 .search-form .search-input.search-giant button {
     margin-top: -14px;
+    right: 10px;
 }
 
 
