@@ -52,6 +52,7 @@ html {
 
 body {
 	margin: 0;
+    word-break: unset !important;
 }
 
 article,
@@ -6097,27 +6098,18 @@ footer .site-info .wrap a{
 
  ******************************************************************************************************
  ******************************************************************************************************/
-/* Ajouts 30/01/18 */
-.span9 .page-header {
-    margin-left: 0px !important;
-}
-.page-header .nav-tabs {
-    margin-top: 10px;
-}
 
-
-/* Ajouts 14/12 */
+/******************************************************************************************************
+>>> GLOBAL
+*******************************************************************************************************/
 body {
     background: #ffffff;
 	padding: 0;
 }
 
-
-/* Bouton telecharger qui ne fonctionne pas sur le viewer */
-div.data-viewer-error a.resource-url-analytics {
-    display: none !important;
+a {
+    color: #002880;
 }
-
 a:hover, a:focus {
     color: #444444;
 }
@@ -6139,56 +6131,9 @@ a:hover, a:focus {
     background-color: #f1342d;
 }
 
-.resource-item .btn-group>.btn:first-child {
-    margin-right: 5px;
-}
-
-/* Ajouts 27/11 */
-.span9 Article {
-	background-color: #fff !important;
-    padding:0;
-    margin-left: 30px !important;
-}
-
-a {
-    color: #002880;
-}
-
-.search-form h2 {
-    font-size: 20px;
-    color: #002880;
-    margin-top: 0;
-    padding-top: 0;
-    margin-bottom: 15px;
-    display: inline-block;
-}
-
-.media-grid {
-    margin: 0;
-}
-
-.nav-item.active>a,.nav-aside li.active a {
-    background-color: #002880;
-}
-
-.dataset-heading {
-    font-size:15px;
-    line-height:0.8;
-}
-
-.search-form .search-input.search-giant input {
-    padding: 10px 45px 10px 10px;
-}
-
 .label,.badge {
     text-shadow: none;
 }
-
-.module-resource {
-    padding:40px;
-}
-/* Fin */
-
 
 .wrap {
     max-width: 1200px;
@@ -6202,38 +6147,14 @@ a {
     margin-right: auto;
 }
 
-.primary .module-content {
-    padding-left: 30px !important;
-    padding-right: 30px !important;
-    padding-top: 0 !important;
-    padding-right: 0;
-}
-
 [role=main] .primary {
     float: right;
-/*    padding-left: 20px;*/
-}
-
-[role=main] .secondary {
-/*    margin-top: 20px;*/
 }
 
 [role=main] {
     background: #efefef;
-/*    padding-top: 25px;*/
 }
 
-/* Ajouts 01/03/2018 */ 
-.popover .popover-content {
-    word-break: break-word;
-}
-.simple-input .field #field-user-search {
-    margin: 0;
-    padding-right: 23px;
-}
-.simple-input .field .btn-search {
-    right: 5px;
-}
 
 /******************************************************************************************************
  >>> HEADER
@@ -6268,10 +6189,80 @@ a {
 /******************************************************************************************************
  >>> BODY - MAIN
  ******************************************************************************************************/
+.span9 .page-header {
+    margin-left: 0px !important;
+}
+.page-header .nav-tabs {
+    margin-top: 10px;
+}
+
+.primary .module-content {
+	padding-left: 30px !important;
+    padding-right: 30px !important;    
+	padding-top: 0 !important;
+    padding-right: 0;
+}
+
+/* Bouton telecharger qui ne fonctionne pas sur le viewer */
+div.data-viewer-error a.resource-url-analytics {
+    display: none !important;
+}
+
+.popover .popover-content {
+    word-break: break-word;
+}
+.simple-input .field #field-user-search {
+    margin: 0;
+    padding-right: 23px;
+}
+.simple-input .field .btn-search {
+    right: 5px;
+}
+
 .page-header .content_action {
     float: right;
     margin-top: 4px;
     margin-right: 4px;
+}
+
+.module-resource {
+    padding:40px;
+}
+
+.nav-item.active>a,.nav-aside li.active a {
+    background-color: #002880;
+}
+
+.dataset-heading {
+    font-size:15px;
+    line-height:0.8;
+}
+
+.search-form .search-input.search-giant input {
+    padding: 10px 45px 10px 10px;
+}
+
+.resource-item .btn-group>.btn:first-child {
+    margin-right: 5px;
+}
+
+.span9 Article {
+    background-color: #fff !important;
+    padding:0;
+    margin-left: 30px !important;
+}
+
+.search-form h2 {
+    font-size: 20px;
+    color: #002880;
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.media-grid {
+    margin: 0;
 }
 
 .module-heading {
@@ -6459,6 +6450,12 @@ li.media-item {
 	margin-top: 0;
     padding-top: 0;
     hyphens: none;
+    word-break: initial;
+    background: #fff;
+}
+
+.media-item .container-media-image {
+    overflow: hidden;
 }
 
 .media-thematique, .media-organisation {
@@ -6569,6 +6566,20 @@ li.media-item {
     height: 180px;
 }
 
+.context-info h1.heading {
+    word-break: unset !important;
+}
+
+.org-info-contact div {
+    margin-top: 25px;
+    color: #afafaf;
+}
+
+.org-info-contact hr {
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-color: #afafaf;
+}
 
 
 /******************************************************************************************************
