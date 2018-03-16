@@ -6581,6 +6581,18 @@ li.media-item {
     border-color: #afafaf;
 }
 
+/* Error messages */
+.error_message .fa-chevron-right {
+    color: #02297f;
+}
+.error_message h1 {
+    color: #02297f;
+}
+.error_message span {
+    font-size: 16px;
+}
+
+
 
 /******************************************************************************************************
  >>> FOOTER
