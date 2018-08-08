@@ -1,0 +1,49 @@
+{#
+Renders a list of resources with icons and view links.
+
+resources - A list of resources to render
+pkg - A package object that the resources belong to.
+
+Example:
+
+  {% snippet "package/snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
+
+#}
+<section id="dataset-resources" class="resources">
+  <h3>{{ _('Data and Resources') }}</h3>
+  {% block resource_list %}    
+    {% if resources %}
+      <ul class="{% block resource_list_class %}resource-list{% endblock %}">
+        {% block resource_list_inner %}
+          {% set can_edit = h.check_access('package_update', {'id':pkg.id }) %}
+            
+          {% set schema = h.scheming_get_dataset_schema('dataset') %}
+          {% for field in schema.resource_fields if field.field_name == 'data_type' %}
+   	        {% if field.choices %}
+	          {% for choice in field.choices %}
+				<div class="resource-datatype">
+                	{% if choice.value == 'service' %}
+					  <h4>Services</h4>
+					{% else %}
+					  <h4>{{ choice.label }}</h4>
+					{% endif %}
+					{% for resource in resources if choice.value == resource.data_type %}
+            			{% snippet 'package/snippets/resource_item.html', pkg=pkg, res=resource, can_edit=can_edit %}
+		        	{% endfor %}
+				</div>
+			  {% endfor %}
+			{% endif %}
+          {% endfor %}
+        {% endblock %}
+      </ul>
+    {% else %}
+      {% if h.check_access('resource_create', {'package_id': pkg['id']}) %}
+          {% trans url=h.url_for('resource.new', id=pkg.name) %}
+            <p class="empty">This dataset has no data, <a href="{{ url }}">why not add some?</a></p>
+          {% endtrans %}
+      {% else %}
+          <p class="empty">{{ _('This dataset has no data') }}</p>
+      {% endif %}
+    {% endif %}
+    {% endblock %}
+</section>

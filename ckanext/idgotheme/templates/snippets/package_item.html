@@ -20,6 +20,16 @@ Example:
 
 {% block package_item %}
   <li class="{{ item_class or "dataset-item" }}">
+    <div class="dataset-item-content image">
+      {% if package.thumbnail %}
+      <img class="dataset-thumbnail" src="{{ package.thumbnail }}">
+      {% elif package.groups %}
+        <img class="dataset-thematic" src="{{ package.groups[0].image_display_url }}">
+      {% else %}
+        <img class="dataset-thumbnail" src="">
+      {% endif %}
+    </div>
+    <div class="dataset-item-content text">
     {% block content %}
       <div class="dataset-content">
         {% block heading %}
@@ -43,6 +53,13 @@ Example:
               {% endif %}
               {{ h.popular('recent views', package.tracking_summary.recent, min=10) if package.tracking_summary }}
             {% endblock %}
+            {% if package.organization.title %}
+              <div class="dataset-item-organization-title">
+                  <i class="fa fa-building-o" aria-hidden="true"></i> {{ package.organization.title }}
+              </div>
+            {% endif %}
+            <!-- A CHANGER -->
+            {# snippet "rating/snippets/stars.html", package=package #}
           </h3>
         {% endblock %}
         {% block banner %}
@@ -72,27 +89,23 @@ Example:
           {% endblock %}
         {% endif %}
       {% endblock %}
- 
-            <ul class="dataset-resources unstyled">
-                {% for resource in package.datatype %}
-
-                    {% set schema = h.scheming_get_dataset_schema('dataset') %}
-
-                <li class="dataset-datatype">
-                    <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}" class="label" data-format="{{ resource.lower() }}">
-                    {% for field in schema.dataset_fields if field.field_name == 'datatype' %}
-                        {% for choice in field.choices if choice.value == resource %}
-                            {{ choice.label }}
-                        {% endfor %}
-                    {% endfor %}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-
+      <ul class="dataset-resources unstyled">
+        {% for resource in package.datatype %}
+          {% set schema = h.scheming_get_dataset_schema('dataset') %}
+          <li class="dataset-datatype">
+            <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}" class="label" data-format="{{ resource.lower() }}">
+            {% for field in schema.dataset_fields if field.field_name == 'datatype' %}
+              {% for choice in field.choices if choice.value == resource %}
+                {{ choice.label }}
+              {% endfor %}
+            {% endfor %}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
     {% endblock %}
 
-	<div class="banner-support-wrap">
+	  <div class="banner-support-wrap">
 		<span class="banner-support" data-format="{{ package.support }}">
 			{% set schema = h.scheming_get_dataset_schema('dataset') %}
 			{% for field in schema.dataset_fields if field.field_name == 'support' %}
@@ -101,8 +114,10 @@ Example:
 		        {% endfor %}
             {% endfor %}
 		</span>
-	</div>
+	  </div>
+      {# package #}
 
+	</div>
   </li>
 {% endblock %}
 

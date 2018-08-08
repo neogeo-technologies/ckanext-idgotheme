@@ -9,6 +9,9 @@
   </a>
   {% endblock %}
   {% block resource_item_description %}
+    {% if res.size %}
+      <div name="size" data-size="{{ res.size }}"><span class="label label-default" name="size-value"></span></div>
+    {% endif %}
     <p class="description">
       {% if res.description %}
         {{ h.markdown_extract(h.get_translated(res, 'description'), extract_length=80) }}

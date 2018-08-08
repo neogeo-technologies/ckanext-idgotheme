@@ -6233,9 +6233,12 @@ div.data-viewer-error a.resource-url-analytics {
     background-color: #002880;
 }
 
-.dataset-heading {
-    font-size:15px;
-    line-height:0.8;
+div.dataset-item-organization-title {
+    margin-top: 2px;
+    color: #333;
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 13px;
 }
 
 .search-form .search-input.search-giant input {
@@ -6276,17 +6279,35 @@ div.data-viewer-error a.resource-url-analytics {
 
 .dataset-heading {
     border-bottom: dotted 1px #ddd;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
+    font-size: 15px;
 }
 
 .dataset-item {
     border-bottom: none;
     border-left: 2px solid #002880;
-    padding: 10px 25px !important;
+    padding: 10px 10px !important;
     margin-bottom: 35px;
     border-radius: 3px;
     background: #f9f9f9;
     position: relative;
+}
+
+.dataset-item-content {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.dataset-item-content .dataset-heading {
+    text-overflow:ellipsis;
+    overflow-x:hidden;
+    white-space:nowrap;
+    width: calc(100% - 50px);
+}
+
+.dataset-item-content.text {
+    width: calc(100% - 145px);
+    padding-left: 20px;
 }
 
 .secondary .nav-facet, .secondary .module-content {
@@ -6317,6 +6338,29 @@ div.data-viewer-error a.resource-url-analytics {
     right: 10px;
 }
 
+/*** Image dataset  ***/
+.dataset-item-content.image {
+    height: 140px;
+    width: 140px;
+	text-align: center;
+    white-space: nowrap;
+    margin-left: auto;
+    margin-right: auto;
+}
+.dataset-item-content.image:before {
+	content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+.dataset-item-content.image img.dataset-thematic {
+    clip-path: inset(0px 0px 130px 0px);
+    margin-top: 25%;
+}
+.dataset-item-content.image img.dataset-thumbnail {
+    vertical-align: middle;    
+    max-height: 100%;
+}
 
 /*** Tags clickables - Type de donnees ***/
 .label[data-format=donnees-ouvertes] {
@@ -6334,7 +6378,7 @@ div.data-viewer-error a.resource-url-analytics {
 }
 
 
-/*** Bandeau latÃ©ral - Support ***/
+/*** Bandeau lateral - Support ***/
 .banner-support-wrap {
     position: absolute;
     right: 0;
@@ -6592,7 +6636,13 @@ li.media-item {
     font-size: 16px;
 }
 
-
+/* Dataset : resources */
+.resource-datatype {
+   padding-bottom: 30px; 
+}
+.resource-datatype h4{
+    border-bottom: 1px dotted #dddddd;
+}
 
 /******************************************************************************************************
  >>> FOOTER
@@ -6664,6 +6714,12 @@ footer #menu-menu-footer li i {
     }
     .affich-liste .media-item h3, .affich-liste .media-item p, .affich-liste .media-item .count {
         width: calc(100% - 180px);
+    }
+    .dataset-item-content {
+        display:block;
+    }
+    .dataset-item-content.text {
+        width: 100%
     }
 }
 
