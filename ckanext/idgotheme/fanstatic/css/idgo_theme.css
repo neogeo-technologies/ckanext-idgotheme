@@ -6245,8 +6245,36 @@ div.dataset-item-organization-title {
     padding: 10px 45px 10px 10px;
 }
 
-.resource-item .btn-group>.btn:first-child {
-    margin-right: 5px;
+#api-ogc-tag {
+    width: 100px;
+    float: right;
+    margin-top: 5px;
+}
+
+.btn-group>.btn {
+    margin-left: 5px !important;
+}
+
+.resource-item .btn-group {
+    position: relative;
+    float: right;
+    top: 0;
+    right: 0;
+    font-weight: normal;
+    margin-bottom: 15px;
+}
+
+.resource-item div {
+    display: inline-block;
+}
+
+#resource-geo-legend {
+    float: right;
+    margin-left: 5px;
+}
+#resource-geo-legend ul {
+    left: auto;
+    right: 0;
 }
 
 .span9 Article {
@@ -6694,7 +6722,10 @@ footer #menu-menu-footer li i {
 }
 
 @media only screen and (max-width: 767px) {
-	.module-content {
+    .span9 Article {
+        margin-left: 0px !important;
+    }
+    .module-content {
 		padding: 0 15px !important;
 	}
 	.toolbar {
@@ -6720,6 +6751,13 @@ footer #menu-menu-footer li i {
     }
     .dataset-item-content.text {
         width: 100%
+    }
+    .resource-item .btn-group {
+        display: block;
+        margin-top: 10px;
+    }
+    .resource-item .btn-group a.btn.btn-primary span {
+        font-size: 12px;
     }
 }
 

@@ -2,41 +2,49 @@
 {% set url = h.url_for(controller='package', action=url_action, id=pkg.name, resource_id=res.id) %}
 
 <li class="resource-item" data-id="{{ res.id }}">
-  {% block resource_item_title %}
-  <a class="heading" href="{{ url }}" title="{{ res.name or res.description }}">
-    {{ h.resource_display_name(res) | truncate(50) }}<span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">{{ h.get_translated(res, 'format') }}</span>
-    {{ h.popular('views', res.tracking_summary.total, min=10) }}
-  </a>
-  {% endblock %}
-  {% block resource_item_description %}
-    {% if res.size %}
-      <div name="size" data-size="{{ res.size }}"><span class="label label-default" name="size-value"></span></div>
-    {% endif %}
-    <p class="description">
-      {% if res.description %}
-        {{ h.markdown_extract(h.get_translated(res, 'description'), extract_length=80) }}
+  <div>
+	{% block resource_item_title %}
+  	<a class="heading" href="{{ url }}" title="{{ res.name or res.description }}">
+      {{ h.resource_display_name(res) | truncate(50) }}<span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">{{ h.get_translated(res, 'format') }}</span>
+      {{ h.popular('views', res.tracking_summary.total, min=10) }}
+  	</a>
+	{% endblock %}
+    {% block resource_item_description %}
+      {% if res.size %}
+        <div name="size" data-size="{{ res.size }}"><span class="label label-default" name="size-value"></span></div>
       {% endif %}
-    </p>
-  {% endblock %}
+      <p class="description">
+        {% if res.description %}
+          {{ h.markdown_extract(h.get_translated(res, 'description'), extract_length=80) }}
+        {% endif %}
+      </p>
+    {% endblock %}
+  </div>
   {% block resource_item_explore %}
   {% if not url_is_edit %}
   <div class="btn-group">
 	{% if can_edit %}
 	  <a href="{{ h.url_for(controller='package', action='resource_views', id=pkg.name, resource_id=res.id) }}" class="btn btn-primary">
         <i class="fa fa-bar-chart-o"></i>
-        Éditer les vues
+        <span>Éditer les vues</span>
       </a>
 	{% endif %}
 	<a href="{{ res.url }}" class="btn btn-primary" target="_blank">
       {% if res.has_views or res.url_type == 'upload' %}
         <i class="fa fa-arrow-circle-o-down"></i>
-      	{{ _('Download') }}
+      	<span>{{ _('Download') }}</span>
       {% else %}
-        <!-- S'applique aux urls référencées (même comportement) -->
+        <!-- S'applique aux urls referencees (meme comportement) -->
         <i class="fa fa-arrow-circle-o-down"></i>
-        {{ _('Download') }}
+        <span>{{ _('Download') }}</span>
       {% endif %}
     </a>
+    {% if (h.is_crige_partner()) and ( res.extracting_service == 'True') %}
+    <a href="#" class="btn btn-primary" target="_blank">
+      <i class="fa fa-filter"></i>
+      <span>Extracteur</span>
+    </a>
+    {% endif %}
   </div>
   {% endif %}
   {% endblock %}

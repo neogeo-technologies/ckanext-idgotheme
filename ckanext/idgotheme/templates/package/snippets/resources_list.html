@@ -22,14 +22,14 @@ Example:
    	        {% if field.choices %}
 	          {% for choice in field.choices %}
 				<div class="resource-datatype">
-                	{% if choice.value == 'service' %}
-					  <h4>Services</h4>
-					{% else %}
-					  <h4>{{ choice.label }}</h4>
-					{% endif %}
-					{% for resource in resources if choice.value == resource.data_type %}
-            			{% snippet 'package/snippets/resource_item.html', pkg=pkg, res=resource, can_edit=can_edit %}
-		        	{% endfor %}
+                  {% if choice.value == 'service' %}
+				    <h4>Services</h4>
+				  {% else %}
+				    <h4>{{ choice.label }}</h4>
+				  {% endif %}
+				  {% for resource in resources if choice.value == resource.data_type %}
+                        {% snippet 'package/snippets/resource_item.html', pkg=pkg, res=resource, can_edit=can_edit %}
+                  {% endfor %}
 				</div>
 			  {% endfor %}
 			{% endif %}

@@ -2,7 +2,8 @@
 
 import ckan.plugins as p
 import ckan.plugins.toolkit as toolkit
-from ckan.common import config
+import ckan.model as model
+from ckan.common import config, c
 from collections import OrderedDict
 import json
 from ckanext.scheming.plugins import _SchemingMixin
@@ -34,13 +35,29 @@ def trad_thematiques_min():
 def trad_thematiques_maj():
     return THEMATIQUES_MAJ
 
+def is_crige_partner():
+    if not c.userobj:
+        return False
+    if c.userobj.sysadmin:
+        return True
+    
+    partner_group_id = model.Session.query(model.Group) \
+	.filter(model.Group.type == 'partner') \
+        .first().id
+
+    query = model.Session.query(model.Member) \
+        .filter(model.Member.state == 'active') \
+        .filter(model.Member.table_name == 'user') \
+        .filter(model.Member.group_id == partner_group_id) \
+        .filter(model.Member.table_id == c.userobj.id)
+    return len(query.all()) != 0
 
 # Plugin
 class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
-    p.implements(p.IConfigurer)
+    p.implements(p.IConfigurer, inherit=True)
     p.implements(p.IFacets, inherit=True)
     p.implements(p.IPackageController, inherit=True)
-    p.implements(p.ITemplateHelpers)
+    p.implements(p.ITemplateHelpers, inherit=True)
 
     SCHEMA_OPTION = 'scheming.dataset_schemas'
     FALLBACK_OPTION = 'scheming.dataset_fallback'
@@ -48,12 +65,15 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
 
     # ITemplateHelpers : Custom Helpers functions
     def get_helpers(self):
-        return {'idgotheme_get_url_wp': get_url_wp,
-		'idgotheme_get_url_publier': get_url_publier,
-                'trad_thematique_min' : trad_thematique_min,
-                'trad_thematique_maj' : trad_thematique_maj,
-                'trad_thematiques_min' : trad_thematiques_min,
-                'trad_thematiques_maj' : trad_thematiques_maj}
+        return {
+          'idgotheme_get_url_wp': get_url_wp,
+          'idgotheme_get_url_publier': get_url_publier,
+          'trad_thematique_min' : trad_thematique_min,
+          'trad_thematique_maj' : trad_thematique_maj,
+          'trad_thematiques_min' : trad_thematiques_min,
+          'trad_thematiques_maj' : trad_thematiques_maj,
+          'is_crige_partner' : is_crige_partner,
+        }
 
     # IConfigurer
     def update_config(self, config_):

@@ -78,7 +78,7 @@
   });
 
   /* for all Show more/show less links modify link to take you to that facet */
-  $('a#facet_read_more').each( function() {
+/*  $('a#facet_read_more').each( function() {
     var name = $(this).attr('name').split("sm_")[1];
     var url = $(this).attr('href');
 
@@ -90,7 +90,7 @@
       location.href = url;
     });
   });
-
+*/
   /**
    * for Alphabatical sort set param 'sortType' to alphaSort
    * for Count sort set param 'sortType' to cntSort
