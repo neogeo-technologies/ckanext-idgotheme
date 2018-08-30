@@ -1,5 +1,30 @@
 {% ckan_extends %}
 
+{% block search_title %}
+  {% if not error %}
+   	<h2>{% snippet 'snippets/search_result_text.html', query=query, count=count, type=type %}</h2>
+  {% else %}
+   	<h2>Error</h2>
+  {% endif %}
+	<span id="download-datasets" class="btn-group">
+  	  <button data-toggle="dropdown">
+    	<i class="fa fa-2x fa-arrow-circle-o-down" aria-hidden="true"></i>
+      </button>
+      <ul class="dropdown-menu">
+		<li>
+		  <div><b>Télécharger les données au format :</b></div>
+		</li>
+    	<li>
+          <a href="{{ h.proxy_export('odl1', request.params) }}" target="_blank"><span>OLD 1 (SCDL 1.0 ANSI, ";")</span></a>
+          <a href="{{ h.proxy_export('odl2', request.params) }}" target="_blank"><span>ODL 2 (SCDL 1.0-UTF-8, ",")</span></a>
+          <a href="{{ h.proxy_export('datasud1', request.params) }}" target="_blank"><span>DataSud 1 (SCDL 1.0 ANSI, ";")</span></a>
+          <a href="{{ h.proxy_export('datasud2', request.params) }}" target="_blank"><span>DataSud 2 (SCDL 1.0-UTF-8, ",")</span></a>
+        </li>
+      </ul>
+  </span>
+{% endblock %}
+
+
 {% block search_facets %}
     {% if facets %}
       <p class="filter-list">

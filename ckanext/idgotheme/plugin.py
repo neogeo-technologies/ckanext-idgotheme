@@ -4,10 +4,13 @@ import ckan.plugins as p
 import ckan.plugins.toolkit as toolkit
 import ckan.model as model
 from ckan.common import config, c
+import ckan.lib.helpers as h
 from collections import OrderedDict
 import json
 from ckanext.scheming.plugins import _SchemingMixin
 import ckan.authz as authz
+from logging import getLogger
+log = getLogger(__name__)
 
 def get_url_wp():
     url_site_wp = config.get('ckanext.idgotheme.url_site_wp', '')
@@ -58,6 +61,7 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
     p.implements(p.IFacets, inherit=True)
     p.implements(p.IPackageController, inherit=True)
     p.implements(p.ITemplateHelpers, inherit=True)
+    p.implements(p.IRoutes, inherit=True)
 
     SCHEMA_OPTION = 'scheming.dataset_schemas'
     FALLBACK_OPTION = 'scheming.dataset_fallback'
@@ -73,6 +77,7 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
           'trad_thematiques_min' : trad_thematiques_min,
           'trad_thematiques_maj' : trad_thematiques_maj,
           'is_crige_partner' : is_crige_partner,
+          'proxy_export': self.proxy_export
         }
 
     # IConfigurer
@@ -81,7 +86,6 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('fanstatic', 'idgotheme')
 
-    
     # IFacets
     def dataset_facets(self, facets_dict, package_type):
         
@@ -102,3 +106,19 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
     def before_index(self, data_dict):
         data_dict['datatype'] = json.loads(data_dict.get('datatype', '[]'))
         return data_dict
+
+    def before_map(self, m):
+        m.connect('/dataset/export',
+                  controller='ckanext.idgotheme.controller:ExportController',
+                  action='query_export')
+        return m
+
+    def proxy_export(self, resformat, *args):
+        args = dict(list(args)[0])
+        
+        url = h.url_for(
+            action='query_export',
+            controller='ckanext.idgotheme.controller:ExportController',
+            resformat=resformat,
+            **dict(args))
+        return url 
