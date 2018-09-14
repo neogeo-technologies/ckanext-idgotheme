@@ -2,11 +2,11 @@
 function toOctetString(value) {
 	var len = String(value).length;
 	if (len > 6) {
-		return (value / 1024 / 1024).toLocaleString('fr-FR') + ' mo';
+		return (Math.round((value / 1024 / 1024)*10)/10).toLocaleString('fr-FR') + ' Mo';
 	} else if (value > 3) {
-		return (value / 1024).toLocaleString('fr-FR') + ' ko';
+		return (Math.round(value / 1024)).toLocaleString('fr-FR') + ' Ko';
 	} else if (value > 0) {
-		return value + ' octets';
+		return Math.round(value) + ' octets';
 	} else {
         return '';
     }
@@ -41,3 +41,4 @@ $('body').on('click', '#show-modal-api-geo', function(){
     );
 
 });
+

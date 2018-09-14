@@ -16,19 +16,26 @@ class ExportController(base.BaseController):
     
     def query_export(self, *args, **kwargs):
         args = dict(kwargs['environ']['paste.parsed_dict_querystring'][0])
-
+        
         q = ''
+        fq = ''
+        bbox = ''
         resformat = 'odl1'
         for key in args:
             if key == 'resformat':
                 resformat = args[key]
+            elif key == 'ext_bbox':
+                bbox = args[key]
+            elif key == 'q':
+                q = args[key]
             else:
-                q += ' +' + key + ':' + args[key]
+                if key not in ['ext_prev_extent','sort']:
+                    fq += ' +' + key + ':' + args[key]
 
         context = { 'model': base.model,
                     'session': base.model.Session,
                     'user': base.c.user }
-        data_dict = {'rows': 100000, 'q': q}
+        data_dict = {'rows': 100000, 'q': q, 'fq': fq, 'ext_bbox': bbox}
         search_result = toolkit.get_action('package_search')(context, data_dict)
         results = [x['id'] for x in search_result.get('results', [])]
 

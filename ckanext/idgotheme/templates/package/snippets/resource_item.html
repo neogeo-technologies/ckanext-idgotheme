@@ -29,6 +29,7 @@
         <span>Éditer les vues</span>
       </a>
 	{% endif %}
+    {% if res.data_type != "service" %}
 	<a href="{{ res.url }}" class="btn btn-primary" target="_blank">
       {% if res.has_views or res.url_type == 'upload' %}
         <i class="fa fa-arrow-circle-o-down"></i>
@@ -39,11 +40,19 @@
         <span>{{ _('Download') }}</span>
       {% endif %}
     </a>
+    {% endif %}
     {% if (h.is_crige_partner()) and ( res.extracting_service == 'True') %}
-    <a href="#" class="btn btn-primary" target="_blank">
-      <i class="fa fa-filter"></i>
-      <span>Extracteur</span>
-    </a>
+      {% if res.data_type == "service" %}
+        <a href="{{ h.idgotheme_get_url_publier() }}/extractor/?layer={{ res.id }}" class="btn btn-primary" target="_blank">
+          <i class="fa fa-filter"></i>
+          <span>Extracteur</span>
+        </a> 
+      {% else %}
+        <a href="{{ h.idgotheme_get_url_publier() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank">
+          <i class="fa fa-filter"></i>
+          <span>Extracteur</span>
+        </a>
+      {% endif %}
     {% endif %}
   </div>
   {% endif %}
