@@ -5827,9 +5827,7 @@ li.media-item {
 
 /*** Download Datasets ***/
 #download-datasets button {
-    background: transparent;
-    color: #999999;
-    padding: 2px 5px;
+    border-radius: 0;
 }
 #download-datasets ul.dropdown-menu {
     padding: 5px;

@@ -8,18 +8,16 @@
   {% endif %}
   {% if type == 'dataset' %}
 	<span id="download-datasets" class="btn-group">
-  	  <button data-toggle="dropdown">
-    	<i class="fa fa-2x fa-arrow-circle-o-down" aria-hidden="true"></i>	
+  	  <button class="btn" data-toggle="dropdown">
+    	Exporter <i class="fa fa-lg fa-download" aria-hidden="true"></i>	
       </button>
       <ul class="dropdown-menu">
 		<li>
-		  <div><b>Télécharger les données au format :</b></div>
+		  <div><b>Télécharger les données</b></div>
 		</li>
     	<li>
-          <a href="{{ h.proxy_export('odl1', request.params) }}" target="_blank"><span>OLD 1 (SCDL 1.0 ANSI, ";")</span></a>
-          <a href="{{ h.proxy_export('odl2', request.params) }}" target="_blank"><span>ODL 2 (SCDL 1.0-UTF-8, ",")</span></a>
-          <a href="{{ h.proxy_export('datasud1', request.params) }}" target="_blank"><span>DataSud 1 (SCDL 1.0 ANSI, ";")</span></a>
-          <a href="{{ h.proxy_export('datasud2', request.params) }}" target="_blank"><span>DataSud 2 (SCDL 1.0-UTF-8, ",")</span></a>
+          <a href="{{ h.proxy_export('odl', request.params) }}" target="_blank"><span>Format ODL</span></a>
+          <a href="{{ h.proxy_export('datasud', request.params) }}" target="_blank"><span>Format DataSud</span></a>
         </li>
       </ul>
     </span>
