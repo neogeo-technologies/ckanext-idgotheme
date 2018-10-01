@@ -114,11 +114,12 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
         return m
 
     def proxy_export(self, resformat, *args):
-        args = dict(list(args)[0])
-        
+        export_args = dict(list(args)[0].params)
+        data_path = args[0].path.split("/")
+
         url = h.url_for(
             action='query_export',
             controller='ckanext.idgotheme.controller:ExportController',
             resformat=resformat,
-            **dict(args))
+            **dict(export_args))
         return url 

@@ -13,14 +13,27 @@ from ckan.common import config, c
 import requests
 
 class ExportController(base.BaseController):
-    
+
     def query_export(self, *args, **kwargs):
         args = dict(kwargs['environ']['paste.parsed_dict_querystring'][0])
-        
+
+        facet_filters = [
+                'organization',
+                'groups',
+                'datatype',
+                'res_format',
+                'support',
+                'license_id',
+                'tags',
+                'update_frequency',
+                'granularity'
+                ]
+
         q = ''
         fq = ''
         bbox = ''
-        resformat = 'odl1'
+        resformat = 'odl'
+
         for key in args:
             if key == 'resformat':
                 resformat = args[key]
@@ -29,7 +42,7 @@ class ExportController(base.BaseController):
             elif key == 'q':
                 q = args[key]
             else:
-                if key not in ['ext_prev_extent','sort']:
+                if key in facet_filters:
                     fq += ' +' + key + ':' + args[key]
 
         context = { 'model': base.model,
