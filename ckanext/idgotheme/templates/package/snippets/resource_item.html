@@ -22,7 +22,49 @@
   </div>
   {% block resource_item_explore %}
   {% if not url_is_edit %}
-  <div class="btn-group">
+  <div class="dropdown btn-group">
+    <a href="#" class="btn btn-primary" data-toggle="dropdown">
+   	  <i class="fa fa-share"></i> Explorer 
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-right">
+      {% block resource_item_explore_links %}
+      {% if can_edit %}
+      <li>
+        <a href="{{ h.url_for(controller='package', action='resource_views', id=pkg.name, resource_id=res.id) }}">
+          <i class="fa fa-bar-chart-o"></i>
+          <span>Éditer les vues</span>
+        </a>
+      </li>
+      {% endif %}
+	  {% if res.data_type != "service" %}
+	  <li>
+        <a href="{{ res.url }}" target="_blank">
+        {% if res.has_views or res.url_type == 'upload' %}
+          <i class="fa fa-arrow-circle-o-down"></i>
+          <span>{{ _('Download') }}</span>
+        {% else %}
+          <!-- S'applique aux urls referencees (meme comportement) -->
+          <i class="fa fa-arrow-circle-o-down"></i>
+          <span>{{ _('Download') }}</span>
+        {% endif %}
+        </a>
+	  </li>
+      {% endif %}
+	  {% if (h.is_crige_partner()) and ( res.extracting_service == 'True') %}
+	  <li>
+        {% if res.data_type != "service" %}
+        <a href="{{ h.idgotheme_get_url_publier() }}/extractor/?resource={{ res.id }}" target="_blank">
+          <i class="fa fa-filter"></i>
+          <span>Extracteur</span>
+        </a>
+        {% endif %}
+	  </li>
+      {% endif %}
+      {% endblock %}
+    </ul>
+  </div>
+  <!--div class="btn-group">
 	{% if can_edit %}
 	  <a href="{{ h.url_for(controller='package', action='resource_views', id=pkg.name, resource_id=res.id) }}" class="btn btn-primary">
         <i class="fa fa-bar-chart-o"></i>
@@ -35,26 +77,20 @@
         <i class="fa fa-arrow-circle-o-down"></i>
       	<span>{{ _('Download') }}</span>
       {% else %}
-        <!-- S'applique aux urls referencees (meme comportement) -->
         <i class="fa fa-arrow-circle-o-down"></i>
         <span>{{ _('Download') }}</span>
       {% endif %}
     </a>
     {% endif %}
     {% if (h.is_crige_partner()) and ( res.extracting_service == 'True') %}
-      {% if res.data_type == "service" %}
-        <a href="{{ h.idgotheme_get_url_publier() }}/extractor/?layer={{ res.id }}" class="btn btn-primary" target="_blank">
-          <i class="fa fa-filter"></i>
-          <span>Extracteur</span>
-        </a> 
-      {% else %}
+      {% if res.data_type != "service" %}
         <a href="{{ h.idgotheme_get_url_publier() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank">
           <i class="fa fa-filter"></i>
           <span>Extracteur</span>
         </a>
       {% endif %}
     {% endif %}
-  </div>
+  </div-->
   {% endif %}
   {% endblock %}
 </li>
