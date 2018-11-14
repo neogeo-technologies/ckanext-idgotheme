@@ -10,19 +10,21 @@
   	</a>
 	{% endblock %}
     {% block resource_item_description %}
-      {% if res.size %}
+      {% if res.Size %}
+        <div name="size" data-size="{{ res.Size }}"><span class="label label-default" name="size-value"></span></div>
+      {% elif res.size %}
         <div name="size" data-size="{{ res.size }}"><span class="label label-default" name="size-value"></span></div>
       {% endif %}
-      <p class="description">
+      <!--p class="description">
         {% if res.description %}
           {{ h.markdown_extract(h.get_translated(res, 'description'), extract_length=80) }}
         {% endif %}
-      </p>
+      </p-->
     {% endblock %}
   </div>
   {% block resource_item_explore %}
   {% if not url_is_edit %}
-  <div class="dropdown btn-group">
+  <!--div class="dropdown btn-group">
     <a href="#" class="btn btn-primary" data-toggle="dropdown">
    	  <i class="fa fa-share"></i> Explorer 
       <span class="caret"></span>
@@ -44,7 +46,6 @@
           <i class="fa fa-arrow-circle-o-down"></i>
           <span>{{ _('Download') }}</span>
         {% else %}
-          <!-- S'applique aux urls referencees (meme comportement) -->
           <i class="fa fa-arrow-circle-o-down"></i>
           <span>{{ _('Download') }}</span>
         {% endif %}
@@ -63,34 +64,26 @@
       {% endif %}
       {% endblock %}
     </ul>
-  </div>
-  <!--div class="btn-group">
+  </div-->
+  <div class="btn-group">
 	{% if can_edit %}
-	  <a href="{{ h.url_for(controller='package', action='resource_views', id=pkg.name, resource_id=res.id) }}" class="btn btn-primary">
-        <i class="fa fa-bar-chart-o"></i>
-        <span>Éditer les vues</span>
+	  <a href="{{ h.url_for(controller='package', action='resource_views', id=pkg.name, resource_id=res.id) }}" class="btn btn-primary" data-toggle="tooltip" title="Éditer les vues">
+        <i class="fa fa-lg fa-bar-chart-o"></i>
       </a>
 	{% endif %}
     {% if res.data_type != "service" %}
-	<a href="{{ res.url }}" class="btn btn-primary" target="_blank">
-      {% if res.has_views or res.url_type == 'upload' %}
-        <i class="fa fa-arrow-circle-o-down"></i>
-      	<span>{{ _('Download') }}</span>
-      {% else %}
-        <i class="fa fa-arrow-circle-o-down"></i>
-        <span>{{ _('Download') }}</span>
-      {% endif %}
+	<a href="{{ res.url }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Télécharger">
+      <i class="fa fa-lg fa-arrow-circle-o-down"></i>
     </a>
     {% endif %}
     {% if (h.is_crige_partner()) and ( res.extracting_service == 'True') %}
       {% if res.data_type != "service" %}
-        <a href="{{ h.idgotheme_get_url_publier() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank">
-          <i class="fa fa-filter"></i>
-          <span>Extracteur</span>
+        <a href="{{ h.idgotheme_get_url_publier() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Extracteur">
+          <i class="fa fa-lg fa-filter"></i>
         </a>
       {% endif %}
     {% endif %}
-  </div-->
+  </div>
   {% endif %}
   {% endblock %}
 </li>

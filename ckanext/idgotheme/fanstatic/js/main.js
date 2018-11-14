@@ -12,6 +12,11 @@ function toOctetString(value) {
     }
 }
 
+// Init Bootstrap Tooltips
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
 // Update resource size in resource list (ckan: dataset)
 $('#dataset-resources .resource-list .resource-item [name="size"]').each(function(){
 	var size_bytes = $(this).attr('data-size');
