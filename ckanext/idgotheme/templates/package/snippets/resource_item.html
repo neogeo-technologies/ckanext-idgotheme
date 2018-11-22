@@ -14,6 +14,8 @@
         <div name="size" data-size="{{ res.Size }}"><span class="label label-default" name="size-value"></span></div>
       {% elif res.size %}
         <div name="size" data-size="{{ res.size }}"><span class="label label-default" name="size-value"></span></div>
+      {% else %}
+      	<p></p>
       {% endif %}
       <!--p class="description">
         {% if res.description %}
