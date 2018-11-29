@@ -88,7 +88,6 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
 
     # IFacets
     def dataset_facets(self, facets_dict, package_type):
-        
         # Ajouter les filtres, dans l'ordre d'affichage sur la page
  	return OrderedDict([
                              ('organization', u'Organisations'),
