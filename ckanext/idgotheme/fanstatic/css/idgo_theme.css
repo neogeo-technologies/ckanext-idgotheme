@@ -5405,9 +5405,9 @@ div.dataset-item-organization-title {
     margin-bottom: 15px;
 }
 
-/*.resource-item div {
-    display: inline-block;
-}*/
+.resource-item {
+    min-height: 4em; 
+}
 
 #resource-geo-legend {
     float: right;
@@ -5546,6 +5546,12 @@ div.dataset-item-organization-title {
     background: #999999 !important;
 }
 
+
+/*** Tag tracking_summary - Ressources ***/
+.label.label-tracking {
+    background: #fbb900;
+    color: #000000;
+}
 
 /*** Bandeau lateral - Support ***/
 .banner-support-wrap {

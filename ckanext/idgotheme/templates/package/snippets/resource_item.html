@@ -10,65 +10,38 @@
   	</a>
 	{% endblock %}
     {% block resource_item_description %}
+      <div>
       {% if res.Size %}
-        <div name="size" data-size="{{ res.Size }}"><span class="label label-default" name="size-value"></span></div>
+        <span name="size" data-size="{{ res.Size }}"><span class="label label-default" name="size-value"></span></span>
       {% elif res.size %}
-        <div name="size" data-size="{{ res.size }}"><span class="label label-default" name="size-value"></span></div>
-      {% else %}
-      	<p></p>
+        <span name="size" data-size="{{ res.size }}"><span class="label label-default" name="size-value"></span></span>
       {% endif %}
-      <!--p class="description">
-        {% if res.description %}
-          {{ h.markdown_extract(h.get_translated(res, 'description'), extract_length=80) }}
+      {% if res.tracking_summary and res.data_type != "service" %}
+        {% if res.tracking_summary.total == 1 %}
+          <span class="label label-tracking">{{ res.tracking_summary.total }} téléchargement</span>
+        {% elif res.tracking_summary.total > 1 %}
+          <span class="label label-tracking">{{ res.tracking_summary.total }} téléchargements</span>
         {% endif %}
-      </p-->
+      {% endif %}
+      </div>
     {% endblock %}
   </div>
   {% block resource_item_explore %}
   {% if not url_is_edit %}
-  <!--div class="dropdown btn-group">
-    <a href="#" class="btn btn-primary" data-toggle="dropdown">
-   	  <i class="fa fa-share"></i> Explorer 
-      <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-right">
-      {% block resource_item_explore_links %}
-      {% if can_edit %}
-      <li>
-        <a href="{{ h.url_for(controller='package', action='resource_views', id=pkg.name, resource_id=res.id) }}">
-          <i class="fa fa-bar-chart-o"></i>
-          <span>Éditer les vues</span>
-        </a>
-      </li>
-      {% endif %}
-	  {% if res.data_type != "service" %}
-	  <li>
-        <a href="{{ res.url }}" target="_blank">
-        {% if res.has_views or res.url_type == 'upload' %}
-          <i class="fa fa-arrow-circle-o-down"></i>
-          <span>{{ _('Download') }}</span>
-        {% else %}
-          <i class="fa fa-arrow-circle-o-down"></i>
-          <span>{{ _('Download') }}</span>
-        {% endif %}
-        </a>
-	  </li>
-      {% endif %}
-	  {% if (h.is_crige_partner()) and ( res.extracting_service == 'True') %}
-	  <li>
-        {% if res.data_type != "service" %}
-        <a href="{{ h.idgotheme_get_url_publier() }}/extractor/?resource={{ res.id }}" target="_blank">
-          <i class="fa fa-filter"></i>
-          <span>Extracteur</span>
-        </a>
-        {% endif %}
-	  </li>
-      {% endif %}
-      {% endblock %}
-    </ul>
-  </div-->
   <div class="btn-group">
-	{% if can_edit %}
+    {% if res.format == "GeoJSON" or res.format == "WMS" %}
+      <a href="{{ url }}" class="btn btn-primary" data-toggle="tooltip" title="Visualiser">
+        <i class="fa fa-lg fa-eye"></i>
+      </a>
+    {% endif %}
+	{% if (h.is_crige_partner()) and ( res.extracting_service == 'True') %}
+      {% if res.data_type != "service" %}
+        <a href="{{ h.idgotheme_get_url_publier() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Extracteur">
+          <i class="fa fa-lg fa-filter"></i>
+        </a>
+      {% endif %}
+    {% endif %}
+	{% if can_edit and res.data_type != "service" %}
 	  <a href="{{ h.url_for(controller='package', action='resource_views', id=pkg.name, resource_id=res.id) }}" class="btn btn-primary" data-toggle="tooltip" title="Éditer les vues">
         <i class="fa fa-lg fa-bar-chart-o"></i>
       </a>
@@ -77,13 +50,6 @@
 	<a href="{{ res.url }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Télécharger">
       <i class="fa fa-lg fa-arrow-circle-o-down"></i>
     </a>
-    {% endif %}
-    {% if (h.is_crige_partner()) and ( res.extracting_service == 'True') %}
-      {% if res.data_type != "service" %}
-        <a href="{{ h.idgotheme_get_url_publier() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Extracteur">
-          <i class="fa fa-lg fa-filter"></i>
-        </a>
-      {% endif %}
     {% endif %}
   </div>
   {% endif %}

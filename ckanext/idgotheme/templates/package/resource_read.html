@@ -66,7 +66,7 @@
         {% endblock %}
 
 		{% block resource_view_content %}
-            {% if res.data_type == 'service' %}
+            {% if res.format == 'WMS' %}
                 <div id="resource-geo-legend" class="dropdown dropdown-right">
                 	<button class="btn btn-primary" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
     					Légende <span class="caret"></span>
