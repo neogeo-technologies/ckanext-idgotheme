@@ -27,23 +27,3 @@ $('#dataset-resources .resource-list .resource-item [name="size"]').each(functio
 var resource_size = $('table tr[name="size"] td').html();
 $('table tr[name="size"] td').html(toOctetString(resource_size));
 
-// Modal API GEO
-$('body').on('click', '#show-modal-api-geo', function(){
-    $('body').append(
-        '<div class="modal fade" id="modal-api-geo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'+
-            '<div class="modal-dialog" role="document">'+
-                '<div class="modal-content">'+
-                    '<div class="modal-header">'+
-                        '<h3 class="modal-title" id="myModalLabel">'+
-                            'API de Données Géographiques'+
-                            '<button class="close" data-dismiss="modal">×</button>'+
-                        '</h3>'+
-                    '</div>'+
-                    '<div class="modal-body">Bientôt disponible...</div>'+
-                '</div>'+
-            '</div>'+
-        '</div>'
-    );
-
-});
-
