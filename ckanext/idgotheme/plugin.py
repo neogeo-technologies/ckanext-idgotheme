@@ -20,6 +20,9 @@ def get_url_publier():
     url_site_publier = config.get('ckanext.idgotheme.url_site_publier', '')
     return url_site_publier
 
+def get_url_extracteur():
+    return config.get('ckanext.idgotheme.url_site_extracteur', '')
+
 # Traduction "Groupes" en "Thématiques"
 THEMATIQUE_MIN = u'thématique'
 THEMATIQUE_MAJ = u'Thématique'
@@ -72,6 +75,7 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
         return {
           'idgotheme_get_url_wp': get_url_wp,
           'idgotheme_get_url_publier': get_url_publier,
+          'idgotheme_get_url_extracteur': get_url_extracteur,
           'trad_thematique_min' : trad_thematique_min,
           'trad_thematique_maj' : trad_thematique_maj,
           'trad_thematiques_min' : trad_thematiques_min,

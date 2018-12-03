@@ -37,17 +37,12 @@
                     {%endif%}
                   {% endblock %}
                   {% if (h.is_crige_partner()) and ( res.extracting_service == 'True') %}
-				  	{% if res.data_type == 'service' %}
-				      <a href="{{ h.idgotheme_get_url_publier() }}/extractor/?layer={{ res.id }}" class="btn btn-primary" target="_blank">
+				  	{% if res.data_type != 'service' %}
+                      <a href="{{ h.idgotheme_get_url_extracteur() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank">
 				        <i class="fa fa-lg fa-filter"></i>
 			            <span>Extracteur</span>
 			          </a>
 	                  <a class="btn btn-primary" data-toggle="modal" data-target="#my-modal-api-geo"><i class="fa fa-lg fa-flask"></i> API Géo</a>
-			        {% else %}
-        			  <a href="{{ h.idgotheme_get_url_publier() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank">
-			            <i class="fa fa-lg fa-filter"></i>
-			            <span>Extracteur</span>
-			          </a>
 			        {% endif %}
 				  {% endif %}
 	            </div>

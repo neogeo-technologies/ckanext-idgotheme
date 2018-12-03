@@ -36,7 +36,7 @@
     {% endif %}
 	{% if (h.is_crige_partner()) and ( res.extracting_service == 'True') %}
       {% if res.data_type != "service" %}
-        <a href="{{ h.idgotheme_get_url_publier() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Extracteur">
+        <a href="{{ h.idgotheme_get_url_extracteur() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Extracteur">
           <i class="fa fa-lg fa-filter"></i>
         </a>
       {% endif %}
