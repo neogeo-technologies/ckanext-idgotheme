@@ -29,7 +29,8 @@
   {% block resource_item_explore %}
   {% if not url_is_edit %}
   <div class="btn-group">
-    {% if res.format == "GeoJSON" or res.format == "WMS" %}
+    {% set formats_visu = ["GEOJSON","WMS","XLS","XLSX","PDF","JSON","XML","JPEG","ODS","PNG","TXT","GIF","HTML","CSV"] %}
+    {% if res.format.upper() in formats_visu %}
       <a href="{{ url }}" class="btn btn-primary" data-toggle="tooltip" title="Visualiser">
         <i class="fa fa-lg fa-eye"></i>
       </a>
