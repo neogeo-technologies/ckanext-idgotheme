@@ -102,7 +102,7 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
                              ('license_id', u'Licences'),
                              ('tags', u'Mots-clés'),
                              ('update_frequency', u'Fréquence de mise à jour'),
-                             ('granularity', u'Granularité de la courverture territoriale'),
+                             ('granularity', u'Granularité de la couverture territoriale'),
                              ])
 
     # IPackageController
