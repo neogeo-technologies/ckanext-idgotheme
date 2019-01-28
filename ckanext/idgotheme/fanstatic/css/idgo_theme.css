@@ -3632,7 +3632,7 @@ header .site-branding-text .header_espaces a span {
 }
 /*menu*/
 header .navigation-top{
-	position: initial;
+	position: relative;
 	display: inline-block;
 }
 header .navigation-top .wrap {
