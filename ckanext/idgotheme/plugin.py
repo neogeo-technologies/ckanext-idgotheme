@@ -46,7 +46,7 @@ def is_crige_partner():
         return False
     if c.userobj.sysadmin:
         return True
-    
+
     partner_group_id = model.Session.query(model.Group) \
 	.filter(model.Group.type == 'partner') \
         .first().id
@@ -81,8 +81,15 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
           'trad_thematiques_min' : trad_thematiques_min,
           'trad_thematiques_maj' : trad_thematiques_maj,
           'is_crige_partner' : is_crige_partner,
-          'proxy_export': self.proxy_export
+          'proxy_export': self.proxy_export,
+          'get_res_api': self.get_res_api,
         }
+
+    def get_res_api(self, res):
+        try:
+            return json.loads(res.get('api'))
+        except Exception as e:
+            return None
 
     # IConfigurer
     def update_config(self, config_):
@@ -125,4 +132,4 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
             controller='ckanext.idgotheme.controller:ExportController',
             resformat=resformat,
             **dict(export_args))
-        return url 
+        return url
