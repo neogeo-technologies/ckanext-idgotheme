@@ -89,7 +89,6 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
         try:
             return json.loads(res.get('api'))
         except Exception as e:
-            print(e)
             return None
 
     # IConfigurer
@@ -134,4 +133,3 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
             resformat=resformat,
             **dict(export_args))
         return url
-
