@@ -1,233 +1,259 @@
 {% ckan_extends %}
-		{% block resource_actions_inner %}
-            {# if h.check_access('package_update', {'id':pkg.id }) %}
-              <li>{% link_for _('Manage'), controller='package', action='resource_edit', id=pkg.name, resource_id=res.id, class_='btn btn-default', icon='wrench' %}</li>
-            {% endif #}
-            {% if res.url and h.is_url(res.url) %}
-              <li>
-                <div class="btn-group">
-                  <a class="btn btn-primary resource-url-analytics resource-type-{{ res.resource_type }}" href="{{ res.url }}">
-                    {% if res.resource_type in ('listing', 'service') %}
-                      <i class="fa fa-lg fa-eye"></i> {{ _('View') }}
-                    {% elif  res.resource_type == 'api' %}
-                      <i class="fa fa-lg fa-key"></i> {{ _('API Endpoint') }}
-                    {% elif (not res.has_views or not res.can_be_previewed) and not res.url_type == 'upload' %}
-                      <i class="fa fa-lg fa-external-link"></i> {{ _('Go to resource') }}
-                    {% else %}
-                      <i class="fa fa-lg fa-arrow-circle-o-down"></i> {{ _('Download') }}
-                    {% endif %}
-                  </a>
-                  {% block download_resource_button %}
-                    {%if res.datastore_active %}
-                      <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, bom=True) }}"
-                            target="_blank"><span>CSV</span></a>
-                          <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, format='tsv', bom=True) }}"
-                            target="_blank"><span>TSV</span></a>
-                          <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, format='json') }}"
-                            target="_blank"><span>JSON</span></a>
-                          <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, format='xml') }}"
-                            target="_blank"><span>XML</span></a>
-                        </li>
-                      </ul>
-                    {%endif%}
-                  {% endblock %}
-                  {% if (h.is_crige_partner()) and ( res.extracting_service == 'True') %}
-				  	{% if res.data_type != 'service' %}
-                      <a href="{{ h.idgotheme_get_url_extracteur() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank">
-				        <i class="fa fa-lg fa-filter"></i>
-			            <span>Extracteur</span>
-			          </a>
-	                  <a class="btn btn-primary" data-toggle="modal" data-target="#my-modal-api-geo"><i class="fa fa-lg fa-flask"></i> API Géo</a>
-			        {% endif %}
-				  {% endif %}
-	            </div>
-              </li>
-            {% endif %}
-		{% endblock %}
+{% block resource_actions_inner %}
+{# if h.check_access('package_update', {'id':pkg.id }) %}
+<li>{% link_for _('Manage'), controller='package', action='resource_edit', id=pkg.name, resource_id=res.id, class_='btn btn-default', icon='wrench' %}</li>
+{% endif #}
+{% if res.url and h.is_url(res.url) %}
+<li>
+  <div class="btn-group">
+    <a class="btn btn-primary resource-url-analytics resource-type-{{ res.resource_type }}" href="{{ res.url }}">
+      {% if res.resource_type in ('listing', 'service') %}
+      <i class="fa fa-lg fa-eye"></i> {{ _('View') }}
+      {% elif res.resource_type == 'api' %}
+      <i class="fa fa-lg fa-key"></i> {{ _('API Endpoint') }}
+      {% elif (not res.has_views or not res.can_be_previewed) and not res.url_type == 'upload' %}
+      <i class="fa fa-lg fa-external-link"></i> {{ _('Go to resource') }}
+      {% else %}
+      <i class="fa fa-lg fa-arrow-circle-o-down"></i> {{ _('Download') }}
+      {% endif %}
+    </a>
+    {% block download_resource_button %}
+    {% if res.datastore_active %}
+    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, bom=True) }}" target="_blank"><span>CSV</span></a>
+        <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, format='tsv', bom=True) }}" target="_blank"><span>TSV</span></a>
+        <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, format='json') }}" target="_blank"><span>JSON</span></a>
+        <a href="{{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, format='xml') }}" target="_blank"><span>XML</span></a>
+      </li>
+    </ul>
+    {% endif %}
+    {% endblock %}
+    {% if (h.is_crige_partner()) and ( res.extracting_service == 'True') %}
+    {% if res.data_type != 'service' %}
+    <a href="{{ h.idgotheme_get_url_extracteur() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank">
+      <i class="fa fa-lg fa-filter"></i>
+      <span>Extracteur</span>
+    </a>
+    <a class="btn btn-primary" data-toggle="modal" data-target="#my-modal-api-geo"><i class="fa fa-lg fa-flask"></i> API Géo</a>
+    {% endif %}
+    {% endif %}
+  </div>
+</li>
+{% endif %}
+{% endblock %}
 
-		{% block resource_read_url %}
-            {% if res.url and h.is_url(res.url) %}
-			  <b>URL</b><div><a class="resource-url-analytics" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></div>
-            {% elif res.url %}
-			  <b>URL</b><div>{{ res.url }}</div>
-            {% endif %}
-			<br>
-        {% endblock %}
+{% block resource_read_url %}
+{% if res.url and h.is_url(res.url) %}
+<b>URL</b>
+<div><a class="resource-url-analytics" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></div>
+{% elif res.url %}
+<b>URL</b>
+<div>{{ res.url }}</div>
+{% endif %}
+<br>
+{% set res_api = h.get_res_api(res) %}
+{% if res_api %}
+  {% if 'geojson' in res_api %}
+  <a href="{{ res_api.geojson }}" class="btn btn-primary">Télécharger les données au format GeoJSON</a>
+  {% elif 'shapezip' in res_api %}
+  <a href="{{ res_api.shapezip }}" class="btn btn-primary">Télécharger les données au format SHP</a>
+  {% endif %}
+  <br> <br>
+  <a href="{{ res_api.url }}/wms?service=WMS&amp;version=1.3.0&amp;request=getStyles&amp;layers={{ res_api.typename }}" class="btn btn-primary" target="_blank">Télécharger le style au format SLD</a>
+  <br>
+<br> 
+{% endif %}
 
-		{% block resource_view_content %}
-            {% if res.format == 'WMS' %}
-                <div id="resource-geo-legend" class="dropdown dropdown-right">
-                	<button class="btn btn-primary" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
-    					Légende <span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu dropdown-menu-right" aria-labeledby="dLabel">
-                        <img src="{{ res.getlegendgraphic }}">
-					</ul>     
-                </div>
-            {% endif %}
-	        {{ super() }}
+{% endblock %}
 
-        {% set service_url = res.url.split('#') %}
-		<div class="modal fade" id="my-modal-api-geo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="myModalLabel">
-                            API de Données Géographiques
-                            <button class="close" data-dismiss="modal">×</button>
-                        </h3>
-                    </div>
-                    <div class="modal-body">
-                        <p>Accédez aux données de la ressource via une API GEO. Plus d'informations dans la documentation principale de DATASUD pour les données géographiques.</p>
-                        <p>
-                            Chaque organisation qui publie des ressources dans DATASUD dispose de son espace de travail propre du type :
-                            <a href="{{ service_url[0] }}">{{ service_url[0] }}</a>.<br>
-                            Vous trouverez le lien spécifique dédié à chaque organisation dans l'onglet <b>Organisation</b>, en sélectionnant l'organisation et à la rubrique <b>Service OGC</b>.
-                            Pour chaque couche de données géographiques, deux types d'API sont disponibles : le flux WMS (Web Map Service) et le flux WFS (Web Feature Service).
-                        </p>
-                        <div class="accordion" id="accordion-api-geo">
-                            <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion-api-geo" href="#collapse1">Points d'accès WMS »</a>
-                                </div>
-                                <div id="collapse1" class="accordion-body collapse">
-                                    <div class="accordion-inner">
-                                        <p>
-                                            Le WMS vous permet d'utiliser des images géolocalisées produites à partir d'une couche de données.<br>
-                                            Vous pouvez accéder à l'API WMS pour les données via les actions suivantes :
-                                        </p>
-										<table class="table-condensed table-striped table-bordered">
-								          <thead></thead>
-								          <tbody>
-								            <tr>
-								              <th scope="row">Connaître la liste des couches disponibles de l'organisation (GetCapabilities)</th>
-								              <td><code>{{ service_url[0] }}?SERVICE=WMS&REQUEST=GetCapabilities</code></td>
-								            </tr>
-								            <tr>
-								              <th scope="row">Afficher une couche (GetMap)</th>
-								              <td><code>{{ service_url[0] }}/wms?service=WMS&version=1.1.0&request=GetMap&layers={{ service_url[1] }}&styles=&bbox=*bbox_couche*&width=768&height=636&srs=EPSG:2154&format=image/png</code></td>
-								            </tr>
-								            <tr>
-								              <th scope="row">Récupérer les informations d'un objet géométrique en coordonnées X,Y (GetFeatureInfo)</th>
-								              <td><code>{{ service_url[0] }}/wms?service=WMS&version=1.1.0&request=GetFeatureInfo&layers={{ service_url[1] }}&x=*x.xx*&y=*y.yy*x%x%</code></td>
-								            </tr>
-            							  </tbody>
-								        </table>
-										<p>
-										  Pour plus d'informations, référez-vous à la documentation : 
-										  <a href="https://datasud.readthedocs.io/fr/latest/developpeurs/index.html">https://datasud.readthedocs.io/fr/latest/developpeurs/index.html</a>
-										</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion-api-geo" href="#collapse2">Points d'accès WFS »</a>
-                                </div>
-                                <div id="collapse2" class="accordion-body collapse">
-                                    <div class="accordion-inner">
-                                        <p>
-                                            Le WFS vous permet d'interroger et récupérer des objets géométrique de votre couche de données.<br>
-                                            Vous pouvez accéder à l'API WFS pour les données via les actions suivantes :
-                                        </p>
-                                        <table class="table-condensed table-striped table-bordered">
-                                          <thead></thead>
-                                          <tbody>
-                                            <tr>
-                                              <th scope="row">Connaître la liste des couches disponibles de l'organisation (GetCapabilities)</th>
-                                              <td><code>{{ service_url[0] }}?SERVICE=WFS&REQUEST=GetCapabilities</code></td>
-                                            </tr>
-                                            <tr>
-                                              <th scope="row">Afficher uune liste d'objets géométriques selon le format souhaité GEOJSON,GML,SHAPEZIP... (GetFeature)</th>
-                                              <td><code>{{ service_url[0] }}/wms?service=WMS&version=1.1.0&request=GetMap&layers={{ service_url[1] }}&styles=&bbox=*bbox_couche*&width=768&height=636&srs=EPSG:3857&outputformat=geojson</code></td>
-                                            </tr>
-                                            <tr>
-                                              <th scope="row">Connaître la liste des attributs et leur type d'une couche (DescribeFeatureType)</th>
-                                              <td><code>{{ service_url[0] }}?SERVICE=WFS&VERSION=1.0.0&REQUEST=DescribeFeatureType&TYPENAME={{ service_url[1] }}</code></td>
-                                            </tr>
-                                          </tbody>
-                                        </table>
-                                        <p>
-                                          Pour plus d'informations, référez-vous à la documentation :
-                                          <a href="https://datasud.readthedocs.io/fr/latest/developpeurs/index.html">https://datasud.readthedocs.io/fr/latest/developpeurs/index.html</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion-api-geo" href="#collapse3">Ajouter un flux WMS/WFS de votre organisation dans QGIS »</a>
-                                </div>
-                                <div id="collapse3" class="accordion-body collapse">
-                                    <div class="accordion-inner">
-                                        <p>
-										  <ul>
-											<li>Choisissez "Ajouter une couche WMS" (raster) ou "Ajouter une couche WFS" (vecteur)</li>
-											<li>"Nouveau"</li>
-											<li>Choisissez un NOM pour votre connexion ; nous recommandons par exemple d'utiliser DATASUD_*organisation-de-mon-choix*</li>
-											<li>Copier/coller l'URL de l'ORGANISATION choisie : https//ogc-rec.datasud.fr/maps/*organisation-de-mon-choix*</li>
-											<li>Soyez attentif au Système de Coordonnées de Référence 'SCR' choisies : nous recommandons l'EPSG:4326 ou EPSG:3857 pour des usages web, EPSG:2154 sinon</li>
-										  </ul>
-                                        </p>
-										<p>
-                                          Pour plus d'informations, référez-vous à la documentation :
-                                          <a href="https://datasud.readthedocs.io/fr/latest/developpeurs/index.html">https://datasud.readthedocs.io/fr/latest/developpeurs/index.html</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion-api-geo" href="#collapse4">Ajouter un flux WMS de votre organisation dans ArcMap »</a>
-                                </div>
-                                <div id="collapse4" class="accordion-body collapse">
-                                    <div class="accordion-inner">
-                                        <p>
-                                          <ul>
-											<li>Cliquez sur le bouton "Ajouter des données" pour ajouter une nouvelle couche.</li>
-											<li>Cliquez sur le menu déroulant Regarder dans, puis dans Serveurs SIG, puis Ajouter un serveur WMS</li>
-											<li>Copier/coller l'URL de l'ORGANISATION choisie : https//ogc-rec.datasud.fr/maps/*organisation-de-mon-choix*</li>
-											<li>Choisissez "Version par défaut"</li>
-											<li>Cliquez sur Obtenir la couche</li>
-											<li>Choisissez la couche à afficher</li>
-											<li>Ajoutez le service (par défaut, le nom du service <b>OGC Web Service</b>), une nouvelle liste s'affiche</li>
-											<li>Sélectionnez le service et ajoutez (par défaut le nom du service est <b>OGC Web Service</b></li>
-                                          </ul>
-                                        </p>
-                                        <p>
-                                          Pour plus d'informations, référez-vous à la documentation :
-                                          <a href="https://datasud.readthedocs.io/fr/latest/developpeurs/index.html">https://datasud.readthedocs.io/fr/latest/developpeurs/index.html</a>
-                                        </p>
-									</div>
-                                </div>
-                            </div>
-                            <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion-api-geo" href="#collapse5">Utilisez un flux WMS dans mapbox.js »</a>
-                                </div>
-                                <div id="collapse5" class="accordion-body collapse">
-                                    <div class="accordion-inner">
-                                        <pre>// Ajoutez chaque couche wms layer en utilisant L.tileLayer.wms
+
+{% block resource_view_content  %}
+{% set res_api = h.get_res_api(res) %}
+{% if res_api %}
+<div id="resource-geo-legend" class="dropdown dropdown-right">
+  <button class="btn btn-primary" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+    Légende <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-right" aria-labeledby="dLabel">
+      <img src="{{ res_api.url }}/wms?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;layer={{ res_api.typename }}&amp;styles=&amp;format=image/png&amp;SLD_VERSION=1.1.0" />
+  </ul>
+</div>
+{% endif %}
+{{ super() }}
+
+{% set res_api = h.get_res_api(res) %}
+{% if 'url' in res_api %}
+  {% set service_url = res_api.url %}
+  {% set typename = res_api.typename %}
+{% else %}
+  {% set _splited = res.url.split('#') %}
+  {% set service_url = _splited[0] %}
+  {% set typename = _splited[1] %}
+{% endif %}
+
+<div class="modal fade" id="my-modal-api-geo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="myModalLabel">
+          API de Données Géographiques
+          <button class="close" data-dismiss="modal">×</button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <p>Accédez aux données de la ressource via une API GEO. Plus d'informations dans la documentation principale de DATASUD pour les données géographiques.</p>
+        <p>
+          Chaque organisation qui publie des ressources dans DATASUD dispose de son espace de travail propre du type :
+          <a href="{{ service_url }}">{{ service_url }}</a>.<br>
+          Vous trouverez le lien spécifique dédié à chaque organisation dans l'onglet <b>Organisation</b>, en sélectionnant l'organisation et à la rubrique <b>Service OGC</b>.
+          Pour chaque couche de données géographiques, deux types d'API sont disponibles : le flux WMS (Web Map Service) et le flux WFS (Web Feature Service).
+        </p>
+        <div class="accordion" id="accordion-api-geo">
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion-api-geo" href="#collapse1">Points d'accès WMS »</a>
+            </div>
+            <div id="collapse1" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <p>
+                  Le WMS vous permet d'utiliser des images géolocalisées produites à partir d'une couche de données.<br>
+                  Vous pouvez accéder à l'API WMS pour les données via les actions suivantes :
+                </p>
+                <table class="table-condensed table-striped table-bordered">
+                  <thead></thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Connaître la liste des couches disponibles de l'organisation (GetCapabilities)</th>
+                      <td><code>{{ service_url }}?SERVICE=WMS&amp;REQUEST=GetCapabilities</code></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Afficher une couche (GetMap)</th>
+                      <td><code>{{ service_url }}/wms?service=WMS&amp;version=1.1.0&amp;request=GetMap&amp;layers={{ typename }}&amp;styles=&amp;bbox=*bbox_couche*&amp;width=768&amp;height=636&amp;srs=EPSG:2154&amp;format=image/png</code></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Récupérer les informations d'un objet géométrique en coordonnées X,Y (GetFeatureInfo)</th>
+                      <td><code>{{ service_url }}/wms?service=WMS&amp;version=1.1.0&amp;request=GetFeatureInfo&amp;layers={{ typename }}&amp;x=*x.xx*&amp;y=*y.yy*x%x%</code></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>
+                  Pour plus d'informations, référez-vous à la documentation :
+                  <a href="https://datasud.readthedocs.io/fr/latest/developpeurs/index.html">https://datasud.readthedocs.io/fr/latest/developpeurs/index.html</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion-api-geo" href="#collapse2">Points d'accès WFS »</a>
+            </div>
+            <div id="collapse2" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <p>
+                  Le WFS vous permet d'interroger et récupérer des objets géométrique de votre couche de données.<br>
+                  Vous pouvez accéder à l'API WFS pour les données via les actions suivantes :
+                </p>
+                <table class="table-condensed table-striped table-bordered">
+                  <thead></thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Connaître la liste des couches disponibles de l'organisation (GetCapabilities)</th>
+                      <td><code>{{ service_url }}?SERVICE=WFS&amp;REQUEST=GetCapabilities</code></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Afficher uune liste d'objets géométriques selon le format souhaité GEOJSON,GML,SHAPEZIP... (GetFeature)</th>
+                      <td><code>{{ service_url }}/wms?service=WMS&amp;version=1.1.0&amp;request=GetMap&amp;layers={{ typename }}&amp;styles=&amp;bbox=*bbox_couche*&amp;width=768&amp;height=636&amp;srs=EPSG:3857&amp;outputformat=geojson</code></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Connaître la liste des attributs et leur type d'une couche (DescribeFeatureType)</th>
+                      <td><code>{{ service_url }}?SERVICE=WFS&amp;VERSION=1.0.0&amp;REQUEST=DescribeFeatureType&amp;TYPENAME={{ typename }}</code></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>
+                  Pour plus d'informations, référez-vous à la documentation :
+                  <a href="https://datasud.readthedocs.io/fr/latest/developpeurs/index.html">https://datasud.readthedocs.io/fr/latest/developpeurs/index.html</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion-api-geo" href="#collapse3">Ajouter un flux WMS/WFS de votre organisation dans QGIS »</a>
+            </div>
+            <div id="collapse3" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <p>
+                  <ul>
+                    <li>Choisissez "Ajouter une couche WMS" (raster) ou "Ajouter une couche WFS" (vecteur)</li>
+                    <li>"Nouveau"</li>
+                    <li>Choisissez un NOM pour votre connexion ; nous recommandons par exemple d'utiliser DATASUD_*organisation-de-mon-choix*</li>
+                    <li>Copier/coller l'URL de l'ORGANISATION choisie : https//ogc-rec.datasud.fr/maps/*organisation-de-mon-choix*</li>
+                    <li>Soyez attentif au Système de Coordonnées de Référence 'SCR' choisies : nous recommandons l'EPSG:4326 ou EPSG:3857 pour des usages web, EPSG:2154 sinon</li>
+                  </ul>
+                </p>
+                <p>
+                  Pour plus d'informations, référez-vous à la documentation :
+                  <a href="https://datasud.readthedocs.io/fr/latest/developpeurs/index.html">https://datasud.readthedocs.io/fr/latest/developpeurs/index.html</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion-api-geo" href="#collapse4">Ajouter un flux WMS de votre organisation dans ArcMap »</a>
+            </div>
+            <div id="collapse4" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <p>
+                  <ul>
+                    <li>Cliquez sur le bouton "Ajouter des données" pour ajouter une nouvelle couche.</li>
+                    <li>Cliquez sur le menu déroulant Regarder dans, puis dans Serveurs SIG, puis Ajouter un serveur WMS</li>
+                    <li>Copier/coller l'URL de l'ORGANISATION choisie : https//ogc-rec.datasud.fr/maps/*organisation-de-mon-choix*</li>
+                    <li>Choisissez "Version par défaut"</li>
+                    <li>Cliquez sur Obtenir la couche</li>
+                    <li>Choisissez la couche à afficher</li>
+                    <li>Ajoutez le service (par défaut, le nom du service <b>OGC Web Service</b>), une nouvelle liste s'affiche</li>
+                    <li>Sélectionnez le service et ajoutez (par défaut le nom du service est <b>OGC Web Service</b></li>
+                  </ul>
+                </p>
+                <p>
+                  Pour plus d'informations, référez-vous à la documentation :
+                  <a href="https://datasud.readthedocs.io/fr/latest/developpeurs/index.html">https://datasud.readthedocs.io/fr/latest/developpeurs/index.html</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion-api-geo" href="#collapse5">Utilisez un flux WMS dans mapbox.js »</a>
+            </div>
+            <div id="collapse5" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <p>
+                  Ajoutez chaque couche wms layer en utilisant L.tileLayer.wms
+                </p>
+                <pre>
 var votre-variable = L.tileLayer.wms('https://ogc-rec.datasud.fr/maps/', {
   format: 'img/png',
   transparent: true,
   layers: 16
 }).addTo(map);
-                                        </pre>
-                                        <p>
-                                            Plus d'informations ici : <a href="https://www.mapbox.com/mapbox.js/example/v1.0.0/wms/">https://www.mapbox.com/mapbox.js/example/v1.0.0/wms/</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </pre>
+                <p>
+                  Plus d'informations ici : <a href="https://www.mapbox.com/mapbox.js/example/v1.0.0/wms/">https://www.mapbox.com/mapbox.js/example/v1.0.0/wms/</a>
+                </p>
+              </div>
             </div>
+          </div>
         </div>
-        {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
