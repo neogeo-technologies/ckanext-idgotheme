@@ -132,11 +132,11 @@
                     </tr>
                     <tr>
                       <th scope="row">Afficher une couche (GetMap)</th>
-                      <td><code>{{ service_url }}/wms?service=WMS&amp;version=1.1.0&amp;request=GetMap&amp;layers={{ typename }}&amp;styles=&amp;bbox=*bbox_couche*&amp;width=768&amp;height=636&amp;srs=EPSG:2154&amp;format=image/png</code></td>
+                      <td><code>{{ service_url }}/wms?service=WMS&amp;version=1.3.0&amp;request=GetMap&amp;layers={{ typename }}&amp;styles=&amp;CRS=EPSG%3A3857&BBOX=355000,5282072,975000,5650000&WIDTH=1014&HEIGHT=600&amp;format=image/png</code></td>
                     </tr>
                     <tr>
                       <th scope="row">Récupérer les informations d'un objet géométrique en coordonnées X,Y (GetFeatureInfo)</th>
-                      <td><code>{{ service_url }}/wms?service=WMS&amp;version=1.1.0&amp;request=GetFeatureInfo&amp;layers={{ typename }}&amp;x=*x.xx*&amp;y=*y.yy*x%x%</code></td>
+                      <td><code>{{ service_url }}/wms?service=WMS&amp;version=1.3.0&amp;request=GetFeatureInfo&amp;layers={{ typename }}&amp;x=*x.xx*&amp;y=*y.yy*x%x%</code></td>
                     </tr>
                   </tbody>
                 </table>
@@ -165,12 +165,12 @@
                       <td><code>{{ service_url }}?SERVICE=WFS&amp;REQUEST=GetCapabilities</code></td>
                     </tr>
                     <tr>
-                      <th scope="row">Afficher uune liste d'objets géométriques selon le format souhaité GEOJSON,GML,SHAPEZIP... (GetFeature)</th>
-                      <td><code>{{ service_url }}/wms?service=WMS&amp;version=1.1.0&amp;request=GetMap&amp;layers={{ typename }}&amp;styles=&amp;bbox=*bbox_couche*&amp;width=768&amp;height=636&amp;srs=EPSG:3857&amp;outputformat=geojson</code></td>
+                      <th scope="row">Afficher uune liste d'objets géométriques selon le format souhaité GEOJSON,GML,SHAPEZIP... (GetFeature). À adapter à une BBOX valide</th>
+                      <td><code>{{ service_url }}?service=WFS&amp;version=2.0.0&amp;REQUEST=GetFeature&TYPENAMES={{ typename }}&amp;STARTINDEX=0&amp;COUNT=1000&amp;SRSNAME=urn:ogc:def:crs:EPSG::4326&BBOX=4.5,43,7.7,45,urn:ogc:def:crs:EPSG::4326&amp;outputformat=geojson</code></td>
                     </tr>
                     <tr>
                       <th scope="row">Connaître la liste des attributs et leur type d'une couche (DescribeFeatureType)</th>
-                      <td><code>{{ service_url }}?SERVICE=WFS&amp;VERSION=1.0.0&amp;REQUEST=DescribeFeatureType&amp;TYPENAME={{ typename }}</code></td>
+                      <td><code>{{ service_url }}?SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=DescribeFeatureType&amp;TYPENAME={{ typename }}</code></td>
                     </tr>
                   </tbody>
                 </table>
