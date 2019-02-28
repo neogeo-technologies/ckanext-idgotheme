@@ -1,4 +1,3 @@
-
 {% ckan_extends %}
 {% block resource_actions_inner %}
 {# if h.check_access('package_update', {'id':pkg.id }) %}
@@ -63,25 +62,27 @@
   {% elif 'shapezip' in res_api %}
   <a href="{{ res_api.shapezip }}" class="btn btn-primary">Télécharger les données au format SHP</a>
   {% endif %}
-<br>
-<br>
+  <br> <br>
+  <a href="{{ res_api.url }}/wms?service=WMS&amp;version=1.3.0&amp;request=getStyles&amp;layers={{ res_api.typename }}" class="btn btn-primary" target="_blank">Télécharger le style au format SLD</a>
+  <br>
+<br> 
 {% endif %}
 
 {% endblock %}
 
 
-{% block resource_view_content %}
-{% if res.format == 'WMS' %}
+{% block resource_view_content  %}
+{% set res_api = h.get_res_api(res) %}
+{% if res_api %}
 <div id="resource-geo-legend" class="dropdown dropdown-right">
   <button class="btn btn-primary" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
     Légende <span class="caret"></span>
   </button>
   <ul class="dropdown-menu dropdown-menu-right" aria-labeledby="dLabel">
-    <img src="{{ res.getlegendgraphic }}">
+      <img src="{{ res_api.url }}/wms?service=WMS&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;layer={{ res_api.typename }}&amp;styles=&amp;format=image/png&amp;SLD_VERSION=1.1.0" />
   </ul>
 </div>
 {% endif %}
-
 {{ super() }}
 
 {% set res_api = h.get_res_api(res) %}
