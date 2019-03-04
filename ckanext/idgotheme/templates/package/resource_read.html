@@ -32,14 +32,19 @@
     </ul>
     {% endif %}
     {% endblock %}
-    {% if (h.is_crige_partner()) and ( res.extracting_service == 'True') %}
-    {% if res.data_type != 'service' %}
-    <a href="{{ h.idgotheme_get_url_extracteur() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank">
-      <i class="fa fa-lg fa-filter"></i>
-      <span>Extracteur</span>
-    </a>
-    <a class="btn btn-primary" data-toggle="modal" data-target="#my-modal-api-geo"><i class="fa fa-lg fa-flask"></i> API Géo</a>
-    {% endif %}
+    {% if res.data_type != 'service' and ( res.extracting_service == 'True') %}
+      {% if (h.is_crige_partner()) %}
+      <a href="{{ h.idgotheme_get_url_extracteur() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank">
+        <i class="fa fa-lg fa-filter"></i>
+        <span>Extracteur</span>
+      </a>
+      <a class="btn btn-primary" data-toggle="modal" data-target="#my-modal-api-geo"><i class="fa fa-lg fa-flask"></i> API Géo</a>
+	  {% else %}
+	  <a class="btn btn-primary" data-toggle="modal" data-target="#extractor-redirect-modal-res">
+        <i class="fa fa-lg fa-filter"></i>
+        <span>Extracteur</span>
+      </a>
+	  {% endif %}
     {% endif %}
   </div>
 </li>
@@ -94,6 +99,16 @@
   {% set service_url = _splited[0] %}
   {% set typename = _splited[1] %}
 {% endif %}
+
+<div class="modal fade extractor-redirect-modal" id="extractor-redirect-modal-res" tabindex="-1" role="dialog" style="display: none;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        Vous devez vous authentifier ou disposer des droits nécessaires pour accéder à l'extraction de données géographiques.
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="modal fade" id="my-modal-api-geo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;">
   <div class="modal-dialog" role="document">

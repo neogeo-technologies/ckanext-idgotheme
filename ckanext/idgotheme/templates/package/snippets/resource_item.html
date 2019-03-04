@@ -35,9 +35,13 @@
         <i class="fa fa-lg fa-eye"></i>
       </a>
     {% endif %}
-	{% if (h.is_crige_partner()) and ( res.extracting_service == 'True') %}
-      {% if res.data_type != "service" %}
+	{% if res.data_type != "service" and ( res.extracting_service == 'True') %}
+      {% if (h.is_crige_partner()) %}
         <a href="{{ h.idgotheme_get_url_extracteur() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Extracteur">
+          <i class="fa fa-lg fa-filter"></i>
+        </a>
+      {% else %}
+        <a class="btn btn-primary" data-toggle="modal" data-target="#extractor-redirect-modal-res-list">
           <i class="fa fa-lg fa-filter"></i>
         </a>
       {% endif %}
