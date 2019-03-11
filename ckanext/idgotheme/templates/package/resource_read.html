@@ -68,7 +68,7 @@
   <a href="{{ res_api.shapezip }}" class="btn btn-primary">Télécharger les données au format SHP</a>
   {% endif %}
   <br> <br>
-  {% if res.format !='TIFF' and res.format != 'ECW'  %
+  {% if res.format !='TIFF' and res.format != 'ECW' %}
   <a href="{{ res_api.url }}?service=WMS&amp;version=1.3.0&amp;request=getStyles&amp;layers={{ res_api.typename }}" class="btn btn-primary" target="_blank">Télécharger le style au format SLD</a>
   <br>
   {% endif %}
