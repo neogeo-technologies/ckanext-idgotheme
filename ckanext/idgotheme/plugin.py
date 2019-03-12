@@ -1,49 +1,59 @@
 # coding: utf-8
 
-import ckan.plugins as p
-import ckan.plugins.toolkit as toolkit
-import ckan.model as model
-from ckan.common import config, c
-import ckan.lib.helpers as h
-from collections import OrderedDict
-import json
-from ckanext.scheming.plugins import _SchemingMixin
-import ckan.authz as authz
 
 from .validation import scheming_replace_created_date
 from .validation import scheming_replace_modified_date
-
+import ckan.authz as authz
+from ckan.common import c
+from ckan.common import config
+import ckan.lib.helpers as h
+import ckan.model as model
+import ckan.plugins as p
+import ckan.plugins.toolkit as toolkit
+from ckanext.scheming.plugins import _SchemingMixin
+from collections import OrderedDict
+import json
 from logging import getLogger
+
 log = getLogger(__name__)
+
 
 def get_url_wp():
     url_site_wp = config.get('ckanext.idgotheme.url_site_wp', '')
     return url_site_wp
 
+
 def get_url_publier():
     url_site_publier = config.get('ckanext.idgotheme.url_site_publier', '')
     return url_site_publier
 
+
 def get_url_extracteur():
     return config.get('ckanext.idgotheme.url_site_extracteur', '')
+
 
 # Traduction "Groupes" en "Thématiques"
 THEMATIQUE_MIN = u'thématique'
 THEMATIQUE_MAJ = u'Thématique'
 THEMATIQUES_MIN = u'thématiques'
-THEMATIQUES_MAJ= u'Thématiques'
+THEMATIQUES_MAJ = u'Thématiques'
+
 
 def trad_thematique_min():
     return THEMATIQUE_MIN
 
+
 def trad_thematique_maj():
     return THEMATIQUE_MAJ
+
 
 def trad_thematiques_min():
     return THEMATIQUES_MIN
 
+
 def trad_thematiques_maj():
     return THEMATIQUES_MAJ
+
 
 def is_crige_partner():
     if not c.userobj:
@@ -52,7 +62,7 @@ def is_crige_partner():
         return True
 
     partner_group_id = model.Session.query(model.Group) \
-	.filter(model.Group.type == 'partner') \
+        .filter(model.Group.type == 'partner') \
         .first().id
 
     query = model.Session.query(model.Member) \
@@ -60,9 +70,10 @@ def is_crige_partner():
         .filter(model.Member.table_name == 'user') \
         .filter(model.Member.group_id == partner_group_id) \
         .filter(model.Member.table_id == c.userobj.id)
+
     return len(query.all()) != 0
 
-# Plugin
+
 class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
     p.implements(p.IConfigurer, inherit=True)
     p.implements(p.IFacets, inherit=True)
@@ -78,17 +89,17 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
     # ITemplateHelpers : Custom Helpers functions
     def get_helpers(self):
         return {
-          'idgotheme_get_url_wp': get_url_wp,
-          'idgotheme_get_url_publier': get_url_publier,
-          'idgotheme_get_url_extracteur': get_url_extracteur,
-          'trad_thematique_min' : trad_thematique_min,
-          'trad_thematique_maj' : trad_thematique_maj,
-          'trad_thematiques_min' : trad_thematiques_min,
-          'trad_thematiques_maj' : trad_thematiques_maj,
-          'is_crige_partner' : is_crige_partner,
-          'proxy_export': self.proxy_export,
-          'get_res_api': self.get_res_api,
-        }
+            'idgotheme_get_url_wp': get_url_wp,
+            'idgotheme_get_url_publier': get_url_publier,
+            'idgotheme_get_url_extracteur': get_url_extracteur,
+            'trad_thematique_min': trad_thematique_min,
+            'trad_thematique_maj': trad_thematique_maj,
+            'trad_thematiques_min': trad_thematiques_min,
+            'trad_thematiques_maj': trad_thematiques_maj,
+            'is_crige_partner': is_crige_partner,
+            'proxy_export': self.proxy_export,
+            'get_res_api': self.get_res_api,
+            }
 
     def get_validators(self):
         return {
@@ -115,16 +126,16 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
             return OrderedDict({'tags': u'Mots-clés'})
         else:
             return OrderedDict([
-                             ('organization', u'Organisations'),
-                             ('groups', u'Thématiques'),
-                             ('datatype', u'Types'),
-                             ('support', u'Supports'),
-                             ('res_format', u'Formats'),
-                             ('license_id', u'Licences'),
-                             ('tags', u'Mots-clés'),
-                             ('update_frequency', u'Fréquence de mise à jour'),
-                             ('granularity', u'Granularité de la couverture territoriale'),
-                             ])
+                ('organization', u'Organisations'),
+                ('groups', u'Thématiques'),
+                ('datatype', u'Types'),
+                ('support', u'Supports'),
+                ('res_format', u'Formats'),
+                ('license_id', u'Licences'),
+                ('tags', u'Mots-clés'),
+                ('update_frequency', u'Fréquence de mise à jour'),
+                ('granularity', u'Granularité de la couverture territoriale'),
+                ])
 
     # IPackageController
     def before_index(self, data_dict):
