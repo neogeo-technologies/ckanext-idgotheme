@@ -41,9 +41,11 @@
           <i class="fa fa-lg fa-filter"></i>
         </a>
       {% else %}
-        <a class="btn btn-primary" data-toggle="modal" data-target="#extractor-redirect-modal-res-list" data-toggle="tooltip" title="Extracteur">
-          <i class="fa fa-lg fa-filter"></i>
-        </a>
+	<span data-toggle="modal" data-target="#extractor-redirect-modal-res-list">
+          <a class="btn btn-primary" data-toggle="tooltip" title="Extracteur">
+            <i class="fa fa-lg fa-filter"></i>
+          </a>
+        </span>
       {% endif %}
     {% endif %}
 	{% if can_edit and res.data_type != "service" %}
