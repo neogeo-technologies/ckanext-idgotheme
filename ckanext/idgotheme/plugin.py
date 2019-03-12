@@ -9,6 +9,10 @@ from collections import OrderedDict
 import json
 from ckanext.scheming.plugins import _SchemingMixin
 import ckan.authz as authz
+
+from .validation import scheming_replace_created_date
+from .validation import scheming_replace_modified_date
+
 from logging import getLogger
 log = getLogger(__name__)
 
@@ -65,6 +69,7 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
     p.implements(p.IPackageController, inherit=True)
     p.implements(p.ITemplateHelpers, inherit=True)
     p.implements(p.IRoutes, inherit=True)
+    p.implements(p.IValidators)
 
     SCHEMA_OPTION = 'scheming.dataset_schemas'
     FALLBACK_OPTION = 'scheming.dataset_fallback'
@@ -84,6 +89,12 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
           'proxy_export': self.proxy_export,
           'get_res_api': self.get_res_api,
         }
+
+    def get_validators(self):
+        return {
+            'scheming_replace_created_date': scheming_replace_created_date,
+            'scheming_replace_modified_date': scheming_replace_modified_date,
+            }
 
     def get_res_api(self, res):
         try:
