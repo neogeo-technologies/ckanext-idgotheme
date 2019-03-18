@@ -28,37 +28,44 @@
   </div>
   {% block resource_item_explore %}
   {% if not url_is_edit %}
-  <div class="btn-group">
-    {% set formats_visu = ["GEOJSON","WMS","XLS","XLSX","PDF","JSON","XML","JPEG","ODS","PNG","TXT","GIF","HTML","CSV"] %}
-    {% if res.format.upper() in formats_visu %}
-      <a href="{{ url }}" class="btn btn-primary" data-toggle="tooltip" title="Visualiser">
-        <i class="fa fa-lg fa-eye"></i>
-      </a>
-    {% endif %}
-	{% if res.data_type != "service" and ( res.extracting_service == 'True') %}
-      {% if (h.is_crige_partner()) %}
-        <a href="{{ h.idgotheme_get_url_extracteur() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Extracteur">
-          <i class="fa fa-lg fa-filter"></i>
+    <div class="btn-group">
+      {% set formats_visu = ["GEOJSON","WMS","XLS","XLSX","PDF","JSON","XML","JPEG","ODS","PNG","TXT","GIF","HTML","CSV"] %}
+
+      {% if res.format.upper() in formats_visu %}
+        <a href="{{ url }}" class="btn btn-primary" data-toggle="tooltip" title="Visualiser">
+          <i class="fa fa-lg fa-eye"></i>
         </a>
-      {% else %}
-	<span data-toggle="modal" data-target="#extractor-redirect-modal-res-list">
-          <a class="btn btn-primary" data-toggle="tooltip" title="Extracteur">
+      {% endif %}
+
+      {% if res.data_type != "service" and ( res.extracting_service == 'True') %}
+        {% if (h.is_crige_partner()) %}
+          <a href="{{ h.idgotheme_get_url_extracteur() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Extracteur">
             <i class="fa fa-lg fa-filter"></i>
+          </a>
+        {% else %}
+          <span data-toggle="modal" data-target="#extractor-redirect-modal-res-list">
+            <a class="btn btn-primary" data-toggle="tooltip" title="Extracteur">
+              <i class="fa fa-lg fa-filter"></i>
+            </a>
+          </span>
+        {% endif %}
+      {% endif %}
+
+      {% if can_edit and res.data_type != "service" %}
+        <a href="{{ h.url_for(controller='package', action='resource_views', id=pkg.name, resource_id=res.id) }}" class="btn btn-primary" data-toggle="tooltip" title="Éditer les vues">
+          <i class="fa fa-lg fa-bar-chart-o"></i>
+        </a>
+      {% endif %}
+
+      {% if res.data_type != "service" %}
+        <span class="open-download-modal" data-toggle="modal" data-target="#download-modal-res-list"
+              data-id="{{ res.id }}" data-name="{{ res.name or res.description }}" data-url="{{ res.url }}">
+          <a class="btn btn-primary" data-toggle="tooltip" title="Télécharger">
+            <i class="fa fa-lg fa-arrow-circle-o-down"></i>
           </a>
         </span>
       {% endif %}
-    {% endif %}
-	{% if can_edit and res.data_type != "service" %}
-	  <a href="{{ h.url_for(controller='package', action='resource_views', id=pkg.name, resource_id=res.id) }}" class="btn btn-primary" data-toggle="tooltip" title="Éditer les vues">
-        <i class="fa fa-lg fa-bar-chart-o"></i>
-      </a>
-	{% endif %}
-    {% if res.data_type != "service" %}
-	<a href="{{ res.url }}" class="btn btn-primary resource-url-analytics" target="_blank" data-toggle="tooltip" title="Télécharger">
-      <i class="fa fa-lg fa-arrow-circle-o-down"></i>
-    </a>
-    {% endif %}
-  </div>
+    </div>
   {% endif %}
   {% endblock %}
 </li>

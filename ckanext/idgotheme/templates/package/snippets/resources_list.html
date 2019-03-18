@@ -1,6 +1,6 @@
 <section id="dataset-resources" class="resources">
   <h3>{{ _('Data and Resources') }}</h3>
-  {% block resource_list %}    
+  {% block resource_list %}
     {% if resources %}
       <ul class="{% block resource_list_class %}resource-list{% endblock %}">
         {% block resource_list_inner %}
@@ -8,41 +8,73 @@
           {% set schema = h.scheming_get_dataset_schema('dataset') %}
           {% for field in schema.resource_fields if field.field_name == 'data_type' %}
             {% if field.choices %}
-	          {% for choice in field.choices %}
-				<div class="resource-datatype">
-                  {% if choice.value == 'service' %}
-				    <h4>Services</h4>
-				  {% else %}
-				    <h4>{{ choice.label }}</h4>
-				  {% endif %}
-				  {% for resource in resources if choice.value == resource.data_type %}
-                    {% snippet 'package/snippets/resource_item.html', pkg=pkg, res=resource, can_edit=can_edit %}
-                  {% endfor %}
-				</div>
-			  {% endfor %}
-			{% endif %}
+              {% for choice in field.choices %}
+                {% do choice.update({'type_count':0}) %}
+
+                {% for resource in resources if choice.value == resource.data_type %}
+                  {% set typeCount = choice.type_count + 1 %}
+                  {% do choice.update({'type_count':typeCount}) %}
+                {% endfor %}
+
+                {% if choice.type_count > 0 %}
+                  <div class="resource-datatype">
+                    {% if choice.value == 'service' %}
+                      <h4>Services</h4>
+                    {% else %}
+                      <h4>{{ choice.label }}</h4>
+                    {% endif %}
+                    {% for resource in resources if choice.value == resource.data_type %}
+                      {% snippet 'package/snippets/resource_item.html', pkg=pkg, res=resource, can_edit=can_edit %}
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
           {% endfor %}
         {% endblock %}
       </ul>
     {% else %}
       {% if h.check_access('resource_create', {'package_id': pkg['id']}) %}
-          {% trans url=h.url_for('resource.new', id=pkg.name) %}
-            <p class="empty">This dataset has no data, <a href="{{ url }}">why not add some?</a></p>
-          {% endtrans %}
+        {% trans url=h.url_for('resource.new', id=pkg.name) %}
+        <p class="empty">This dataset has no data, <a href="{{ url }}">why not add some?</a></p>
+        {% endtrans %}
       {% else %}
-          <p class="empty">{{ _('This dataset has no data') }}</p>
+        <p class="empty">{{ _('This dataset has no data') }}</p>
       {% endif %}
     {% endif %}
-    {% endblock %}
+  {% endblock %}
 
-<div class="modal fade extractor-redirect-modal" id="extractor-redirect-modal-res-list" tabindex="-1" role="dialog" style="display: none;">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <p>Vous devez vous authentifier ou disposer des droits nécessaires pour accéder à l'extraction de données géographiques.</p>
-        <p>Pour faire votre demande d'affiliation et en savoir plus, rendez-vous sur votre page <a href="{{ h.idgotheme_get_url_publier() }}/organisation/all" target="_blank">Organisation</a> dans l'espace utilisateur de DATA SUD</p>	
+  <div class="modal fade extractor-redirect-modal" id="extractor-redirect-modal-res-list" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p>Vous devez vous authentifier ou disposer des droits nécessaires pour accéder à l'extraction de données géographiques.</p>
+          <p>Pour faire votre demande d'affiliation et en savoir plus, rendez-vous sur votre page <a href="{{ h.idgotheme_get_url_publier() }}/organisation/all" target="_blank">Organisation</a> dans l'espace utilisateur de DATA SUD</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+  <div class="modal fade" id="download-modal-res-list" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog" role="document">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3>Téléchargement de la ressource "<span class="resource-name"></span>"</h3>
+      </div>
+      <div class="modal-content">
+        <div class="modal-body">
+          <p class="modal-custom-content">
+            <ul>
+              <li>Sondage externe pour répondre à quelques questions facultatives</li>
+              <li>Laisser un commentaire sur le jeu de données</li>
+              <li>Déclarer une réutilisation du jeu de données</li>
+            </ul>
+          </p>
+          <a href="" class="btn btn-primary download-button-resource resource-url-analytics" target="_blank" data-toggle="tooltip" title="Télécharger">
+            <i class="fa fa-lg fa-arrow-circle-o-down"></i> Télécharger
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

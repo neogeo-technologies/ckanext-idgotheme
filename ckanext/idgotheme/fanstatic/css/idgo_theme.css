@@ -5392,7 +5392,7 @@ div.dataset-item-organization-title {
     margin-top: 5px;
 }
 
-.btn-group>.btn {
+.btn-group .btn {
     margin-left: 5px !important;
 }
 
