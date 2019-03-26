@@ -2,6 +2,7 @@
 
 
 import ckan.lib.helpers as h
+import ckan.model as model
 from ckanext.scheming.errors import SchemingException
 import ckanext.scheming.helpers as sh
 from ckantoolkit import _
@@ -68,4 +69,23 @@ def scheming_datasetfield_null_if_empty(field, schema):
             for i in xrange(len(schema['dataset_fields'])):
                 if schema['dataset_fields'][i]['field_name'] == field['field_name']:
                     schema['dataset_fields'][i]['display_snippet'] = None
+    return validator
+
+@scheming_validator
+def scheming_datasetfield_null_if_empty(field, schema):
+    def validator(key, data, errors, context):
+        value = data[key]
+        if not value:
+            for i in xrange(len(schema['dataset_fields'])):
+                if schema['dataset_fields'][i]['field_name'] == field['field_name']:
+                    schema['dataset_fields'][i]['display_snippet'] = None
+    return validator
+
+
+@scheming_validator
+def force_resource_url_type(field, schema):
+    def validator(key, data, errors, context):
+        resource_id = data[(key[0], key[1], 'id')]
+        data = {'url_type': 'upload'}
+        model.Session.query(model.Resource).filter_by(id=resource_id).update(data)
     return validator
