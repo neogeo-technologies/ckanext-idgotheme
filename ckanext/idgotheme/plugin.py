@@ -1,9 +1,9 @@
 # coding: utf-8
 
-
+from .validation import force_resource_url_type
+from .validation import scheming_datasetfield_null_if_empty
 from .validation import scheming_replace_created_date
 from .validation import scheming_replace_modified_date
-from .validation import scheming_datasetfield_null_if_empty
 import ckan.authz as authz
 from ckan.common import c
 from ckan.common import config
@@ -110,6 +110,7 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
 
 	def get_validators(self):
 		return {
+			'force_resource_url_type': force_resource_url_type,
 			'scheming_replace_created_date': scheming_replace_created_date,
 			'scheming_replace_modified_date': scheming_replace_modified_date,
 			'scheming_datasetfield_null_if_empty': scheming_datasetfield_null_if_empty,
