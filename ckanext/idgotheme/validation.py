@@ -85,7 +85,9 @@ def scheming_datasetfield_null_if_empty(field, schema):
 @scheming_validator
 def force_resource_url_type(field, schema):
     def validator(key, data, errors, context):
-        resource_id = data[(key[0], key[1], 'id')]
-        data = {'url_type': 'upload'}
-        model.Session.query(model.Resource).filter_by(id=resource_id).update(data)
+        value = data[key]
+        if value in ('upload',):
+            resource_id = data[(key[0], key[1], 'id')]
+            data = {'url_type': value}
+            model.Session.query(model.Resource).filter_by(id=resource_id).update(data)
     return validator
