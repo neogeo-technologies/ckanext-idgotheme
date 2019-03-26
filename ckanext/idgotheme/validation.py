@@ -58,3 +58,14 @@ def scheming_replace_modified_date(field, schema):
     def validator(key, data, errors, context):
         generic_date_validator('metadata_modified', key, data, errors, context)
     return validator
+
+
+@scheming_validator
+def scheming_datasetfield_null_if_empty(field, schema):
+    def validator(key, data, errors, context):
+        value = data[key]
+        if not value:
+            for i in xrange(len(schema['dataset_fields'])):
+                if schema['dataset_fields'][i]['field_name'] == field['field_name']:
+                    schema['dataset_fields'][i]['display_snippet'] = None
+    return validator

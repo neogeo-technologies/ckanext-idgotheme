@@ -4529,7 +4529,7 @@ header .navigation-top #top-menu li.bleu a:before{
 }
 #secondary .bloc_html a{
 	position: relative;
-} 
+}
 #secondary .bloc_html .player {
 	background-image: url(assets/images/player.png);
 	background-repeat: no-repeat;
@@ -4849,7 +4849,7 @@ footer .site-info .wrap a{
 	footer #menu-menu-footer li {
 		font-size: 13px;
 	}
-	footer .twitter h2, 
+	footer .twitter h2,
 	footer .twitter a {
 		font-size: 15px;
 	}
@@ -4914,7 +4914,7 @@ footer .site-info .wrap a{
 	}
 /*HOME*/
 /*bandeau*/
-	#page #bandeau {	
+	#page #bandeau {
 		background-position: center;
 	}
 	#page #bandeau .bloc_texte {
@@ -4954,7 +4954,7 @@ footer .site-info .wrap a{
 		margin-right: 10px;
 		margin-bottom: 50px;
 	}
-	#page #actus .actus_content .actu_cat, 
+	#page #actus .actus_content .actu_cat,
 	#page #portail .portail_content .portail_cat {
 		font-size: 19px;
 	}
@@ -5007,7 +5007,7 @@ footer .site-info .wrap a{
 	#page #secondary .sidebar_content .trouver_donnee li {
 		text-align: left;
 	}
-	#page #secondary .sidebar_content .bloc_slider, 
+	#page #secondary .sidebar_content .bloc_slider,
 	#page #secondary .sidebar_content .bloc_html {
 		width: 300px;
 		padding: 0;
@@ -5152,7 +5152,7 @@ footer .site-info .wrap a{
 	}
 /*PAGE*/
 /*sidebar*/
-	#page #secondary .sidebar_content .bloc_slider, 
+	#page #secondary .sidebar_content .bloc_slider,
 	#page #secondary .sidebar_content .bloc_html {
 		margin-left: 10px;
 		margin-right: 10px;
@@ -5194,8 +5194,8 @@ footer .site-info .wrap a{
 	#page header .site-branding-text .header_espaces {
 		text-align: center;
 		left: 10px;
-		bottom: -50px;	
-	}	
+		bottom: -50px;
+	}
 	#page header .site-branding-text .header_espaces a {
 		text-align: left;
 	}
@@ -5339,7 +5339,7 @@ a:hover, a:focus {
 
 .primary .module-content {
 	padding-left: 30px !important;
-    padding-right: 30px !important;    
+    padding-right: 30px !important;
 	padding-top: 0 !important;
     padding-right: 0;
 }
@@ -5406,7 +5406,7 @@ div.dataset-item-organization-title {
 }
 
 .resource-item {
-    min-height: 4em; 
+    min-height: 4em;
 }
 
 #resource-geo-legend {
@@ -5527,7 +5527,7 @@ div.dataset-item-organization-title {
     margin-top: 25%;
 }
 .dataset-item-content.image img.dataset-thumbnail {
-    vertical-align: middle;    
+    vertical-align: middle;
     max-height: 100%;
 }
 
@@ -5618,7 +5618,7 @@ a.sort-action:hover {
     color: #0072bc;
 }
 a.sort-action span {
-    text-decoration: underline;	
+    text-decoration: underline;
 }
 
 .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-submenu:hover>a, .dropdown-submenu:focus>a {
@@ -5749,7 +5749,7 @@ li.media-item {
 }
 .affich-liste .media-item .container-media-image {
 	height: 110px;
-    width: 190px;	
+    width: 190px;
 	float: left;
     display: inline-block;
     text-align: center;
@@ -5761,7 +5761,7 @@ li.media-item {
 .affich-liste .media-item p {
     display: inline-block;
     width: calc(100% - 210px);
-    margin-left: 20px;	
+    margin-left: 20px;
 	margin-bottom: 0;
 }
 .affich-liste .media-item .count {
@@ -5813,7 +5813,7 @@ li.media-item {
 
 /* Dataset : resources */
 .resource-datatype {
-   padding-bottom: 30px; 
+   padding-bottom: 30px;
 }
 .resource-datatype h4{
     border-bottom: 1px dotted #dddddd;
@@ -5827,7 +5827,7 @@ li.media-item {
     top: 0;
     left: 0;
     border: 0;
-    margin: 0 0 40px 0; 
+    margin: 0 0 40px 0;
 }
 
 
@@ -5856,9 +5856,6 @@ li.media-item {
 
 /*** Modal Extracteur ***/
 .extractor-redirect-modal {
-    /*width: 60%;
-    left: 0;
-    margin-left: 20%;*/
     z-index: 1041;
 }
 
@@ -5887,7 +5884,7 @@ footer #menu-menu-footer li i {
 		font-size: 12px;
 	}
 	li.media-item .media-heading {
-		font-size: 16px;	
+		font-size: 16px;
 	}
 }
 
@@ -5958,7 +5955,7 @@ footer #menu-menu-footer li i {
     }
 	.affich-liste li.media-item {
 	    height: 120px;
-	}	
+	}
 	li.media-item .media-heading {
         font-size: 14px;
     }
@@ -5976,4 +5973,3 @@ footer #menu-menu-footer li i {
         height: 80px;
     }
 }
-

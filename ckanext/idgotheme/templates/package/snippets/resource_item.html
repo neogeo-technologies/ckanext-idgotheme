@@ -31,11 +31,11 @@
     <div class="btn-group">
       {% set formats_visu = ["GEOJSON","WMS","XLS","XLSX","PDF","JSON","XML","JPEG","ODS","PNG","TXT","GIF","HTML","CSV"] %}
 
-      {% if res.format.upper() in formats_visu %}
+      {# if res.format.upper() in formats_visu #}
         <a href="{{ url }}" class="btn btn-primary" data-toggle="tooltip" title="Visualiser">
           <i class="fa fa-lg fa-eye"></i>
         </a>
-      {% endif %}
+      {# endif #}
 
       {% if res.data_type != "service" and ( res.extracting_service == 'True') %}
         {% if (h.is_crige_partner()) %}
