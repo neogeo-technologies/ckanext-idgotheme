@@ -63,12 +63,12 @@
 			</div>
 			<div class="modal-content">
 				<div class="modal-body">
-					<p class="modal-custom-content">
+					<div class="modal-custom-content">
 						{% set ihm_settings = h.get_ihm_settings() %}
 						{% for obj in ihm_settings if obj.name == "download-modal-res-list" %}
 							{{ h.render_markdown(obj.content) }}
 						{% endfor %}
-					</p>
+					</div>
 				</div>
 			</div>
 			<div class="modal-footer">

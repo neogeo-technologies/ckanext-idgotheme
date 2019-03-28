@@ -59,7 +59,7 @@
 
       {% if res.data_type != "service" %}
         <span class="open-download-modal" data-toggle="modal" data-target="#download-modal-res-list"
-              data-id="{{ res.id }}" data-name="{{ res.name or res.description }}" data-url="{{ res.url }}">
+              data-dataset="{{ pkg.name }}" data-id="{{ res.id }}" data-name="{{ res.name or res.description }}" data-url="{{ res.url }}">
           <a class="btn btn-primary" data-toggle="tooltip" title="Télécharger">
             <i class="fa fa-lg fa-arrow-circle-o-down"></i>
           </a>

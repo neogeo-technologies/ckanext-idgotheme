@@ -20,7 +20,7 @@
     </a>
 		{% else %}
 		<a class="btn btn-primary open-download-modal" data-toggle="modal" data-target="#download-modal-res-list"
-			 data-id="{{ res.id }}" data-name="{{ res.name or res.description }}" data-url="{{ res.url }}">
+			 data-dataset="{{ pkg.name }}" data-id="{{ res.id }}" data-name="{{ res.name or res.description }}" data-url="{{ res.url }}">
 			<!-- <a class="btn btn-primary" data-toggle="tooltip" title="Télécharger"> -->
 			<i class="fa fa-lg fa-arrow-circle-o-down"></i> {{ _('Download') }}
 		</a>
@@ -72,9 +72,9 @@
 {% set res_api = h.get_res_api(res) %}
 {% if res_api %}
   {% if 'geojson' in res_api %}
-  <a href="{{ res_api.geojson }}" class="btn btn-primary">Télécharger les données au format GeoJSON</a>
+  <a href="{{ res_api.geojson }}" target="_blank" class="btn btn-primary">Télécharger les données au format GeoJSON</a>
   {% elif 'shapezip' in res_api %}
-  <a href="{{ res_api.shapezip }}" class="btn btn-primary">Télécharger les données au format SHP</a>
+  <a href="{{ res_api.shapezip }}" target="_blank" class="btn btn-primary">Télécharger les données au format SHP</a>
   {% endif %}
   <br> <br>
   {% if res.format != 'TIFF' and res.format != 'ECW' %}
@@ -119,12 +119,12 @@
 		</div>
 		<div class="modal-content">
 			<div class="modal-body">
-				<p class="modal-custom-content">
+				<div class="modal-custom-content">
 					{% set ihm_settings = h.get_ihm_settings() %}
 					{% for obj in ihm_settings if obj.name == "download-modal-res-list" %}
 						{{ h.render_markdown(obj.content) }}
 					{% endfor %}
-				</p>
+				</div>
 			</div>
 		</div>
 		<div class="modal-footer">

@@ -29,10 +29,14 @@ $('table tr[name="size"] td').html(toOctetString(resource_size));
 
 // Modal resource download
 $(document).on("click", ".open-download-modal", function () {
+  var datasetName = $(this).data('dataset');
   var resourceID = $(this).data('id');
   var resourceName = $(this).data('name');
   var resourceURL = $(this).data('url');
   // TODO: AJAX request to get modal text -> $("#download-modal-res-list .modal-custom-content")
   $("#download-modal-res-list .resource-name").html(resourceName);
   $("#download-modal-res-list .download-button-resource").attr("href", resourceURL);
+
+  var modalCustomContent = $("#download-modal-res-list .modal-custom-content").html().replace('{{URL_DATASET}}',`dataset/${datasetName}`);
+  $("#download-modal-res-list .modal-custom-content").html(modalCustomContent);
 });
