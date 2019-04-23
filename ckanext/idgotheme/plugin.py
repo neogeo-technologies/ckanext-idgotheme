@@ -82,6 +82,14 @@ def get_ihm_settings():
     return r.json()
 
 
+def get_proxified_service_url(package_id, resource_id):
+    return h.url_for(
+        action='proxy_service',
+        controller='ckanext.geoview.controllers.service_proxy:ServiceProxyController',
+        id=package_id,
+        resource_id=resource_id)
+
+
 class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
     p.implements(p.IConfigurer, inherit=True)
     p.implements(p.IFacets, inherit=True)
@@ -119,10 +127,18 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
         }
 
     def get_res_api(self, res):
+        service_url = get_proxified_service_url(res['package_id'], res['id'])
         try:
-            return json.loads(res.get('api'))
-        except Exception as e:
+            api = json.loads(res.get('api'))
+        except Exception:
             return None
+        # else:
+        if 'url' in api:
+            for key in ('geojson', 'shapezip', 'getlegendgraphic',):
+                if key not in api:
+                    continue
+                api[key] = api.pop(key).replace(api['url'], service_url)
+        return api
 
     # IConfigurer
     def update_config(self, config_):
