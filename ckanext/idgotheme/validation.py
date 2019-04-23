@@ -71,6 +71,7 @@ def scheming_datasetfield_null_if_empty(field, schema):
                     schema['dataset_fields'][i]['display_snippet'] = None
     return validator
 
+
 @scheming_validator
 def scheming_datasetfield_null_if_empty(field, schema):
     def validator(key, data, errors, context):

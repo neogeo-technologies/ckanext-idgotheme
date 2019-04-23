@@ -3,69 +3,68 @@
 
 <li class="resource-item" data-id="{{ res.id }}">
   <div>
-	{% block resource_item_title %}
-  	<a class="heading" href="{{ url }}" title="{{ res.name or res.description }}">
+    {% block resource_item_title %}
+    <a class="heading" href="{{ url }}" title="{{ res.name or res.description }}">
       {{ h.resource_display_name(res) | truncate(50) }}<span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">{{ h.get_translated(res, 'format') }}</span>
       {{ h.popular('views', res.tracking_summary.total, min=10) }}
-  	</a>
-	{% endblock %}
+    </a>
+    {% endblock %}
     {% block resource_item_description %}
-      <div>
+    <div>
       {% if res.Size %}
-        <span name="size" data-size="{{ res.Size }}"><span class="label label-default" name="size-value"></span></span>
+      <span name="size" data-size="{{ res.Size }}"><span class="label label-default" name="size-value"></span></span>
       {% elif res.size %}
-        <span name="size" data-size="{{ res.size }}"><span class="label label-default" name="size-value"></span></span>
+      <span name="size" data-size="{{ res.size }}"><span class="label label-default" name="size-value"></span></span>
       {% endif %}
       {% if res.tracking_summary and res.data_type != "service" %}
-        {% if res.tracking_summary.total == 1 %}
-          <span class="label label-tracking">{{ res.tracking_summary.total }} téléchargement</span>
-        {% elif res.tracking_summary.total > 1 %}
-          <span class="label label-tracking">{{ res.tracking_summary.total }} téléchargements</span>
-        {% endif %}
+      {% if res.tracking_summary.total == 1 %}
+      <span class="label label-tracking">{{ res.tracking_summary.total }} téléchargement</span>
+      {% elif res.tracking_summary.total > 1 %}
+      <span class="label label-tracking">{{ res.tracking_summary.total }} téléchargements</span>
       {% endif %}
-      </div>
+      {% endif %}
+    </div>
     {% endblock %}
   </div>
   {% block resource_item_explore %}
   {% if not url_is_edit %}
-    <div class="btn-group">
-      {% set formats_visu = ["GEOJSON","WMS","XLS","XLSX","PDF","JSON","XML","JPEG","ODS","PNG","TXT","GIF","HTML","CSV"] %}
+  <div class="btn-group">
+    {% set formats_visu = ["GEOJSON","WMS","XLS","XLSX","PDF","JSON","XML","JPEG","ODS","PNG","TXT","GIF","HTML","CSV"] %}
 
-      {# if res.format.upper() in formats_visu #}
-        <a href="{{ url }}" class="btn btn-primary" data-toggle="tooltip" title="Visualiser">
-          <i class="fa fa-lg fa-eye"></i>
-        </a>
-      {# endif #}
+    {# if res.format.upper() in formats_visu #}
+    <a href="{{ url }}" class="btn btn-primary" data-toggle="tooltip" title="Visualiser">
+      <i class="fa fa-lg fa-eye"></i>
+    </a>
+    {# endif #}
 
-      {% if res.data_type != "service" and ( res.extracting_service == 'True') %}
-        {% if (h.is_crige_partner()) %}
-          <a href="{{ h.idgotheme_get_url_extracteur() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Extracteur">
-            <i class="fa fa-lg fa-filter"></i>
-          </a>
-        {% else %}
-          <span data-toggle="modal" data-target="#extractor-redirect-modal-res-list">
-            <a class="btn btn-primary" data-toggle="tooltip" title="Extracteur">
-              <i class="fa fa-lg fa-filter"></i>
-            </a>
-          </span>
-        {% endif %}
-      {% endif %}
+    {% if res.data_type != "service" and ( res.extracting_service == 'True') %}
+    {% if (h.is_crige_partner()) %}
+    <a href="{{ h.idgotheme_get_url_extracteur() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Extracteur">
+      <i class="fa fa-lg fa-filter"></i>
+    </a>
+    {% else %}
+    <span data-toggle="modal" data-target="#extractor-redirect-modal-res-list">
+      <a class="btn btn-primary" data-toggle="tooltip" title="Extracteur">
+        <i class="fa fa-lg fa-filter"></i>
+      </a>
+    </span>
+    {% endif %}
+    {% endif %}
 
-      {% if can_edit and res.data_type != "service" %}
-        <a href="{{ h.url_for(controller='package', action='resource_views', id=pkg.name, resource_id=res.id) }}" class="btn btn-primary" data-toggle="tooltip" title="Éditer les vues">
-          <i class="fa fa-lg fa-bar-chart-o"></i>
-        </a>
-      {% endif %}
+    {% if can_edit and res.data_type != "service" %}
+    <a href="{{ h.url_for(controller='package', action='resource_views', id=pkg.name, resource_id=res.id) }}" class="btn btn-primary" data-toggle="tooltip" title="Éditer les vues">
+      <i class="fa fa-lg fa-bar-chart-o"></i>
+    </a>
+    {% endif %}
 
-      {% if res.data_type != "service" %}
-        <span class="open-download-modal" data-toggle="modal" data-target="#download-modal-res-list"
-              data-dataset="{{ pkg.name }}" data-id="{{ res.id }}" data-name="{{ res.name or res.description }}" data-url="{{ res.url }}">
-          <a class="btn btn-primary" data-toggle="tooltip" title="Télécharger">
-            <i class="fa fa-lg fa-arrow-circle-o-down"></i>
-          </a>
-        </span>
-      {% endif %}
-    </div>
+    {% if res.data_type != "service" %}
+    <span class="open-download-modal" data-toggle="modal" data-target="#download-modal-res-list" data-dataset="{{ pkg.name }}" data-id="{{ res.id }}" data-name="{{ res.name or res.description }}" data-url="{{ res.url }}">
+      <a class="btn btn-primary" data-toggle="tooltip" title="Télécharger">
+        <i class="fa fa-lg fa-arrow-circle-o-down"></i>
+      </a>
+    </span>
+    {% endif %}
+  </div>
   {% endif %}
   {% endblock %}
 </li>

@@ -6,7 +6,7 @@
 {% if res.url and h.is_url(res.url) %}
 <li>
   <div class="btn-group">
-		{% if res.resource_type in ('listing', 'service') or res.resource_type == 'api' or ((not res.has_views or not res.can_be_previewed) and not res.url_type == 'upload')%}
+    {% if res.resource_type in ('listing', 'service') or res.resource_type == 'api' or ((not res.has_views or not res.can_be_previewed) and not res.url_type == 'upload')%}
     <a class="btn btn-primary resource-url-analytics resource-type-{{ res.resource_type }}" href="{{ res.url }}">
       {% if res.resource_type in ('listing', 'service') %}
       <i class="fa fa-lg fa-eye"></i> {{ _('View') }}
@@ -14,17 +14,16 @@
       <i class="fa fa-lg fa-key"></i> {{ _('API Endpoint') }}
       {% elif (not res.has_views or not res.can_be_previewed) and not res.url_type == 'upload' %}
       <i class="fa fa-lg fa-external-link"></i> {{ _('Go to resource') }}
-			{# else #}
-			<!-- <i class="fa fa-lg fa-arrow-circle-o-down"></i> {{ _('Download') }} -->
+      {# else #}
+      <!-- <i class="fa fa-lg fa-arrow-circle-o-down"></i> {{ _('Download') }} -->
       {% endif %}
     </a>
-		{% else %}
-		<a class="btn btn-primary open-download-modal" data-toggle="modal" data-target="#download-modal-res-list"
-			 data-dataset="{{ pkg.name }}" data-id="{{ res.id }}" data-name="{{ res.name or res.description }}" data-url="{{ res.url }}">
-			<!-- <a class="btn btn-primary" data-toggle="tooltip" title="Télécharger"> -->
-			<i class="fa fa-lg fa-arrow-circle-o-down"></i> {{ _('Download') }}
-		</a>
-		{% endif %}
+    {% else %}
+    <a class="btn btn-primary open-download-modal" data-toggle="modal" data-target="#download-modal-res-list" data-dataset="{{ pkg.name }}" data-id="{{ res.id }}" data-name="{{ res.name or res.description }}" data-url="{{ res.url }}">
+      <!-- <a class="btn btn-primary" data-toggle="tooltip" title="Télécharger"> -->
+      <i class="fa fa-lg fa-arrow-circle-o-down"></i> {{ _('Download') }}
+    </a>
+    {% endif %}
 
     {% block download_resource_button %}
     {% if res.datastore_active %}
@@ -42,18 +41,18 @@
     {% endif %}
     {% endblock %}
     {% if res.data_type != 'service' and ( res.extracting_service == 'True') %}
-      {% if (h.is_crige_partner()) %}
-      <a href="{{ h.idgotheme_get_url_extracteur() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank">
-        <i class="fa fa-lg fa-filter"></i>
-        <span>Extracteur</span>
-      </a>
-	  {% else %}
-	  <a class="btn btn-primary" data-toggle="modal" data-target="#extractor-redirect-modal-res">
-        <i class="fa fa-lg fa-filter"></i>
-        <span>Extracteur</span>
-      </a>
-	  {% endif %}
-      <a class="btn btn-primary" data-toggle="modal" data-target="#my-modal-api-geo"><i class="fa fa-lg fa-flask"></i> API Géo</a>
+    {% if (h.is_crige_partner()) %}
+    <a href="{{ h.idgotheme_get_url_extracteur() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank">
+      <i class="fa fa-lg fa-filter"></i>
+      <span>Extracteur</span>
+    </a>
+    {% else %}
+    <a class="btn btn-primary" data-toggle="modal" data-target="#extractor-redirect-modal-res">
+      <i class="fa fa-lg fa-filter"></i>
+      <span>Extracteur</span>
+    </a>
+    {% endif %}
+    <a class="btn btn-primary" data-toggle="modal" data-target="#my-modal-api-geo"><i class="fa fa-lg fa-flask"></i> API Géo</a>
     {% endif %}
   </div>
 </li>
@@ -71,23 +70,23 @@
 <br>
 {% set res_api = h.get_res_api(res) %}
 {% if res_api %}
-  {% if 'geojson' in res_api %}
-  <a href="{{ res_api.geojson }}" target="_blank" class="btn btn-primary">Télécharger les données au format GeoJSON</a>
-  {% elif 'shapezip' in res_api %}
-  <a href="{{ res_api.shapezip }}" target="_blank" class="btn btn-primary">Télécharger les données au format SHP</a>
-  {% endif %}
-  <br> <br>
-  {% if res.format != 'TIFF' and res.format != 'ECW' %}
-  <a href="{{ res_api.url }}?service=WMS&amp;version=1.3.0&amp;request=getStyles&amp;layers={{ res_api.typename }}" class="btn btn-primary" target="_blank">Télécharger le style au format SLD</a>
-  <br>
-  {% endif %}
+{% if 'geojson' in res_api %}
+<a href="{{ res_api.geojson }}" target="_blank" class="btn btn-primary">Télécharger les données au format GeoJSON</a>
+{% elif 'shapezip' in res_api %}
+<a href="{{ res_api.shapezip }}" target="_blank" class="btn btn-primary">Télécharger les données au format SHP</a>
+{% endif %}
+<br> <br>
+{% if res.format != 'TIFF' and res.format != 'ECW' %}
+<a href="{{ res_api.url }}?service=WMS&amp;version=1.3.0&amp;request=getStyles&amp;layers={{ res_api.typename }}" class="btn btn-primary" target="_blank">Télécharger le style au format SLD</a>
+<br>
+{% endif %}
 <br>
 {% endif %}
 
 {% endblock %}
 
 
-{% block resource_view_content  %}
+{% block resource_view_content %}
 {% set res_api = h.get_res_api(res) %}
 {% if res_api %}
 <div id="resource-geo-legend" class="dropdown dropdown-right">
@@ -103,36 +102,36 @@
 
 {% set res_api = h.get_res_api(res) %}
 {% if 'url' in res_api %}
-  {% set service_url = res_api.url %}
-  {% set typename = res_api.typename %}
+{% set service_url = res_api.url %}
+{% set typename = res_api.typename %}
 {% else %}
-  {% set _splited = res.url.split('#') %}
-  {% set service_url = _splited[0] %}
-  {% set typename = _splited[1] %}
+{% set _splited = res.url.split('#') %}
+{% set service_url = _splited[0] %}
+{% set typename = _splited[1] %}
 {% endif %}
 
 <div class="modal fade download-modal" id="download-modal-res-list" tabindex="-1" role="dialog" style="display: none;">
-	<div class="modal-dialog modal-lg" role="document">
-		<div class="modal-header">
-			<button class="close" data-dismiss="modal">×</button>
-			<h3>Téléchargement de la ressource "<span class="resource-name"></span>"</h3>
-		</div>
-		<div class="modal-content">
-			<div class="modal-body">
-				<div class="modal-custom-content">
-					{% set ihm_settings = h.get_ihm_settings() %}
-					{% for obj in ihm_settings if obj.name == "download-modal-res-list" %}
-						{{ h.render_markdown(obj.content) }}
-					{% endfor %}
-				</div>
-			</div>
-		</div>
-		<div class="modal-footer">
-			<a href="" class="btn btn-primary download-button-resource resource-url-analytics" target="_blank" data-toggle="tooltip" title="Télécharger">
-				<i class="fa fa-lg fa-arrow-circle-o-down"></i> Télécharger
-			</a>
-		</div>
-	</div>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-header">
+      <button class="close" data-dismiss="modal">×</button>
+      <h3>Téléchargement de la ressource "<span class="resource-name"></span>"</h3>
+    </div>
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-custom-content">
+          {% set ihm_settings = h.get_ihm_settings() %}
+          {% for obj in ihm_settings if obj.name == "download-modal-res-list" %}
+          {{ h.render_markdown(obj.content) }}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="" class="btn btn-primary download-button-resource resource-url-analytics" target="_blank" data-toggle="tooltip" title="Télécharger">
+        <i class="fa fa-lg fa-arrow-circle-o-down"></i> Télécharger
+      </a>
+    </div>
+  </div>
 </div>
 
 <div class="modal fade extractor-redirect-modal" id="extractor-redirect-modal-res" tabindex="-1" role="dialog" style="display: none;">

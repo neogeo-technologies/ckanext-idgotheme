@@ -2,9 +2,9 @@
 
 {% block group_list %}
 <ul class="media-grid affich-grille" data-module="media-grid">
-	{% block group_list_inner %}
+  {% block group_list_inner %}
   {% for group in groups %}
-    {% snippet "group/snippets/group_item.html", group=group, position=loop.index %}
+  {% snippet "group/snippets/group_item.html", group=group, position=loop.index %}
   {% endfor %}
   {% endblock %}
 </ul>

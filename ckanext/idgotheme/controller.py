@@ -29,7 +29,7 @@ class ExportController(base.BaseController):
             'tags',
             'update_frequency',
             'granularity',
-            ]
+        ]
 
         q = ''
         fq = ''
@@ -51,14 +51,14 @@ class ExportController(base.BaseController):
             'model': base.model,
             'session': base.model.Session,
             'user': base.c.user,
-            }
+        }
 
         data_dict = {
             'rows': 100000,
             'q': q,
             'fq': fq,
             'ext_bbox': bbox,
-            }
+        }
 
         search_result = toolkit.get_action('package_search')(context, data_dict)
         results = [x['id'] for x in search_result.get('results', [])]

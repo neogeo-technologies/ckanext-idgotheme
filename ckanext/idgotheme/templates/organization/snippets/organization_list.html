@@ -4,7 +4,7 @@
 <ul class="media-grid affich-grille" data-module="media-grid">
   {% block organization_list_inner %}
   {% for organization in organizations %}
-    {% snippet "organization/snippets/organization_item.html", organization=organization, position=loop.index %}
+  {% snippet "organization/snippets/organization_item.html", organization=organization, position=loop.index %}
   {% endfor %}
   {% endblock %}
 </ul>
