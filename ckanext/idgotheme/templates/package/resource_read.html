@@ -19,10 +19,31 @@
       {% endif %}
     </a>
     {% else %}
-    <a class="btn btn-primary open-download-modal" data-toggle="modal" data-target="#download-modal-res-list" data-dataset="{{ pkg.name }}" data-id="{{ res.id }}" data-name="{{ res.name or res.description }}" data-url="{{ res.url }}">
-      <!-- <a class="btn btn-primary" data-toggle="tooltip" title="Télécharger"> -->
-      <i class="fa fa-lg fa-arrow-circle-o-down"></i> {{ _('Download') }}
-    </a>
+
+	  {% set ihm_settings = h.get_ihm_settings() %}
+      {% if ihm_settings['download-modal-res-list'].active == False %}
+        <a href="{{ res.url }}" class="btn btn-primary download-button-resource resource-url-analytics" target="_blank" data-toggle="tooltip" title="Télécharger">
+          <i class="fa fa-lg fa-arrow-circle-o-down"></i>
+        </a>
+      {% else %}
+        <span class="open-download-modal" data-toggle="modal" data-target="#download-modal-res-list"
+          data-datasetname="{{ pkg.name }}"
+          data-datasettitle="{{ pkg.title }}"
+          data-datasetcreationdate="{{ pkg.dataset_creation_date }}"
+          data-datasetpublicationdate="{{ pkg.dataset_creation_date }}"
+          data-datasetmodificationdate="{{ pkg.dataset_modification_date }}"
+          data-datasetlicense="{{ pkg.license_title }}"
+          data-resourcetitle="{{ res.name or res.description }}"
+          data-resourceurl="{{ res.url }}"
+          data-resourceformat="{{ res.format }}"
+          data-resourcecrs="{{ res.crs }}"
+        >
+          <a class="btn btn-primary">
+            <i class="fa fa-lg fa-arrow-circle-o-down"></i> Télécharger
+          </a>
+        </span>
+      {% endif %}
+
     {% endif %}
 
     {% block download_resource_button %}
@@ -112,18 +133,13 @@
 
 <div class="modal fade download-modal" id="download-modal-res-list" tabindex="-1" role="dialog" style="display: none;">
   <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-header">
-      <button class="close" data-dismiss="modal">×</button>
-      <h3>Téléchargement de la ressource "<span class="resource-name"></span>"</h3>
-    </div>
     <div class="modal-content">
-      <div class="modal-body">
+      <div class="modal-body" style="max-height: 750px;">
+        <button class="close" data-dismiss="modal">×</button>
         <div class="modal-custom-content">
-          {% set ihm_settings = h.get_ihm_settings() %}
-          {% for obj in ihm_settings if obj.name == "download-modal-res-list" %}
-          {{ h.render_markdown(obj.content) }}
-          {% endfor %}
-        </div>
+	      {% set ihm_settings = h.get_ihm_settings() %}
+          {{ h.render_markdown(ihm_settings['download-modal-res-list'].content) }}       
+	    </div>
       </div>
     </div>
     <div class="modal-footer">

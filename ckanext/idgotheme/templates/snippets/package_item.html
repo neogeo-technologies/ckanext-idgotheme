@@ -72,7 +72,7 @@ Example:
       <p class="empty">{{ _("This dataset has no description") }}</p>
       {% endif %}
       {% endblock %}
-      {% snippet "rating/snippets/stars_inactive.html", package=package %}
+      {# snippet "rating/snippets/stars_inactive.html", package=package #}
     </div>
     {% block resources %}
     {% if package.resources and not hide_resources %}

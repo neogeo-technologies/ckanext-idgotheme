@@ -58,11 +58,30 @@
     {% endif %}
 
     {% if res.data_type != "service" %}
-    <span class="open-download-modal" data-toggle="modal" data-target="#download-modal-res-list" data-dataset="{{ pkg.name }}" data-id="{{ res.id }}" data-name="{{ res.name or res.description }}" data-url="{{ res.url }}">
-      <a class="btn btn-primary" data-toggle="tooltip" title="Télécharger">
-        <i class="fa fa-lg fa-arrow-circle-o-down"></i>
-      </a>
-    </span>
+      {% set ihm_settings = h.get_ihm_settings() %}
+      {% if ihm_settings['download-modal-res-list'].active == False %}
+        <a href="{{ res.url }}" class="btn btn-primary download-button-resource resource-url-analytics" target="_blank" data-toggle="tooltip" title="Télécharger">
+          <i class="fa fa-lg fa-arrow-circle-o-down"></i>
+        </a>
+      {% else %}
+        <span class="open-download-modal" data-toggle="modal" data-target="#download-modal-res-list" 
+          data-datasetname="{{ pkg.name }}"
+          data-datasettitle="{{ pkg.title }}"
+          data-datasetcreationdate="{{ pkg.dataset_creation_date }}"
+          data-datasetpublicationdate="{{ pkg.dataset_creation_date }}"
+          data-datasetmodificationdate="{{ pkg.dataset_modification_date }}"
+          data-datasetlicense="{{ pkg.license_title }}"
+          data-resourcetitle="{{ res.name or res.description }}"
+          data-resourceurl="{{ res.url }}"
+          data-resourceformat="{{ res.format }}"
+          data-resourcecrs="{{ res.crs }}"
+        >
+          <a class="btn btn-primary" data-toggle="tooltip" title="Télécharger">
+            <i class="fa fa-lg fa-arrow-circle-o-down"></i>
+          </a>
+        </span>
+      {% endif %}
+    
     {% endif %}
   </div>
   {% endif %}
