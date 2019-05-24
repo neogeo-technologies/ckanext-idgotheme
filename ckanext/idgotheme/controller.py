@@ -27,7 +27,7 @@ class ExportController(base.BaseController):
             'support',
             'license_id',
             'tags',
-            'update_frequency',
+            'frequency',
             'granularity',
         ]
 

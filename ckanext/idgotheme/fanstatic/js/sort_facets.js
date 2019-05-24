@@ -104,7 +104,7 @@
     'res_format' : {'sortType': 'cntSort', 'sort' : 'desc'},
     'license_id' : {'sortType': 'cntSort', 'sort' : 'desc'},
     'tags' : {'sortType': 'cntSort', 'sort' : 'desc'},
-    'update_frequency' : {'sortType': 'cntSort', 'sort' : 'desc'},
+    'frequency' : {'sortType': 'cntSort', 'sort' : 'desc'},
   };
 
   var allVars = $.getUrlVars();

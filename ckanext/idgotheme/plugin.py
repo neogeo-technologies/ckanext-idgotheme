@@ -160,7 +160,7 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
                 ('res_format', u'Formats'),
                 ('license_id', u'Licences'),
                 ('tags', u'Mots-clés'),
-                ('update_frequency', u'Fréquence de mise à jour'),
+                ('frequency', u'Fréquence de mise à jour'),
                 ('granularity', u'Granularité de la couverture territoriale'),
             ])
 
