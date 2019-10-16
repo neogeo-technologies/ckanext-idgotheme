@@ -78,8 +78,18 @@ def is_crige_partner():
 
 def get_ihm_settings():
     url = get_url_publier() + "/ihm/ckan/settings"
-    r = requests.get(url)
-    return r.json()
+    try:
+        r = requests.get(url)
+    except Exception as err:
+        log.error(err)
+        return {
+            'download-modal-res-list': {
+                'active': True,
+                'content': '',
+            }
+        }
+    else:
+        return r.json()
 
 
 def get_proxified_service_url(package_id, resource_id):
