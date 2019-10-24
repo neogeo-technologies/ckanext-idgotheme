@@ -78,9 +78,12 @@ Config Settings
 
 Document any optional config settings here. For example::
 
-    # The minimum number of hours to wait before re-checking a resource
-    # (optional, default: 24).
-    ckanext.idgotheme.some_setting = some_default_value
+    ckanext.idgotheme.name = IDGO
+    ckanext.idgotheme.readthedocs = https://readthedocs.idgo
+    ckanext.idgotheme.url_site_wp = https://publier.idgo
+    ckanext.idgotheme.url_site_publier = https://publier.idgo
+    ckanext.idgotheme.url_site_extracteur = https://extracteur.idgo
+    ckanext.idgotheme.extent = -5.6 41 9.9 51.4
 
 
 ------------------------
