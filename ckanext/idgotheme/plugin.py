@@ -17,7 +17,16 @@ import json
 from logging import getLogger
 import requests
 
+
 log = getLogger(__name__)
+
+
+def platform_name():
+    return config.get('ckanext.idgotheme.name', 'IDGO')
+
+
+def readthedocs_url():
+    return config.get('ckanext.idgotheme.readthedocs', None)
 
 
 def get_url_wp():
@@ -126,6 +135,8 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
             'proxy_export': self.proxy_export,
             'get_res_api': self.get_res_api,
             'get_ihm_settings': get_ihm_settings,
+            'platform_name': platform_name,
+            'readthedocs_url': readthedocs_url,
         }
 
     def get_validators(self):
