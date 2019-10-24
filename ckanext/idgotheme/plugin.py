@@ -29,6 +29,11 @@ def readthedocs_url():
     return config.get('ckanext.idgotheme.readthedocs', None)
 
 
+def get_default_extent():
+    extent = config.get('ckanext.idgotheme.extent', [-5.6, 41, 9.9, 51.4])
+    return [[extent[1], extent[0]], [extent[4], extent[3]]].__str__()
+
+
 def get_url_wp():
     url_site_wp = config.get('ckanext.idgotheme.url_site_wp', '')
     return url_site_wp
@@ -137,6 +142,7 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
             'get_ihm_settings': get_ihm_settings,
             'platform_name': platform_name,
             'readthedocs_url': readthedocs_url,
+            'default_extent': get_default_extent,
         }
 
     def get_validators(self):
