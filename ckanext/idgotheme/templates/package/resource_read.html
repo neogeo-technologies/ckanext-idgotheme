@@ -65,7 +65,7 @@
     {% endif %}
     {% endblock %}
     {% if res.data_type != 'service' and ( res.extracting_service == 'True') %}
-    {% if (h.is_crige_partner()) %}
+    {% if (h.is_idgo_partner()) %}
     <a href="{{ h.idgotheme_get_url_extracteur() }}?resource={{ res.id }}" class="btn btn-primary" target="_blank">
       <i class="fa fa-lg fa-filter"></i>
       <span>Extracteur</span>

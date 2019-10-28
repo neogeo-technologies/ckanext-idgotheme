@@ -71,15 +71,18 @@ def trad_thematiques_maj():
     return THEMATIQUES_MAJ
 
 
-def is_crige_partner():
+def is_idgo_partner():
     if not c.userobj:
         return False
     if c.userobj.sysadmin:
         return True
 
+    # /!\ TODO /!\
+    # => Affectuer filtre sur le nom du groupe pas sur le type !
     partner_group_id = model.Session.query(model.Group) \
         .filter(model.Group.type == 'partner') \
         .first().id
+    # /!\ TODO /!\
 
     query = model.Session.query(model.Member) \
         .filter(model.Member.state == 'active') \
