@@ -141,7 +141,7 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
             'trad_thematique_maj': trad_thematique_maj,
             'trad_thematiques_min': trad_thematiques_min,
             'trad_thematiques_maj': trad_thematiques_maj,
-            'is_crige_partner': is_crige_partner,
+            'is_idgo_partner': is_idgo_partner,
             'proxy_export': self.proxy_export,
             'get_res_api': self.get_res_api,
             'get_ihm_settings': get_ihm_settings,
