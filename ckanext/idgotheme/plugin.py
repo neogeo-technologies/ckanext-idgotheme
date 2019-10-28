@@ -17,7 +17,26 @@ import json
 from logging import getLogger
 import requests
 
+
 log = getLogger(__name__)
+
+
+def get_platform_name():
+    return config.get('ckanext.idgotheme.name', r'IDGO').decode('utf-8')
+
+
+def get_readthedocs_url():
+    return config.get('ckanext.idgotheme.readthedocs', None)
+
+
+def get_default_extent():
+    extent = config.get('ckanext.idgotheme.extent', r'-5.6 41 9.9 51.4').split()
+    try:
+        return [[float(extent[1]), float(extent[0])],
+                [float(extent[3]), float(extent[2])]].__str__()
+    except Exception as e:
+        log.error(e)
+        return [[-5.6, 41], [9.9, 51.4]].__str__()
 
 
 def get_url_wp():
@@ -57,15 +76,18 @@ def trad_thematiques_maj():
     return THEMATIQUES_MAJ
 
 
-def is_crige_partner():
+def is_idgo_partner():
     if not c.userobj:
         return False
     if c.userobj.sysadmin:
         return True
 
+    # /!\ TODO /!\
+    # => Affectuer filtre sur le nom du groupe pas sur le type !
     partner_group_id = model.Session.query(model.Group) \
         .filter(model.Group.type == 'partner') \
         .first().id
+    # /!\ TODO /!\
 
     query = model.Session.query(model.Member) \
         .filter(model.Member.state == 'active') \
@@ -77,19 +99,21 @@ def is_crige_partner():
 
 
 def get_ihm_settings():
+    data = {
+        'download-modal-res-list': {
+            'active': False,
+            'content': '',
+        }
+    }
+
     url = get_url_publier() + "/ihm/ckan/settings"
     try:
         r = requests.get(url)
     except Exception as err:
         log.error(err)
-        return {
-            'download-modal-res-list': {
-                'active': True,
-                'content': '',
-            }
-        }
     else:
-        return r.json()
+        data.update(r.json())
+    return data
 
 
 def get_proxified_service_url(package_id, resource_id):
@@ -122,10 +146,13 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
             'trad_thematique_maj': trad_thematique_maj,
             'trad_thematiques_min': trad_thematiques_min,
             'trad_thematiques_maj': trad_thematiques_maj,
-            'is_crige_partner': is_crige_partner,
+            'is_idgo_partner': is_idgo_partner,
             'proxy_export': self.proxy_export,
             'get_res_api': self.get_res_api,
             'get_ihm_settings': get_ihm_settings,
+            'get_platform_name': get_platform_name,
+            'get_readthedocs_url': get_readthedocs_url,
+            'get_default_extent': get_default_extent,
         }
 
     def get_validators(self):

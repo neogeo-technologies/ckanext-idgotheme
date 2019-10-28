@@ -3,7 +3,7 @@
 {% endblock %}
 
 {% block secondary_content %}
-{% snippet "spatial/snippets/spatial_query.html", default_extent="[[46.00, 2.80], [48.50, 7.20]]" %}
+{% snippet "spatial/snippets/spatial_query.html", default_extent=h.get_default_extent() %}
 {{ super() }}
 {% endblock %}
 
@@ -12,8 +12,8 @@
   <div class="module-content">
     {% block package_search_results_api_inner %}
     <small>
-      {% set api_link = h.link_to(_('API'), g.site_url+'/api/3/action/package_list') %}
-      {% set api_doc_link = h.link_to(_('API Docs'), 'http://datasud.readthedocs.io/fr/latest/index.html') %}
+      {% set api_link = h.link_to(_('API'), g.site_url + '/api/3/action/package_list') %}
+      {% set api_doc_link = h.link_to(_('API Docs'), h.get_readthedocs_url()) %}
       {% if g.dumps_url -%}
       {% set dump_link = h.link_to(_('full {format} dump').format(format=g.dumps_format), g.dumps_url) %}
       {% trans %}
@@ -21,7 +21,7 @@
       {% endtrans %}
       {% else %}
       {% trans %}
-      You can also access this registry using the {{ api_link }} (see {{ api_doc_link}}).
+      You can also access this registry using the {{ api_link }} (see {{ api_doc_link }}).
       {% endtrans %}
       {%- endif %}
     </small>

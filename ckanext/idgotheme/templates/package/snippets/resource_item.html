@@ -38,8 +38,8 @@
     {# endif #}
 
     {% if res.data_type != "service" and ( res.extracting_service == 'True') %}
-    {% if (h.is_crige_partner()) %}
-    <a href="{{ h.idgotheme_get_url_extracteur() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Extracteur">
+    {% if (h.is_idgo_partner()) %}
+    <a href="{{ h.idgotheme_get_url_extracteur() }}?resource={{ res.id }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Extracteur">
       <i class="fa fa-lg fa-filter"></i>
     </a>
     {% else %}
@@ -64,7 +64,7 @@
           <i class="fa fa-lg fa-arrow-circle-o-down"></i>
         </a>
       {% else %}
-        <span class="open-download-modal" data-toggle="modal" data-target="#download-modal-res-list" 
+        <span class="open-download-modal" data-toggle="modal" data-target="#download-modal-res-list"
           data-datasetname="{{ pkg.name }}"
           data-datasettitle="{{ pkg.title }}"
           data-datasetcreationdate="{{ pkg.dataset_creation_date }}"
@@ -81,7 +81,7 @@
           </a>
         </span>
       {% endif %}
-    
+
     {% endif %}
   </div>
   {% endif %}
