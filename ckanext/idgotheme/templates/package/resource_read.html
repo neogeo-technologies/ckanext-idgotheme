@@ -20,7 +20,10 @@
     </a>
     {% else %}
 
-	  {% set ihm_settings = h.get_ihm_settings() %}
+      {% set ihm_settings = h.get_ihm_settings() %}
+      {% set platform_name = h.get_platform_name() %}
+      {% set readthedocs_url = h.get_readthedocs_url() %}
+
       {% if ihm_settings['download-modal-res-list'].active == False %}
         <a href="{{ res.url }}" class="btn btn-primary download-button-resource resource-url-analytics" target="_blank" data-toggle="tooltip" title="Télécharger">
           <i class="fa fa-lg fa-arrow-circle-o-down"></i>
@@ -171,9 +174,9 @@
         </h3>
       </div>
       <div class="modal-body">
-        <p>Accédez aux données de la ressource via une API GEO. Plus d'informations dans la documentation principale de {{ h.platform_name }} pour les données géographiques.</p>
+        <p>Accédez aux données de la ressource via une API GEO. Plus d'informations dans la documentation principale de {{ platform_name }} pour les données géographiques.</p>
         <p>
-          Chaque organisation qui publie des ressources dans {{ h.platform_name }} dispose de son espace de travail propre du type :
+          Chaque organisation qui publie des ressources dans {{ platform_name }} dispose de son espace de travail propre du type :
           <a href="{{ service_url }}">{{ service_url }}</a>.<br>
           Vous trouverez le lien spécifique dédié à chaque organisation dans l'onglet <b>Organisation</b>, en sélectionnant l'organisation et à la rubrique <b>Service OGC</b>.
           Pour chaque couche de données géographiques, deux types d'API sont disponibles : le flux WMS (Web Map Service) et le flux WFS (Web Feature Service).
@@ -205,8 +208,8 @@
                       <td><code>{{ service_url }}?service=WMS&amp;version=1.3.0&amp;request=GetFeatureInfo&amp;layers={{ typename }}&amp;x=*x.xx*&amp;y=*y.yy*x%x%</code></td>
                     </tr>
                   </tbody>
-                </table>{% if h.readthedocs_url %}
-                <p>Pour plus d'informations, référez-vous à la documentation : <a href="{{ h.readthedocs_url }}">{{ h.readthedocs_url }}</a></p>{% endif %}
+                </table>{% if readthedocs_url %}
+                <p>Pour plus d'informations, référez-vous à la documentation : <a href="{{ readthedocs_url }}">{{ readthedocs_url }}</a></p>{% endif %}
               </div>
             </div>
           </div>
@@ -236,8 +239,8 @@
                       <td><code>{{ service_url }}?SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=DescribeFeatureType&amp;TYPENAME={{ typename }}</code></td>
                     </tr>
                   </tbody>
-                </table>{% if h.readthedocs_url %}
-                <p>Pour plus d'informations, référez-vous à la documentation : <a href="{{ h.readthedocs_url }}">{{ h.readthedocs_url }}</a></p>{% endif %}
+                </table>{% if readthedocs_url %}
+                <p>Pour plus d'informations, référez-vous à la documentation : <a href="{{ readthedocs_url }}">{{ readthedocs_url }}</a></p>{% endif %}
               </div>
             </div>
           </div>
@@ -255,8 +258,8 @@
                     <li>Copier/coller l'URL : {{ service_url }}</li>
                     <li>Soyez attentif au Système de Coordonnées de Référence 'SCR' choisies : nous recommandons l'EPSG:4326 ou EPSG:3857 pour des usages web, EPSG:2154 sinon</li>
                   </ul>
-                </p>{% if h.readthedocs_url %}
-                <p>Pour plus d'informations, référez-vous à la documentation : <a href="{{ h.readthedocs_url }}">{{ h.readthedocs_url }}</a></p>{% endif %}
+                </p>{% if readthedocs_url %}
+                <p>Pour plus d'informations, référez-vous à la documentation : <a href="{{ readthedocs_url }}">{{ readthedocs_url }}</a></p>{% endif %}
               </div>
             </div>
           </div>
@@ -277,8 +280,8 @@
                     <li>Ajoutez le service (par défaut, le nom du service <b>OGC Web Service</b>), une nouvelle liste s'affiche</li>
                     <li>Sélectionnez le service et ajoutez (par défaut le nom du service est <b>OGC Web Service</b></li>
                   </ul>
-                </p>{% if h.readthedocs_url %}
-                <p>Pour plus d'informations, référez-vous à la documentation : <a href="{{ h.readthedocs_url }}">{{ h.readthedocs_url }}</a></p>{% endif %}
+                </p>{% if readthedocs_url %}
+                <p>Pour plus d'informations, référez-vous à la documentation : <a href="{{ readthedocs_url }}">{{ readthedocs_url }}</a></p>{% endif %}
               </div>
             </div>
           </div>

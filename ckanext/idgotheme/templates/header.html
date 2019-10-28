@@ -2,6 +2,7 @@
 
 {% set url_site_wp = h.idgotheme_get_url_wp() %}
 {% set url_site_publier = h.idgotheme_get_url_publier() %}
+{% set platform_name = h.get_platform_name() %}
 
 {% block header_wrapper %}
 {% if c.userobj %}
@@ -64,7 +65,7 @@
             <img width="149" height="74" src="/img/logo.png" class="custom-logo" alt="" itemprop="logo" sizes="100vw" />
           </a>
           <h1 class="site-title">
-            <a href="{{ url_site_wp }}" rel="home">{{ h.platform_name }}</a>
+            <a href="{{ url_site_wp }}" rel="home">{{ platform_name }}</a>
           </h1>
         </div>
       </div>
