@@ -31,7 +31,12 @@ def get_readthedocs_url():
 
 def get_default_extent():
     extent = config.get('ckanext.idgotheme.extent', r'-5.6 41 9.9 51.4').split()
-    return [[extent[1], extent[0]], [extent[3], extent[2]]].__str__()
+    try:
+        return [[float(extent[1]), float(extent[0])],
+                [float(extent[3]), float(extent[2])]].__str__()
+    except Exception as e:
+        log.error(e)
+        return [[-5.6, 41], [9.9, 51.4]].__str__()
 
 
 def get_url_wp():
