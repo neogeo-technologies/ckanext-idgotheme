@@ -22,7 +22,7 @@ log = getLogger(__name__)
 
 
 def get_platform_name():
-    return config.get('ckanext.idgotheme.name', 'IDGO')
+    return config.get('ckanext.idgotheme.name', r'IDGO').decode('utf-8')
 
 
 def get_readthedocs_url():
@@ -30,7 +30,7 @@ def get_readthedocs_url():
 
 
 def get_default_extent():
-    extent = config.get('ckanext.idgotheme.extent', '-5.6 41 9.9 51.4').split()
+    extent = config.get('ckanext.idgotheme.extent', r'-5.6 41 9.9 51.4').split()
     return [[extent[1], extent[0]], [extent[4], extent[3]]].__str__()
 
 
