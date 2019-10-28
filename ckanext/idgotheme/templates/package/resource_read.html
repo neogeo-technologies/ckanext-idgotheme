@@ -66,7 +66,7 @@
     {% endblock %}
     {% if res.data_type != 'service' and ( res.extracting_service == 'True') %}
     {% if (h.is_crige_partner()) %}
-    <a href="{{ h.idgotheme_get_url_extracteur() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank">
+    <a href="{{ h.idgotheme_get_url_extracteur() }}?resource={{ res.id }}" class="btn btn-primary" target="_blank">
       <i class="fa fa-lg fa-filter"></i>
       <span>Extracteur</span>
     </a>
@@ -299,7 +299,7 @@ L.tileLayer.wms('{{ service_url }}', {
     layers: 16,
 }).addTo(map);
                 </pre>
-                <p>Plus d'informations sur <a href="https://docs.mapbox.com/mapbox.js/">la documentation de MapBox</a>.</p>
+                <p>Plus d'informations sur <a href="https://docs.mapbox.com/mapbox.js/" target="_blank">la documentation de MapBox</a>.</p>
               </div>
             </div>
           </div>
