@@ -21,6 +21,12 @@
     <dt>{{ _('Views') }}</dt>
     <dd>{{ pkg.tracking_summary.total }}</dd>
   </dl>
+  {% if pkg.tracking_summary.download %}
+  <dl>
+    <dt>Téléchargements</dt>
+    <dd>{{ pkg.tracking_summary.download }}</dd>
+  </dl>
+  {% endif %}
   {% endif %}
 </div>
 {% endblock %}
