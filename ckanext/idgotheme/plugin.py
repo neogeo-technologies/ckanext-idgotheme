@@ -168,6 +168,12 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
     # ITemplateHelpers : Custom Helpers functions
     def get_helpers(self):
         return {
+            'idgotheme_href_accessibility': href_accessibility,
+            'idgotheme_href_terms_and_conditions': href_terms_and_conditions,
+            'idgotheme_href_legal_notices': href_legal_notices,
+            'idgotheme_href_contact': href_contact,
+            'idgotheme_href_site_map': href_site_map,
+            'idgotheme_href_credit': href_credit,
             'idgotheme_get_url_wp': get_url_wp,
             'idgotheme_get_url_publier': get_url_publier,
             'idgotheme_get_url_extracteur': get_url_extracteur,
@@ -182,12 +188,6 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
             'get_platform_name': get_platform_name,
             'get_readthedocs_url': get_readthedocs_url,
             'get_default_extent': get_default_extent,
-            'href_accessibility': href_accessibility,
-            'href_terms_and_conditions': href_terms_and_conditions,
-            'href_legal_notices': href_legal_notices,
-            'href_contact': href_contact,
-            'href_site_map': href_site_map,
-            'href_credit': href_credit,
         }
 
     def get_validators(self):
