@@ -182,6 +182,12 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
             'get_platform_name': get_platform_name,
             'get_readthedocs_url': get_readthedocs_url,
             'get_default_extent': get_default_extent,
+            'href_accessibility': href_accessibility,
+            'href_terms_and_conditions': href_terms_and_conditions,
+            'href_legal_notices': href_legal_notices,
+            'href_contact': href_contact,
+            'href_site_map': href_site_map,
+            'href_credit': href_credit,
         }
 
     def get_validators(self):
