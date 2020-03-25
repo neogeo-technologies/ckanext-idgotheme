@@ -53,6 +53,35 @@ def get_url_extracteur():
     return config.get('ckanext.idgotheme.url_site_extracteur', '')
 
 
+def get_url_site_wp():
+    url_site_wp = config.get('ckanext.idgotheme.url_site_wp', '')
+    return url_site_wp
+
+
+def href_accessibility():
+    return config.get('ckanext.idgotheme.href_accessibility')
+
+
+def href_terms_and_conditions():
+    return config.get('ckanext.idgotheme.href_terms_and_conditions')
+
+
+def href_legal_notices():
+    return config.get('ckanext.idgotheme.href_legal_notices')
+
+
+def href_contact():
+    return config.get('ckanext.idgotheme.href_contact')
+
+
+def href_site_map():
+    return config.get('ckanext.idgotheme.href_site_map')
+
+
+def href_credit():
+    return config.get('ckanext.idgotheme.href_credit')
+
+
 # Traduction "Groupes" en "Thématiques"
 THEMATIQUE_MIN = u'thématique'
 THEMATIQUE_MAJ = u'Thématique'
