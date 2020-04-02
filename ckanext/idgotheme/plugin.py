@@ -53,6 +53,35 @@ def get_url_extracteur():
     return config.get('ckanext.idgotheme.url_site_extracteur', '')
 
 
+def get_url_site_wp():
+    url_site_wp = config.get('ckanext.idgotheme.url_site_wp', '')
+    return url_site_wp
+
+
+def href_accessibility():
+    return config.get('ckanext.idgotheme.href_accessibility')
+
+
+def href_terms_and_conditions():
+    return config.get('ckanext.idgotheme.href_terms_and_conditions')
+
+
+def href_legal_notices():
+    return config.get('ckanext.idgotheme.href_legal_notices')
+
+
+def href_contact():
+    return config.get('ckanext.idgotheme.href_contact')
+
+
+def href_site_map():
+    return config.get('ckanext.idgotheme.href_site_map')
+
+
+def href_credit():
+    return config.get('ckanext.idgotheme.href_credit')
+
+
 # Traduction "Groupes" en "Thématiques"
 THEMATIQUE_MIN = u'thématique'
 THEMATIQUE_MAJ = u'Thématique'
@@ -139,6 +168,12 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
     # ITemplateHelpers : Custom Helpers functions
     def get_helpers(self):
         return {
+            'idgotheme_href_accessibility': href_accessibility,
+            'idgotheme_href_terms_and_conditions': href_terms_and_conditions,
+            'idgotheme_href_legal_notices': href_legal_notices,
+            'idgotheme_href_contact': href_contact,
+            'idgotheme_href_site_map': href_site_map,
+            'idgotheme_href_credit': href_credit,
             'idgotheme_get_url_wp': get_url_wp,
             'idgotheme_get_url_publier': get_url_publier,
             'idgotheme_get_url_extracteur': get_url_extracteur,
