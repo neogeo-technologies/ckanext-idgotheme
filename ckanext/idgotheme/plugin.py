@@ -149,6 +149,8 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
             'is_idgo_partner': is_idgo_partner,
             'proxy_export': self.proxy_export,
             'get_res_api': self.get_res_api,
+            'get_res_wms_capabilities_url': self.get_res_wms_capabilities_url,
+            'get_res_wfs_capabilities_url': self.get_res_wfs_capabilities_url,
             'get_ihm_settings': get_ihm_settings,
             'get_platform_name': get_platform_name,
             'get_readthedocs_url': get_readthedocs_url,
@@ -176,6 +178,22 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
                     continue
                 api[key] = api.pop(key).replace(api['url'], service_url)
         return api
+
+    def get_res_wms_capabilities_url(self, url):
+        urlsplit = url.split('#')
+        url = urlsplit[0]
+        layername = len(urlsplit) == 2 and urlsplit[1] or None
+        if url.endswith('?'):
+            url = url[:-1]
+        return '%s?SERVICE=WMS&REQUEST=GetCapabilities', layername
+
+    def get_res_wfs_capabilities_url(self, url):
+        urlsplit = url.split('#')
+        url = urlsplit[0]
+        layername = len(urlsplit) == 2 and urlsplit[1] or None
+        if url.endswith('?'):
+            url = url[:-1]
+        return '%s?SERVICE=WFS&REQUEST=GetCapabilities', layername
 
     # IConfigurer
     def update_config(self, config_):
