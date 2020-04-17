@@ -1,4 +1,4 @@
-.resource-super-container tr[name="restricted"] {
+.resource-additional-information tr[name="restricted"] {
   display: none;
   visibility: hidden;
 }
