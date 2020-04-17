@@ -185,7 +185,7 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
         layername = len(urlsplit) == 2 and urlsplit[1] or None
         if url.endswith('?'):
             url = url[:-1]
-        return '%s?SERVICE=WMS&REQUEST=GetCapabilities', layername
+        return '%s?SERVICE=WMS&REQUEST=GetCapabilities' % url, layername
 
     def get_res_wfs_capabilities_url(self, url):
         urlsplit = url.split('#')
@@ -193,7 +193,7 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
         layername = len(urlsplit) == 2 and urlsplit[1] or None
         if url.endswith('?'):
             url = url[:-1]
-        return '%s?SERVICE=WFS&REQUEST=GetCapabilities', layername
+        return '%s?SERVICE=WFS&REQUEST=GetCapabilities' % url, layername
 
     # IConfigurer
     def update_config(self, config_):
