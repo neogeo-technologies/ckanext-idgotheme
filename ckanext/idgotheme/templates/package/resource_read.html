@@ -93,13 +93,13 @@
   {% if res.url and h.is_url(res.url) %}
     {% if res.format ==  'WMS' %}
     {% set res_wms_capabilities_url, layername = h.get_res_wms_capabilities_url(res.url) %}
-    <p>URL du service WMS à utiliser avec QGIS par exemple :<br>
+    <p>URL du service WMS (à utiliser avec QGIS par exemple) :<br>
       <a class="resource-url-analytics" href="{{ res_wms_capabilities_url }}" title="{{ res_wms_capabilities_url }}">{{ res_wms_capabilities_url }}</a><br>
       Identifiant de la couche : <strong>{{ layername }}</strong>.
     </p>
     {% elif res.format ==  'WFS' %}
     {% set res_wfs_capabilities_url, layername = h.get_res_wfs_capabilities_url(res.url) %}
-    <p>URL du service WFS à utiliser avec QGIS par exemple :<br>
+    <p>URL du service WFS (à utiliser avec QGIS par exemple) :<br>
       <a class="resource-url-analytics" href="{{ res_wfs_capabilities_url }}" title="{{ res_wfs_capabilities_url }}">{{ res_wfs_capabilities_url }}</a><br>
       Identifiant de la couche : <strong>{{ layername }}</strong>.
     </p>
