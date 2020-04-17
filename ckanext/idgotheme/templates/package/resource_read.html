@@ -309,3 +309,9 @@ L.tileLayer.wms('{{ service_url }}', {
   </div>
 </div>
 {% endblock %}
+
+{% block resource_additional_information %}
+<div class="resource-additional-information">
+{{ super() }}
+</div>
+{% endblock %}

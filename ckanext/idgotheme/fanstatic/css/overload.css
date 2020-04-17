@@ -1,0 +1,4 @@
+.resource-super-container tr[name="restricted"] {
+  display: none;
+  visibility: hidden;
+}
