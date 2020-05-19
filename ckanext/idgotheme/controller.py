@@ -1,24 +1,26 @@
 # coding: utf-8
 
 
-from ckan.common import _
-from ckan.common import c
 from ckan.common import config
-from ckan.common import request
 import ckan.lib.base as base
-import ckan.logic as logic
-import ckan.model as model
 import ckan.plugins.toolkit as toolkit
-from ckan.plugins.toolkit import asint
-from logging import getLogger
 import requests
-import urlparse
+from urlparse import urlparse
+import re
 
 
 class ExportController(base.BaseController):
 
     def query_export(self, *args, **kwargs):
         args = dict(kwargs['environ']['paste.parsed_dict_querystring'][0])
+
+        referer = urlparse(kwargs['environ']['HTTP_REFERER'])
+        found = re.search(r'^\/(\w+)\/(.+)$', referer.path)
+        if found and len(found.groups()) == 2:
+            key = {'group': 'groups'}.get(found.groups()[0], found.groups()[0])
+            value = found.groups()[1]
+            args[key] = value
+
         facet_filters = [
             'organization',
             'groups',
@@ -53,19 +55,12 @@ class ExportController(base.BaseController):
             'user': base.c.user,
         }
 
-        data_dict = {
-            'rows': 100000,
-            'q': q,
-            'fq': fq,
-            'ext_bbox': bbox,
-        }
+        data_dict = {'rows': 100000, 'q': q, 'fq': fq, 'ext_bbox': bbox}
 
         search_result = toolkit.get_action('package_search')(context, data_dict)
         results = [x['id'] for x in search_result.get('results', [])]
 
         # POST REQUEST
-        export_url = url_site_publier = config.get('ckanext.idgotheme.url_site_publier', '') + '/dataset/export?'
+        export_url = config.get('ckanext.idgotheme.url_site_publier', '') + '/dataset/export?'
         export_data = {'ids': ','.join(results), 'format': resformat}
-        r = requests.post(url=export_url, data=export_data)
-
-        return r
+        return requests.post(url=export_url, data=export_data)
