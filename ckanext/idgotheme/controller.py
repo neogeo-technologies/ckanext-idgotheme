@@ -47,7 +47,7 @@ class ExportController(base.BaseController):
                 q = args[key]
             else:
                 if key in facet_filters:
-                    fq += ' +' + key + ':' + args[key]
+                    fq += ' +' + key + ':' + args[key].decode('utf-8')
 
         context = {
             'model': base.model,
