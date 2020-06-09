@@ -14,12 +14,14 @@ class ExportController(base.BaseController):
     def query_export(self, *args, **kwargs):
         args = dict(kwargs['environ']['paste.parsed_dict_querystring'][0])
 
-        referer = urlparse(kwargs['environ']['HTTP_REFERER'])
-        found = re.search(r'^\/(\w+)\/(.+)$', referer.path)
-        if found and len(found.groups()) == 2:
-            key = {'group': 'groups'}.get(found.groups()[0], found.groups()[0])
-            value = found.groups()[1]
-            args[key] = value
+        http_referer = kwargs['environ'].get('HTTP_REFERER', None)
+        if http_referer:
+            referer = urlparse(http_referer)
+            found = re.search(r'^\/(\w+)\/(.+)$', referer.path)
+            if found and len(found.groups()) == 2:
+                key = {'group': 'groups'}.get(found.groups()[0], found.groups()[0])
+                value = found.groups()[1]
+                args[key] = value
 
         facet_filters = [
             'organization',
@@ -47,7 +49,7 @@ class ExportController(base.BaseController):
                 q = args[key]
             else:
                 if key in facet_filters:
-                    fq += ' +' + key + ':' + args[key]
+                    fq += ' +' + key + ':' + args[key].decode('utf-8')
 
         context = {
             'model': base.model,
