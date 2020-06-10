@@ -212,5 +212,5 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
             action='query_export',
             controller='ckanext.idgotheme.controller:ExportController',
             resformat=resformat,
-            **kw,
+            **kw
         )
