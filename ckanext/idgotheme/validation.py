@@ -1,19 +1,27 @@
 # coding: utf-8
 
+# Copyright (c) 2017-2020 Neogeo-Technologies.
+# All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain
+# a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
 
-import ckan.lib.helpers as h
+
+import datetime
+
 import ckan.model as model
-from ckanext.scheming.errors import SchemingException
-import ckanext.scheming.helpers as sh
 from ckantoolkit import _
 from ckantoolkit import get_validator
 from ckantoolkit import Invalid
-from ckantoolkit import missing
-from ckantoolkit import UnknownValidator
-import datetime
-import json
-import pytz
-import re
 
 
 OneOf = get_validator('OneOf')
@@ -41,7 +49,7 @@ def generic_date_validator(metadata_key, key, data, errors, context):
         else:
             try:
                 date = datetime.datetime.strptime(value, '%Y-%m-%d')
-            except (TypeError, ValueError), e:
+            except (TypeError, ValueError):
                 raise Invalid(_('Date format incorrect'))
 
         data[(metadata_key, )] = date.isoformat()
@@ -58,17 +66,6 @@ def scheming_replace_created_date(field, schema):
 def scheming_replace_modified_date(field, schema):
     def validator(key, data, errors, context):
         generic_date_validator('metadata_modified', key, data, errors, context)
-    return validator
-
-
-@scheming_validator
-def scheming_datasetfield_null_if_empty(field, schema):
-    def validator(key, data, errors, context):
-        value = data[key]
-        if not value:
-            for i in xrange(len(schema['dataset_fields'])):
-                if schema['dataset_fields'][i]['field_name'] == field['field_name']:
-                    schema['dataset_fields'][i]['display_snippet'] = None
     return validator
 
 
