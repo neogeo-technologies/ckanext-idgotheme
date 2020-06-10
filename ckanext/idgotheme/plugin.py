@@ -1,10 +1,26 @@
 # coding: utf-8
 
-from .validation import force_resource_url_type
-from .validation import scheming_datasetfield_null_if_empty
-from .validation import scheming_replace_created_date
-from .validation import scheming_replace_modified_date
-import ckan.authz as authz
+# Copyright (c) 2017-2020 Neogeo-Technologies.
+# All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain
+# a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+
+
+from collections import OrderedDict
+import json
+from logging import getLogger
+import requests
+
 from ckan.common import c
 from ckan.common import config
 import ckan.lib.helpers as h
@@ -12,10 +28,12 @@ import ckan.model as model
 import ckan.plugins as p
 import ckan.plugins.toolkit as toolkit
 from ckanext.scheming.plugins import _SchemingMixin
-from collections import OrderedDict
-import json
-from logging import getLogger
-import requests
+
+from .validation import force_resource_url_type
+from .validation import scheming_datasetfield_null_if_empty
+from .validation import scheming_replace_created_date
+from .validation import scheming_replace_modified_date
+
 
 log = getLogger(__name__)
 
@@ -35,10 +53,10 @@ def get_url_extracteur():
 
 
 # Traduction "Groupes" en "Thématiques"
-THEMATIQUE_MIN = u'thématique'
-THEMATIQUE_MAJ = u'Thématique'
-THEMATIQUES_MIN = u'thématiques'
-THEMATIQUES_MAJ = u'Thématiques'
+THEMATIQUE_MIN = u"thématique"
+THEMATIQUE_MAJ = u"Thématique"
+THEMATIQUES_MIN = u"thématiques"
+THEMATIQUES_MAJ = u"Thématiques"
 
 
 def trad_thematique_min():
@@ -77,7 +95,7 @@ def is_crige_partner():
 
 
 def get_ihm_settings():
-    url = get_url_publier() + "/ihm/ckan/settings"
+    url = get_url_publier() + '/ihm/ckan/settings'
     try:
         r = requests.get(url)
     except Exception as err:
@@ -97,7 +115,8 @@ def get_proxified_service_url(package_id, resource_id):
         action='proxy_service',
         controller='ckanext.geoview.controllers.service_proxy:ServiceProxyController',
         id=package_id,
-        resource_id=resource_id)
+        resource_id=resource_id,
+    )
 
 
 class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
@@ -163,15 +182,15 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
             return OrderedDict({'tags': u'Mots-clés'})
         else:
             return OrderedDict([
-                ('organization', u'Organisations'),
-                ('groups', u'Thématiques'),
-                ('datatype', u'Types'),
-                ('support', u'Supports'),
-                ('res_format', u'Formats'),
-                ('license_id', u'Licences'),
-                ('tags', u'Mots-clés'),
-                ('frequency', u'Fréquence de mise à jour'),
-                ('granularity', u'Granularité de la couverture territoriale'),
+                ('organization', u"Organisations"),
+                ('groups', u"Thématiques"),
+                ('datatype', u"Types"),
+                ('support', u"Supports"),
+                ('res_format', u"Formats"),
+                ('license_id', u"Licences"),
+                ('tags', u"Mots-clés"),
+                ('frequency', u"Fréquence de mise à jour"),
+                ('granularity', u"Granularité de la couverture territoriale"),
             ])
 
     # IPackageController
@@ -183,16 +202,15 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
         m.connect(
             '/dataset/export',
             controller='ckanext.idgotheme.controller:ExportController',
-            action='query_export')
+            action='query_export',
+        )
         return m
 
     def proxy_export(self, resformat, *args):
-        export_args = dict(list(args)[0].params)
-        data_path = args[0].path.split("/")
-
-        url = h.url_for(
+        kw = dict(list(args)[0].params)
+        return h.url_for(
             action='query_export',
             controller='ckanext.idgotheme.controller:ExportController',
             resformat=resformat,
-            **dict(export_args))
-        return url
+            **kw,
+        )
