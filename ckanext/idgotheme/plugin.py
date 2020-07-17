@@ -99,6 +99,10 @@ def href_credit():
     return config.get('ckanext.idgotheme.href_credit')
 
 
+def href_gdpr():
+    return config.get('ckanext.idgotheme.href_gdpr')
+
+
 # Traduction "Groupes" en "Thématiques"
 THEMATIQUE_MIN = u"thématique"
 THEMATIQUE_MAJ = u"Thématique"
@@ -196,6 +200,7 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
             'idgotheme_href_contact': href_contact,
             'idgotheme_href_site_map': href_site_map,
             'idgotheme_href_credit': href_credit,
+            'idgotheme_href_gdpr': href_gdpr,
             'idgotheme_get_url_wp': get_url_wp,
             'idgotheme_get_url_publier': get_url_publier,
             'idgotheme_get_url_extracteur': get_url_extracteur,
