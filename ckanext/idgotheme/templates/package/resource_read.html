@@ -7,24 +7,20 @@
 <li>
   <div class="btn-group">
     {% set res_api = h.get_res_api(res) %}
-
-    {% if res.resource_type in ('listing', 'service') or res.resource_type == 'api' or ((not res.has_views or not res.can_be_previewed) and not res.url_type == 'upload')%}
+    {% if res.resource_type in ('listing', 'service') or res.resource_type == 'api' or ((not res.has_views or not res.can_be_previewed) and not res.url_type == 'upload') and not res_api.lineage == 'idgo_resource_raster_tile' %}
     <a class="btn btn-primary resource-url-analytics resource-type-{{ res.resource_type }}" href="{{ res.url }}">
       {% if res.resource_type in ('listing', 'service') %}
       <i class="fa fa-lg fa-eye"></i> {{ _('View') }}
       {% elif res.resource_type == 'api' %}
       <i class="fa fa-lg fa-key"></i> {{ _('API Endpoint') }}
       {% elif (not res.has_views or not res.can_be_previewed) and not res.url_type == 'upload' %}
-        {% if not res_api.lineage == 'idgo_resource_raster_tile' %}
       <i class="fa fa-lg fa-external-link"></i> {{ _('Go to resource') }}
-        {% endif %}
-      {% endif %}
-      {% endif %}
-
       {# else #}
       <!-- <i class="fa fa-lg fa-arrow-circle-o-down"></i> {{ _('Download') }} -->
       {% endif %}
     </a>
+    {% elif res_api.lineage == 'idgo_resource_raster_tile' %}
+    {# empty #}
     {% else %}
 
       {% set ihm_settings = h.get_ihm_settings() %}
@@ -122,6 +118,7 @@
     {% endif %}
   {% endif %}
 
+  {% set res_api = h.get_res_api(res) %}
   {% if res_api %}
   <a href="{{ res.url }}" target="_blank" class="btn btn-primary">Télécharger les données au format {{ res.format }}</a>
     {% if 'geojson' in res_api %}
@@ -141,7 +138,7 @@
 
 {% block resource_view_content %}
 {% set res_api = h.get_res_api(res) %}
-{% if res_api %}
+{% if res_api and not res_api.lineage == 'idgo_resource_raster_tile' %}
 <div id="resource-geo-legend" class="dropdown dropdown-right">
   <button class="btn btn-primary" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
     Légende <span class="caret"></span>
