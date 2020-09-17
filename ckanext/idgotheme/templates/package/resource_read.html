@@ -6,6 +6,8 @@
 {% if res.url and h.is_url(res.url) %}
 <li>
   <div class="btn-group">
+    {% set res_api = h.get_res_api(res) %}
+
     {% if res.resource_type in ('listing', 'service') or res.resource_type == 'api' or ((not res.has_views or not res.can_be_previewed) and not res.url_type == 'upload')%}
     <a class="btn btn-primary resource-url-analytics resource-type-{{ res.resource_type }}" href="{{ res.url }}">
       {% if res.resource_type in ('listing', 'service') %}
@@ -13,7 +15,12 @@
       {% elif res.resource_type == 'api' %}
       <i class="fa fa-lg fa-key"></i> {{ _('API Endpoint') }}
       {% elif (not res.has_views or not res.can_be_previewed) and not res.url_type == 'upload' %}
+        {% if not res_api.lineage == 'idgo_resource_raster_tile' %}
       <i class="fa fa-lg fa-external-link"></i> {{ _('Go to resource') }}
+        {% endif %}
+      {% endif %}
+      {% endif %}
+
       {# else #}
       <!-- <i class="fa fa-lg fa-arrow-circle-o-down"></i> {{ _('Download') }} -->
       {% endif %}
@@ -64,20 +71,29 @@
     </ul>
     {% endif %}
     {% endblock %}
+
     {% if res.data_type != 'service' and ( res.extracting_service == 'True') %}
-    {% if (h.is_idgo_partner()) %}
+      {% if (h.is_idgo_partner()) %}
     <a href="{{ h.idgotheme_get_url_extracteur() }}?resource={{ res.id }}" class="btn btn-primary" target="_blank">
       <i class="fa fa-lg fa-filter"></i>
       <span>Extracteur</span>
     </a>
-    {% else %}
+      {% else %}
     <a class="btn btn-primary" data-toggle="modal" data-target="#extractor-redirect-modal-res">
       <i class="fa fa-lg fa-filter"></i>
       <span>Extracteur</span>
     </a>
-    {% endif %}
+      {% endif %}
     <a class="btn btn-primary" data-toggle="modal" data-target="#my-modal-api-geo"><i class="fa fa-lg fa-flask"></i> API Géo</a>
     {% endif %}
+
+    {% if res.extracting_service == 'True' and res_api.lineage == 'idgo_resource_raster_tile' %}
+    <a href="{{ h.idgotheme_get_url_extracteur() }}?resource_beta={{ res.id }}" class="btn btn-primary" target="_blank">
+      <i class="fa fa-lg fa-filter"></i>
+      <span>Extracteur</span>
+    </a>
+    {% endif %}
+
   </div>
 </li>
 {% endif %}
@@ -106,7 +122,6 @@
     {% endif %}
   {% endif %}
 
-  {% set res_api = h.get_res_api(res) %}
   {% if res_api %}
   <a href="{{ res.url }}" target="_blank" class="btn btn-primary">Télécharger les données au format {{ res.format }}</a>
     {% if 'geojson' in res_api %}
