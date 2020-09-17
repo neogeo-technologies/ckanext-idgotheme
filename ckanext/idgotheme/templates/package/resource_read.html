@@ -119,7 +119,7 @@
   {% endif %}
 
   {% set res_api = h.get_res_api(res) %}
-  {% if res_api %}
+  {% if res_api and not res_api.lineage == 'idgo_resource_raster_tile' %}
   <a href="{{ res.url }}" target="_blank" class="btn btn-primary">Télécharger les données au format {{ res.format }}</a>
     {% if 'geojson' in res_api %}
   <a href="{{ res_api.geojson }}" target="_blank" class="btn btn-primary">Télécharger les données au format GeoJSON</a>
