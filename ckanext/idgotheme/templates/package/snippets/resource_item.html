@@ -30,6 +30,7 @@
   {% if not url_is_edit %}
   <div class="btn-group">
     {% set formats_visu = ["GEOJSON","WMS","XLS","XLSX","PDF","JSON","XML","JPEG","ODS","PNG","TXT","GIF","HTML","CSV"] %}
+    {% set res_api = h.get_res_api(res) %}
 
     {# if res.format.upper() in formats_visu #}
     <a href="{{ url }}" class="btn btn-primary" data-toggle="tooltip" title="Visualiser">
@@ -39,7 +40,7 @@
 
     {% if res.data_type != "service" and ( res.extracting_service == 'True') %}
     {% if (h.is_idgo_partner()) %}
-    <a href="{{ h.idgotheme_get_url_extracteur() }}?resource={{ res.id }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Extracteur">
+    <a href="{{ h.idgotheme_get_url_extracteur() }}?{% if res_api.lineage == 'idgo_resource_raster_tile' %}resource_beta{% else %}resource{% endif %}={{ res.id }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Extracteur">
       <i class="fa fa-lg fa-filter"></i>
     </a>
     {% else %}
@@ -60,9 +61,11 @@
     {% if res.data_type != "service" %}
       {% set ihm_settings = h.get_ihm_settings() %}
       {% if ihm_settings['download-modal-res-list'].active == False %}
+        {% if not res_api.lineage == 'idgo_resource_raster_tile' %}
         <a href="{{ res.url }}" class="btn btn-primary download-button-resource resource-url-analytics" target="_blank" data-toggle="tooltip" title="Télécharger">
           <i class="fa fa-lg fa-arrow-circle-o-down"></i>
         </a>
+        {% endif %}
       {% else %}
         <span class="open-download-modal" data-toggle="modal" data-target="#download-modal-res-list"
           data-datasetname="{{ pkg.name }}"
