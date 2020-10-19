@@ -112,7 +112,7 @@
       <a class="resource-url-analytics" href="{{ res_wms_capabilities_url }}" title="{{ res_wms_capabilities_url }}">{{ res_wms_capabilities_url }}</a><br>
       Identifiant de la couche : <strong>{{ layername }}</strong>.
     </p>
-    {% elif res.format ==  'WFS' %}
+    {% elif res.format != 'WMS' %}
     {% set res_wfs_capabilities_url, layername = h.get_res_wfs_capabilities_url(res.url) %}
     <p>URL du service WFS (à utiliser avec QGIS par exemple) :<br>
       <a class="resource-url-analytics" href="{{ res_wfs_capabilities_url }}" title="{{ res_wfs_capabilities_url }}">{{ res_wfs_capabilities_url }}</a><br>
@@ -215,7 +215,7 @@
           Chaque organisation qui publie des ressources dans {{ platform_name }} dispose de son espace de travail propre du type :
           <a href="{{ service_url }}">{{ service_url }}</a>.<br>
           Vous trouverez le lien spécifique dédié à chaque organisation dans l'onglet <b>Organisation</b>, en sélectionnant l'organisation et à la rubrique <b>Service OGC</b>.
-          {% if res.format ==  'WFS' %}Pour chaque couche de données géographiques, deux types d'API sont disponibles : le flux WMS (Web Map Service) et le flux WFS (Web Feature Service).{% endif %}
+          {% if res.format != 'WMS' %}Pour chaque couche de données géographiques, deux types d'API sont disponibles : le flux WMS (Web Map Service) et le flux WFS (Web Feature Service).{% endif %}
         </p>
         <div class="accordion" id="accordion-api-geo">
           <div class="accordion-group">
@@ -249,7 +249,7 @@
               </div>
             </div>
           </div>
-          {% if res.format ==  'WFS' %}
+          {% if res.format != 'WMS' %}
           <div class="accordion-group">
             <div class="accordion-heading">
               <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion-api-geo" href="#collapse2">Points d'accès WFS »</a>
@@ -284,13 +284,13 @@
           {% endif %}
           <div class="accordion-group">
             <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion-api-geo" href="#collapse3">Ajouter un flux WMS{% if res.format ==  'WFS' %}/WFS{% endif %} de votre organisation dans QGIS »</a>
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion-api-geo" href="#collapse3">Ajouter un flux WMS{% if res.format != 'WMS' %}/WFS{% endif %} de votre organisation dans QGIS »</a>
             </div>
             <div id="collapse3" class="accordion-body collapse">
               <div class="accordion-inner">
                 <p>
                   <ul>
-                    <li>Choisissez "Ajouter une couche WMS" (raster){% if res.format ==  'WFS' %} ou "Ajouter une couche WFS" (vecteur){% endif %}</li>
+                    <li>Choisissez "Ajouter une couche WMS" (raster){% if res.format != 'WMS' %} ou "Ajouter une couche WFS" (vecteur){% endif %}</li>
                     <li>"Nouveau"</li>
                     <li>Choisissez un NOM pour votre connexion</li>
                     <li>Copier/coller l'URL : {{ service_url }}</li>
