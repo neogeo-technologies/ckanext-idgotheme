@@ -123,7 +123,7 @@
 
   {% set res_api = h.get_res_api(res) %}
   {% if res_api and not res_api.lineage == 'idgo_resource_raster_tile' %}
-  <ul class="list-unstyled">
+  <ul class="unstyled list-unstyled">
     <li>
       <a href="{{ res.url }}" target="_blank" class="btn btn-link">Télécharger les données au format {{ res.format }}</a>
     </li>
