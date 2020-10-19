@@ -83,11 +83,14 @@
     <a class="btn btn-primary" data-toggle="modal" data-target="#my-modal-api-geo"><i class="fa fa-lg fa-flask"></i> API Géo</a>
     {% endif %}
 
+    {{ res }}
+
     {% if res.extracting_service == 'True' and res_api.lineage == 'idgo_resource_raster_tile' %}
     <a href="{{ h.idgotheme_get_url_extracteur() }}?resource_beta={{ res.id }}" class="btn btn-primary" target="_blank">
       <i class="fa fa-lg fa-filter"></i>
       <span>Extracteur</span>
     </a>
+    <a class="btn btn-primary" data-toggle="modal" data-target="#my-modal-api-geo"><i class="fa fa-lg fa-flask"></i> API Géo</a>
     {% endif %}
 
   </div>
@@ -239,6 +242,7 @@
               </div>
             </div>
           </div>
+          {% if res.format ==  'WFS' %}
           <div class="accordion-group">
             <div class="accordion-heading">
               <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion-api-geo" href="#collapse2">Points d'accès WFS »</a>
@@ -270,15 +274,16 @@
               </div>
             </div>
           </div>
+          {% endif %}
           <div class="accordion-group">
             <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion-api-geo" href="#collapse3">Ajouter un flux WMS/WFS de votre organisation dans QGIS »</a>
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion-api-geo" href="#collapse3">Ajouter un flux WMS{% if res.format ==  'WFS' %}/WFS{% endif %} de votre organisation dans QGIS »</a>
             </div>
             <div id="collapse3" class="accordion-body collapse">
               <div class="accordion-inner">
                 <p>
                   <ul>
-                    <li>Choisissez "Ajouter une couche WMS" (raster) ou "Ajouter une couche WFS" (vecteur)</li>
+                    <li>Choisissez "Ajouter une couche WMS" (raster){% if res.format ==  'WFS' %} ou "Ajouter une couche WFS" (vecteur){% endif %}</li>
                     <li>"Nouveau"</li>
                     <li>Choisissez un NOM pour votre connexion</li>
                     <li>Copier/coller l'URL : {{ service_url }}</li>
