@@ -208,7 +208,7 @@
           Chaque organisation qui publie des ressources dans {{ platform_name }} dispose de son espace de travail propre du type :
           <a href="{{ service_url }}">{{ service_url }}</a>.<br>
           Vous trouverez le lien spécifique dédié à chaque organisation dans l'onglet <b>Organisation</b>, en sélectionnant l'organisation et à la rubrique <b>Service OGC</b>.
-          Pour chaque couche de données géographiques, deux types d'API sont disponibles : le flux WMS (Web Map Service) et le flux WFS (Web Feature Service).
+          {% if res.format ==  'WFS' %}Pour chaque couche de données géographiques, deux types d'API sont disponibles : le flux WMS (Web Map Service) et le flux WFS (Web Feature Service).{% endif %}
         </p>
         <div class="accordion" id="accordion-api-geo">
           <div class="accordion-group">
