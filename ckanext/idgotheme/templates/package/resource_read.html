@@ -100,7 +100,7 @@
 
 {% block resource_read_url %}
   {% if res.url and h.is_url(res.url) %}
-    <p class="ellipsis">URL de référence CKAN : <a class="resource-url-analytics" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></p>
+    <!-- <p class="ellipsis">URL de référence CKAN : <a class="resource-url-analytics" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></p> -->
   {% elif res.url %}
     <p class="muted break-word">{{ _('URL:') }} {{ res.url }}</p>
   {% endif %}
@@ -123,18 +123,25 @@
 
   {% set res_api = h.get_res_api(res) %}
   {% if res_api and not res_api.lineage == 'idgo_resource_raster_tile' %}
-  <a href="{{ res.url }}" target="_blank" class="btn btn-primary">Télécharger les données au format {{ res.format }}</a>
+  <ul>
+    <li>
+      <a href="{{ res.url }}" target="_blank" class="btn btn-link">Télécharger les données au format {{ res.format }}</a>
+    </li>
     {% if 'geojson' in res_api %}
-  <a href="{{ res_api.geojson }}" target="_blank" class="btn btn-primary">Télécharger les données au format GeoJSON</a>
+    <li>
+      <a href="{{ res_api.geojson }}" target="_blank" class="btn btn-link">Télécharger les données au format GeoJSON</a>
+    </li>
     {% elif 'shapezip' in res_api %}
-  <a href="{{ res_api.shapezip }}" target="_blank" class="btn btn-primary">Télécharger les données au format SHP</a>
+    <li>
+      <a href="{{ res_api.shapezip }}" target="_blank" class="btn btn-link">Télécharger les données au format SHP</a>
+    </li>
     {% endif %}
-  <br><br>
     {% if res.format != 'TIFF' and res.format != 'ECW' %}
-  <a href="{{ res_api.url }}?service=WMS&amp;version=1.3.0&amp;request=getStyles&amp;layers={{ res_api.typename }}" class="btn btn-primary" target="_blank">Télécharger le style au format SLD</a>
-  <br>
+    <li>
+      <a href="{{ res_api.url }}?service=WMS&amp;version=1.3.0&amp;request=getStyles&amp;layers={{ res_api.typename }}" class="btn btn-link" target="_blank">Télécharger le style au format SLD</a>
+    </li>
     {% endif %}
-  <br>
+  </ul>
   {% endif %}
 {% endblock %}
 
