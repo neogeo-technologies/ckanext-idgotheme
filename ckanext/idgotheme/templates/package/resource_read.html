@@ -6,7 +6,8 @@
 {% if res.url and h.is_url(res.url) %}
 <li>
   <div class="btn-group">
-    {% if res.resource_type in ('listing', 'service') or res.resource_type == 'api' or ((not res.has_views or not res.can_be_previewed) and not res.url_type == 'upload')%}
+    {% set res_api = h.get_res_api(res) %}
+    {% if res.resource_type in ('listing', 'service') or res.resource_type == 'api' or ((not res.has_views or not res.can_be_previewed) and not res.url_type == 'upload') and not res_api.lineage == 'idgo_resource_raster_tile' %}
     <a class="btn btn-primary resource-url-analytics resource-type-{{ res.resource_type }}" href="{{ res.url }}">
       {% if res.resource_type in ('listing', 'service') %}
       <i class="fa fa-lg fa-eye"></i> {{ _('View') }}
@@ -18,6 +19,8 @@
       <!-- <i class="fa fa-lg fa-arrow-circle-o-down"></i> {{ _('Download') }} -->
       {% endif %}
     </a>
+    {% elif res_api.lineage == 'idgo_resource_raster_tile' %}
+    {# empty #}
     {% else %}
 
       {% set ihm_settings = h.get_ihm_settings() %}
@@ -64,20 +67,32 @@
     </ul>
     {% endif %}
     {% endblock %}
-    {% if res.data_type != 'service' and ( res.extracting_service == 'True') %}
-    {% if (h.is_idgo_partner()) %}
+
+    {% if res.data_type != 'service' and (res.extracting_service == 'True') and not res_api.lineage == 'idgo_resource_raster_tile' %}
+      {% if (h.is_idgo_partner()) %}
     <a href="{{ h.idgotheme_get_url_extracteur() }}?resource={{ res.id }}" class="btn btn-primary" target="_blank">
       <i class="fa fa-lg fa-filter"></i>
       <span>Extracteur</span>
     </a>
-    {% else %}
+      {% else %}
     <a class="btn btn-primary" data-toggle="modal" data-target="#extractor-redirect-modal-res">
       <i class="fa fa-lg fa-filter"></i>
       <span>Extracteur</span>
     </a>
-    {% endif %}
+      {% endif %}
     <a class="btn btn-primary" data-toggle="modal" data-target="#my-modal-api-geo"><i class="fa fa-lg fa-flask"></i> API Géo</a>
     {% endif %}
+
+    {{ res }}
+
+    {% if res.extracting_service == 'True' and res_api.lineage == 'idgo_resource_raster_tile' %}
+    <a href="{{ h.idgotheme_get_url_extracteur() }}?resource_beta={{ res.id }}" class="btn btn-primary" target="_blank">
+      <i class="fa fa-lg fa-filter"></i>
+      <span>Extracteur</span>
+    </a>
+    <a class="btn btn-primary" data-toggle="modal" data-target="#my-modal-api-geo"><i class="fa fa-lg fa-flask"></i> API Géo</a>
+    {% endif %}
+
   </div>
 </li>
 {% endif %}
@@ -85,19 +100,19 @@
 
 {% block resource_read_url %}
   {% if res.url and h.is_url(res.url) %}
-    <p class="ellipsis">URL de référence CKAN : <a class="resource-url-analytics" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></p>
+    <!-- <p class="ellipsis">URL de référence CKAN : <a class="resource-url-analytics" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></p> -->
   {% elif res.url %}
     <p class="muted break-word">{{ _('URL:') }} {{ res.url }}</p>
   {% endif %}
 
   {% if res.url and h.is_url(res.url) %}
-    {% if res.format ==  'WMS' %}
+    {% if res.format == 'WMS' %}
     {% set res_wms_capabilities_url, layername = h.get_res_wms_capabilities_url(res.url) %}
     <p>URL du service WMS (à utiliser avec QGIS par exemple) :<br>
       <a class="resource-url-analytics" href="{{ res_wms_capabilities_url }}" title="{{ res_wms_capabilities_url }}">{{ res_wms_capabilities_url }}</a><br>
       Identifiant de la couche : <strong>{{ layername }}</strong>.
     </p>
-    {% elif res.format ==  'WFS' %}
+    {% elif res.format == 'WFS' %}
     {% set res_wfs_capabilities_url, layername = h.get_res_wfs_capabilities_url(res.url) %}
     <p>URL du service WFS (à utiliser avec QGIS par exemple) :<br>
       <a class="resource-url-analytics" href="{{ res_wfs_capabilities_url }}" title="{{ res_wfs_capabilities_url }}">{{ res_wfs_capabilities_url }}</a><br>
@@ -107,26 +122,33 @@
   {% endif %}
 
   {% set res_api = h.get_res_api(res) %}
-  {% if res_api %}
-  <a href="{{ res.url }}" target="_blank" class="btn btn-primary">Télécharger les données au format {{ res.format }}</a>
+  {% if res_api and not res_api.lineage == 'idgo_resource_raster_tile' %}
+  <ul class="unstyled list-unstyled">
+    <li>
+      <a href="{{ res.url }}" target="_blank" class="btn btn-link">Télécharger les données au format {{ res.format }}</a>
+    </li>
     {% if 'geojson' in res_api %}
-  <a href="{{ res_api.geojson }}" target="_blank" class="btn btn-primary">Télécharger les données au format GeoJSON</a>
+    <li>
+      <a href="{{ res_api.geojson }}" target="_blank" class="btn btn-link">Télécharger les données au format GeoJSON</a>
+    </li>
     {% elif 'shapezip' in res_api %}
-  <a href="{{ res_api.shapezip }}" target="_blank" class="btn btn-primary">Télécharger les données au format SHP</a>
+    <li>
+      <a href="{{ res_api.shapezip }}" target="_blank" class="btn btn-link">Télécharger les données au format SHP</a>
+    </li>
     {% endif %}
-  <br><br>
     {% if res.format != 'TIFF' and res.format != 'ECW' %}
-  <a href="{{ res_api.url }}?service=WMS&amp;version=1.3.0&amp;request=getStyles&amp;layers={{ res_api.typename }}" class="btn btn-primary" target="_blank">Télécharger le style au format SLD</a>
-  <br>
+    <li>
+      <a href="{{ res_api.url }}?service=WMS&amp;version=1.3.0&amp;request=getStyles&amp;layers={{ res_api.typename }}" class="btn btn-link" target="_blank">Télécharger le style au format SLD</a>
+    </li>
     {% endif %}
-  <br>
+  </ul>
   {% endif %}
 {% endblock %}
 
 
 {% block resource_view_content %}
 {% set res_api = h.get_res_api(res) %}
-{% if res_api %}
+{% if res_api and not res_api.lineage == 'idgo_resource_raster_tile' %}
 <div id="resource-geo-legend" class="dropdown dropdown-right">
   <button class="btn btn-primary" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
     Légende <span class="caret"></span>
@@ -172,7 +194,7 @@
     <div class="modal-content">
       <div class="modal-body">
         <p>Vous devez vous authentifier ou disposer des droits nécessaires pour accéder à l'extraction de données géographiques.</p>
-        <p>Pour faire votre demande d'affiliation et en savoir plus, rendez-vous sur votre page <a href="{{ h.idgotheme_get_url_publier() }}/organisation/all" target="_blank">Organisation</a> dans l'espace utilisateur de {{ platform_name }}</p>
+        <p>Pour faire votre demande d'affiliation et en savoir plus, rendez-vous sur votre page <a href="{{ h.idgotheme_get_url_publier() }}/organisation/all" target="_blank">Organisation</a> dans l'espace utilisateur de la plateforme {{ g.site_title }}.</p>
       </div>
     </div>
   </div>
@@ -193,7 +215,7 @@
           Chaque organisation qui publie des ressources dans {{ platform_name }} dispose de son espace de travail propre du type :
           <a href="{{ service_url }}">{{ service_url }}</a>.<br>
           Vous trouverez le lien spécifique dédié à chaque organisation dans l'onglet <b>Organisation</b>, en sélectionnant l'organisation et à la rubrique <b>Service OGC</b>.
-          Pour chaque couche de données géographiques, deux types d'API sont disponibles : le flux WMS (Web Map Service) et le flux WFS (Web Feature Service).
+          {# if WFS only #}Pour chaque couche de données géographiques, deux types d'API sont disponibles : le flux WMS (Web Map Service) et le flux WFS (Web Feature Service).{# endif #}
         </p>
         <div class="accordion" id="accordion-api-geo">
           <div class="accordion-group">
@@ -215,7 +237,7 @@
                     </tr>
                     <tr>
                       <th scope="row">Afficher une couche (GetMap)</th>
-                      <td><code>{{ service_url }}?service=WMS&amp;version=1.3.0&amp;request=GetMap&amp;layers={{ typename }}&amp;styles=&amp;CRS=EPSG%3A3857&BBOX=355000,5282072,975000,5650000&WIDTH=1014&HEIGHT=600&amp;format=image/png</code></td>
+                      <td><code>{{ service_url }}?service=WMS&amp;version=1.3.0&amp;request=GetMap&amp;layers={{ typename }}&amp;styles=&amp;CRS=EPSG%3A3857&amp;BBOX=355000,5282072,975000,5650000&amp;WIDTH=1014&amp;HEIGHT=600&amp;format=image/png</code></td>
                     </tr>
                     <tr>
                       <th scope="row">Récupérer les informations d'un objet géométrique en coordonnées X,Y (GetFeatureInfo)</th>
@@ -227,6 +249,7 @@
               </div>
             </div>
           </div>
+          {# if WFS only #}
           <div class="accordion-group">
             <div class="accordion-heading">
               <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion-api-geo" href="#collapse2">Points d'accès WFS »</a>
@@ -246,7 +269,7 @@
                     </tr>
                     <tr>
                       <th scope="row">Afficher uune liste d'objets géométriques selon le format souhaité GEOJSON,GML,SHAPEZIP... (GetFeature). À adapter à une BBOX valide</th>
-                      <td><code>{{ service_url }}?service=WFS&amp;version=2.0.0&amp;REQUEST=GetFeature&TYPENAMES={{ typename }}&amp;STARTINDEX=0&amp;COUNT=1000&amp;SRSNAME=urn:ogc:def:crs:EPSG::4326&BBOX=4.5,43,7.7,45,urn:ogc:def:crs:EPSG::4326&amp;outputformat=geojson</code></td>
+                      <td><code>{{ service_url }}?service=WFS&amp;version=2.0.0&amp;REQUEST=GetFeature&amp;TYPENAMES={{ typename }}&amp;STARTINDEX=0&amp;COUNT=1000&amp;SRSNAME=urn:ogc:def:crs:EPSG::4326&amp;BBOX=4.5,43,7.7,45,urn:ogc:def:crs:EPSG::4326&amp;outputformat=geojson</code></td>
                     </tr>
                     <tr>
                       <th scope="row">Connaître la liste des attributs et leur type d'une couche (DescribeFeatureType)</th>
@@ -258,15 +281,16 @@
               </div>
             </div>
           </div>
+          {# endif #}
           <div class="accordion-group">
             <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion-api-geo" href="#collapse3">Ajouter un flux WMS/WFS de votre organisation dans QGIS »</a>
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion-api-geo" href="#collapse3">Ajouter un flux WMS{# if WFS only #}/WFS{# endif #} de votre organisation dans QGIS »</a>
             </div>
             <div id="collapse3" class="accordion-body collapse">
               <div class="accordion-inner">
                 <p>
                   <ul>
-                    <li>Choisissez "Ajouter une couche WMS" (raster) ou "Ajouter une couche WFS" (vecteur)</li>
+                    <li>Choisissez "Ajouter une couche WMS" (raster){# if WFS only #} ou "Ajouter une couche WFS" (vecteur){# endif #}</li>
                     <li>"Nouveau"</li>
                     <li>Choisissez un NOM pour votre connexion</li>
                     <li>Copier/coller l'URL : {{ service_url }}</li>
