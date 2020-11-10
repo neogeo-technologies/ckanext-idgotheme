@@ -4664,6 +4664,7 @@ footer #menu-menu-footer li a{
     -moz-transition: all 0.4s ease;
     -o-transition: all 0.4s ease;
     transition: all 0.4s ease;
+    font-size: 12px;
 }
 footer #menu-menu-footer li a:hover{
 	color: #c6c6c6;
