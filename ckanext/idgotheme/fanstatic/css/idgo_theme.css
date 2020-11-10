@@ -1642,9 +1642,11 @@ body:not(.crigepaca-front-page) .entry-header {
 	padding: 1em 0 2em;
 }
 
+/*
 .widget {
 	padding-bottom: 3em;
 }
+*/
 
 h2.widget-title {
 	color: #222;
@@ -4669,6 +4671,37 @@ footer #menu-menu-footer li a{
 footer #menu-menu-footer li a:hover{
 	color: #c6c6c6;
 	box-shadow:none;
+}
+
+/* Logos partenaire */
+footer .soutien_financier li:first-child {
+    margin-top: 30px;
+    width: 100%;
+    color: black;
+}
+footer .soutien_financier li:nth-child(3) {
+    width: 60px;
+}
+footer .soutien_financier li,
+footer #menu-menu-footer li {
+    display: inline-block;
+    vertical-align: top;
+    border: none;
+    text-transform: uppercase;
+    font-size: 15px;
+    padding-left: 10px;
+}
+footer .soutien_financier li a {
+    height: 40px;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+footer .soutien_financier li a img{
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
 }
 /*twitter*/
 footer .twitter {
