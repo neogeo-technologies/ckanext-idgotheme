@@ -668,7 +668,7 @@ body {
     letter-spacing: 0.08em;
     margin: 0;
     padding: 0;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 .site-title,
