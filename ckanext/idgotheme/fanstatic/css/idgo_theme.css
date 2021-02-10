@@ -3612,19 +3612,19 @@ header .site-branding-text .header_espaces a:hover{
 	border-color:   #ff554f;
 }
 header .site-branding-text .header_espaces a.documentaire {
-	background-image: url(https://www.datasud.fr/wp-content/themes/crigepaca/assets/images/svg/espace_documentaire.svg);
+	background-image: url(/svg/espace_documentaire.svg);
 }
 header .site-branding-text .header_espaces a.documentaire:hover {
-	background-image: url(https://www.datasud.fr/wp-content/themes/crigepaca/assets/images/svg/espace_documentaire_hover.svg);
+	background-image: url(/svg/espace_documentaire_hover.svg);
 	background-repeat: no-repeat;
 	background-position: left 10px center;
 	background-size: 30px auto;
 }
 header .site-branding-text .header_espaces a.dev {
-	background-image: url(https://www.datasud.fr/wp-content/themes/crigepaca/assets/images/svg/espace_dev.svg);
+	background-image: url(/svg/espace_dev.svg);
 }
 header .site-branding-text .header_espaces a.dev:hover {
-	background-image: url(https://www.datasud.fr/wp-content/themes/crigepaca/assets/images/svg/espace_dev_hover.svg);
+	background-image: url(/svg/espace_dev_hover.svg);
 	background-repeat: no-repeat;
 	background-position: left 10px center;
 	background-size: 30px auto;
@@ -3808,7 +3808,7 @@ header .navigation-top #top-menu li.bleu a:before{
 }
 #recherche .form_search #searchsubmit {
 	background-color: #0072bc;
-	background-image: url(assets/images/svg/loupe.svg);
+	background-image: url(a/svg/loupe.svg);
 	background-repeat: no-repeat;
 	background-position: center;
 	box-shadow: none;
@@ -3890,13 +3890,13 @@ header .navigation-top #top-menu li.bleu a:before{
 }
 #blocs .bloc_content:first-child {
 	background-color: #ffba13;
-	background-image: url(assets/images/svg/publier_donnees.svg);
+	background-image: url(/svg/publier_donnees.svg);
 	background-position: left 70px center;
 	background-size: auto 165%;
 }
 #blocs .bloc_content:last-child{
 	background-color: #ff554f;
-	background-image: url(assets/images/svg/trouver_donnees.svg);
+	background-image: url(/svg/trouver_donnees.svg);
 	background-position: right 70px center;
 	background-size: auto 125%;
 }
