@@ -62,7 +62,7 @@
     {% endif %}
     {% endblock %}
     {% if res.data_type != 'service' and ( res.extracting_service == 'True') %}
-    {% if (h.is_crige_partner()) %}
+    {% if (h.is_partner()) %}
     <a href="{{ h.idgotheme_get_url_extracteur() }}/extractor/?resource={{ res.id }}" class="btn btn-primary" target="_blank">
       <i class="fa fa-lg fa-filter"></i>
       <span>Extracteur</span>
@@ -138,7 +138,7 @@
         <button class="close" data-dismiss="modal">×</button>
         <div class="modal-custom-content">
 	      {% set ihm_settings = h.get_ihm_settings() %}
-          {{ h.render_markdown(ihm_settings['download-modal-res-list'].content) }}       
+          {{ h.render_markdown(ihm_settings['download-modal-res-list'].content) }}
 	    </div>
       </div>
     </div>

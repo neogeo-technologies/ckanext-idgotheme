@@ -5624,13 +5624,16 @@ div.dataset-item-organization-title {
     background-color: transparent;
 }
 
+.banner-support[data-format=region-sud-scotigeo],
+.banner-support[data-format=region-sud],
 .banner-support[data-format=region-paca] {
     background-color: #fc7300;
 }
+
+/* TO DELETE */
 .banner-support[data-format=crige-paca] {
     background-color: #6e53b2;
 }
-
 
 /* Facet : clear all & sort */
 a.clear-all-action {

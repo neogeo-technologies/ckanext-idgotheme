@@ -114,4 +114,4 @@ var crigepacaScreenReaderText = {
 		});
 	})();
 })( jQuery );
- 
+

@@ -57,7 +57,7 @@ def trad_thematiques_maj():
     return THEMATIQUES_MAJ
 
 
-def is_crige_partner():
+def is_partner():
     if not c.userobj:
         return False
     if c.userobj.sysadmin:
@@ -122,7 +122,7 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
             'trad_thematique_maj': trad_thematique_maj,
             'trad_thematiques_min': trad_thematiques_min,
             'trad_thematiques_maj': trad_thematiques_maj,
-            'is_crige_partner': is_crige_partner,
+            'is_partner': is_partner,
             'proxy_export': self.proxy_export,
             'get_res_api': self.get_res_api,
             'get_ihm_settings': get_ihm_settings,
