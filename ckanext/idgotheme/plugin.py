@@ -103,6 +103,10 @@ def href_gdpr():
     return config.get('ckanext.idgotheme.href_gdpr')
 
 
+def get_matomo_site_url():
+    return config.get('ckanext.idgotheme.matomo_site_url', '')
+
+
 # Traduction "Groupes" en "Thématiques"
 THEMATIQUE_MIN = u"thématique"
 THEMATIQUE_MAJ = u"Thématique"
@@ -204,6 +208,7 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
             'idgotheme_get_url_wp': get_url_wp,
             'idgotheme_get_url_publier': get_url_publier,
             'idgotheme_get_url_extracteur': get_url_extracteur,
+            'idgotheme_get_matomo_site_url': get_matomo_site_url,
             'trad_thematique_min': trad_thematique_min,
             'trad_thematique_maj': trad_thematique_maj,
             'trad_thematiques_min': trad_thematiques_min,
