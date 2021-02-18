@@ -9,6 +9,7 @@
 
 {% set matomo_site_url = h.idgotheme_get_matomo_site_url() %}
 {% set matomo_site_id = h.idgotheme_get_matomo_site_id() %}
+{% if matomo_site_url and matomo_site_id %}
 <script>
 var _paq = window._paq || [];
 /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
@@ -22,7 +23,7 @@ _paq.push(['enableLinkTracking']);
   g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
 })();
 </script>
-
+{% endif %}
 {% endblock %}
 
 {% block styles %}
