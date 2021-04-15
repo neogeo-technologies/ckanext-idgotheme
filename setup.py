@@ -21,7 +21,7 @@ from codecs import open  # To use a consistent encoding
 from os import path
 
 
-version = '1.12'
+version = '1.13'
 
 
 here = path.abspath(path.dirname(__file__))
