@@ -69,6 +69,8 @@ def get_url_publier():
 def get_url_extracteur():
     return config.get('ckanext.idgotheme.url_site_extracteur', '')
 
+def get_url_rawgraphs():
+    return config.get('ckanext.idgotheme.url_rawgraphs', '')
 
 def get_url_site_wp():
     url_site_wp = config.get('ckanext.idgotheme.url_site_wp', '')
