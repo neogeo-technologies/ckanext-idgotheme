@@ -78,7 +78,7 @@
     {% endif %}
     <a class="btn btn-primary" data-toggle="modal" data-target="#my-modal-api-geo"><i class="fa fa-lg fa-flask"></i> API Géo</a>
     {% endif %}
-    {% if res.datastore_active and res.format == 'CSV' and h.idgotheme_get_url_rawgraphs() != '' %}
+    {% if res.datastore_active and h.idgotheme_get_url_rawgraphs() != '' %}
 	  <a href="{{ h.idgotheme_get_url_rawgraphs() }}?csv_url={{ h.url_for(controller='ckanext.datastore.controller:DatastoreController', action='dump', resource_id=res.id, bom=True) }}" class="btn btn-primary" target="_blank">
       <i class="fa fa-lg fa-filter"></i>
       <span>Voir dans RawGraphs</span>
