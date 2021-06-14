@@ -201,6 +201,7 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
             'idgotheme_get_url_wp': get_url_wp,
             'idgotheme_get_url_publier': get_url_publier,
             'idgotheme_get_url_extracteur': get_url_extracteur,
+            'idgotheme_get_url_rawgraphs': get_url_rawgraphs,
             'trad_thematique_min': trad_thematique_min,
             'trad_thematique_maj': trad_thematique_maj,
             'trad_thematiques_min': trad_thematiques_min,
