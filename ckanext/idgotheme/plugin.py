@@ -101,6 +101,47 @@ def href_credit():
     return config.get('ckanext.idgotheme.href_credit')
 
 
+def get_url_site_wp():
+    url_site_wp = config.get('ckanext.idgotheme.url_site_wp', '')
+    return url_site_wp
+
+
+def href_accessibility():
+    return config.get('ckanext.idgotheme.href_accessibility')
+
+
+def href_terms_and_conditions():
+    return config.get('ckanext.idgotheme.href_terms_and_conditions')
+
+
+def href_legal_notices():
+    return config.get('ckanext.idgotheme.href_legal_notices')
+
+
+def href_contact():
+    return config.get('ckanext.idgotheme.href_contact')
+
+
+def href_site_map():
+    return config.get('ckanext.idgotheme.href_site_map')
+
+
+def href_credit():
+    return config.get('ckanext.idgotheme.href_credit')
+
+
+def href_gdpr():
+    return config.get('ckanext.idgotheme.href_gdpr')
+
+
+def get_matomo_site_url():
+    return config.get('ckanext.idgotheme.matomo_site_url', '')
+
+
+def get_matomo_site_id():
+    return config.get('ckanext.idgotheme.matomo_site_id', '')
+
+
 # Traduction "Groupes" en "Thématiques"
 THEMATIQUE_MIN = u"thématique"
 THEMATIQUE_MAJ = u"Thématique"
@@ -198,10 +239,13 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
             'idgotheme_href_contact': href_contact,
             'idgotheme_href_site_map': href_site_map,
             'idgotheme_href_credit': href_credit,
+            'idgotheme_href_gdpr': href_gdpr,
             'idgotheme_get_url_wp': get_url_wp,
             'idgotheme_get_url_publier': get_url_publier,
             'idgotheme_get_url_extracteur': get_url_extracteur,
             'idgotheme_get_url_rawgraphs': get_url_rawgraphs,
+            'idgotheme_get_matomo_site_url': get_matomo_site_url,
+            'idgotheme_get_matomo_site_id': get_matomo_site_id,
             'trad_thematique_min': trad_thematique_min,
             'trad_thematique_maj': trad_thematique_maj,
             'trad_thematiques_min': trad_thematiques_min,
@@ -209,6 +253,8 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
             'is_idgo_partner': is_idgo_partner,
             'proxy_export': self.proxy_export,
             'get_res_api': self.get_res_api,
+            'get_res_wms_capabilities_url': self.get_res_wms_capabilities_url,
+            'get_res_wfs_capabilities_url': self.get_res_wfs_capabilities_url,
             'get_ihm_settings': get_ihm_settings,
             'get_platform_name': get_platform_name,
             'get_readthedocs_url': get_readthedocs_url,
@@ -236,6 +282,22 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
                     continue
                 api[key] = api.pop(key).replace(api['url'], service_url)
         return api
+
+    def get_res_wms_capabilities_url(self, url):
+        urlsplit = url.split('#')
+        url = urlsplit[0]
+        layername = len(urlsplit) == 2 and urlsplit[1] or None
+        if url.endswith('?'):
+            url = url[:-1]
+        return '%s?SERVICE=WMS&REQUEST=GetCapabilities' % url, layername
+
+    def get_res_wfs_capabilities_url(self, url):
+        urlsplit = url.split('#')
+        url = urlsplit[0]
+        layername = len(urlsplit) == 2 and urlsplit[1] or None
+        if url.endswith('?'):
+            url = url[:-1]
+        return '%s?SERVICE=WFS&REQUEST=GetCapabilities' % url, layername
 
     # IConfigurer
     def update_config(self, config_):

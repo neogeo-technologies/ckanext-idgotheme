@@ -1,0 +1,4 @@
+.resource-additional-information tr[name="restricted"] {
+  display: none;
+  visibility: hidden;
+}

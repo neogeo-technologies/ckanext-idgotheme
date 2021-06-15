@@ -6,6 +6,24 @@
 {% resource 'idgotheme/js/menu.js' %}
 {% resource 'idgotheme/js/sort_facets.js' %}
 {% resource 'idgotheme/js/sort_data.js' %}
+
+{% set matomo_site_url = h.idgotheme_get_matomo_site_url() %}
+{% set matomo_site_id = h.idgotheme_get_matomo_site_id() %}
+{% if matomo_site_url and matomo_site_id %}
+<script>
+var _paq = window._paq || [];
+/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+_paq.push(['trackPageView']);
+_paq.push(['enableLinkTracking']);
+(function() {
+  var u="//{{ matomo_site_url }}/";
+  _paq.push(['setTrackerUrl', u+'matomo.php']);
+  _paq.push(['setSiteId', '{{ matomo_site_id }}']);
+  var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+  g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+})();
+</script>
+{% endif %}
 {% endblock %}
 
 {% block styles %}
@@ -13,4 +31,5 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400" rel="stylesheet">
 {% resource 'idgotheme/css/idgo_theme.css' %}
+{% resource 'idgotheme/css/overload.css' %}
 {% endblock %}

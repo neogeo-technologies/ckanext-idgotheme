@@ -4,6 +4,8 @@
 {% set href_contact = h.idgotheme_href_contact() %}
 {% set href_site_map = h.idgotheme_href_site_map() %}
 {% set href_credit = h.idgotheme_href_credit() %}
+{% set href_gdpr = h.idgotheme_href_gdpr() %}
+
 <footer id="colophon" class="site-footer" role="contentinfo">
   <div class="wrap">
     <div class="widget-area" role="complementary">
@@ -34,6 +36,10 @@
               <li id="menu-item-63" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-63">
                 <i class="fa fa-caret-right" aria-hidden="true"></i>
                 <a href="{{ href_credit }}">Crédit</a>
+              </li>{% endif %}{% if href_gdpr %}
+              <li id="menu-item-63" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-63">
+                <i class="fa fa-caret-right" aria-hidden="true"></i>
+                <a href="{{ href_gdpr }}">RGPD</a>
               </li>{% endif %}
             </ul>
           </div>
