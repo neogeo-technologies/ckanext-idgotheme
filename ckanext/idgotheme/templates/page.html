@@ -124,4 +124,34 @@
       {% resource 'base/tracking.js' %}
     {% endif %}
   {{ super() }}
+  <script>!(function () {
+      let e = document.createElement("script"),
+        t = document.head || document.getElementsByTagName("head")[0];
+      (e.src =
+        "https://cdn.jsdelivr.net/npm/@anthonygigerich/rasa-webchat@1.1.1/lib/index.js"),
+
+        (e.async = !0),
+        (e.onload = () => {
+          window.WebChat.default(
+            {
+              title: 'Databot',
+              inputTextFieldHint: "Ecrivez votre message...",
+              socketUrl: "https://chatbot.datasud.fr",
+              initPayload: "/get_started",
+              customData: { language: "fr" },
+              withRules: true,
+              showRestartButton: true,
+              showFullScreenButton: true,
+              params: {
+                storage: 'session'
+              },
+
+            },
+            null
+          );
+        }),
+        t.insertBefore(e, t.firstChild);
+    })();
+  </script>
+
 {% endblock -%}
