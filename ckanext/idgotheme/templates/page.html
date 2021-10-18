@@ -132,6 +132,7 @@
 
         (e.async = !0),
         (e.onload = () => {
+        if (window.screen.width > 700) {
           window.WebChat.default(
             {
               title: 'Databot',
@@ -149,6 +150,7 @@
             },
             null
           );
+         }
         }),
         t.insertBefore(e, t.firstChild);
     })();
