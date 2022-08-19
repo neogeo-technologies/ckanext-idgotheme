@@ -50,6 +50,17 @@
       </a>
     </span>
     {% endif %}
+    {% if (h.is_idgo_partner()) %}
+    <a href="{{ h.idgotheme_get_url_extracteur() }}/extractor_dalles/?resource_beta={{ res.id }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Extracteur de dalles">
+      <i class="fa fa-globe"></i>
+    </a>
+    {% else %}
+    <span data-toggle="modal" data-target="#extractor-redirect-modal-res-list">
+      <a class="btn btn-primary" data-toggle="tooltip" title="Extracteur de dalles">
+        <i class="fa fa fa-globe"></i>
+      </a>
+    </span>
+    {% endif %}
     {% endif %}
 
     {% if can_edit and res.data_type != "service" %}
