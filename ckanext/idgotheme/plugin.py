@@ -112,6 +112,10 @@ def get_matomo_site_id():
     return config.get('ckanext.idgotheme.matomo_site_id', '')
 
 
+def get_url_rastertile_extract():
+    return config.get('ckanext.idgotheme.url_site_rastertile_extracteur', '')
+
+
 # Traduction "Groupes" en "Thématiques"
 THEMATIQUE_MIN = u"thématique"
 THEMATIQUE_MAJ = u"Thématique"
@@ -216,6 +220,7 @@ class IdgothemePlugin(p.SingletonPlugin, _SchemingMixin):
             'idgotheme_get_url_rawgraphs': get_url_rawgraphs,
             'idgotheme_get_matomo_site_url': get_matomo_site_url,
             'idgotheme_get_matomo_site_id': get_matomo_site_id,
+            'idgotheme_get_url_rastertile_extract': get_url_rastertile_extract,
             'trad_thematique_min': trad_thematique_min,
             'trad_thematique_maj': trad_thematique_maj,
             'trad_thematiques_min': trad_thematiques_min,
