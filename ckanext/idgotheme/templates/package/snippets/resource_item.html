@@ -39,7 +39,7 @@
     {# endif #}
 
     {% if h.is_idgo_partner() and res.rastertile_extract == 'True' %}
-    <a href="{{ h.idgotheme_get_url_rastertile_extract() }}/{{ res.id }}/" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Extracteur de dalles">
+    <a href="{{ h.idgotheme_get_url_rastertile_extract(res.id) }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Extracteur de dalles">
       <i class="fa fa-globe"></i>
     </a>
     {% else %}

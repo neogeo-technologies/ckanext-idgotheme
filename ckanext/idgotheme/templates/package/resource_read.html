@@ -69,7 +69,7 @@
     {% endblock %}
 
     {% if h.is_idgo_partner() and res.rastertile_extract == 'True' %}
-    <a href="{{ h.idgotheme_get_url_rastertile_extract() }}/{{ res.id }}/" class="btn btn-primary" target="_blank">
+    <a href="{{ h.idgotheme_get_url_rastertile_extract(res.id) }}" class="btn btn-primary" target="_blank">
       <i class="fa fa-globe"></i>
       <span>Extracteur de dalles</span>
     </a>
