@@ -68,7 +68,8 @@
     {% endif %}
     {% endblock %}
 
-    {% if h.is_idgo_partner() and res.rastertile_extract == 'True' %}
+    {% if res.rastertile_extract == 'True' %}
+    {% if h.is_idgo_partner() %}
     <a href="{{ h.idgotheme_get_url_rastertile_extract(res.id) }}" class="btn btn-primary" target="_blank">
       <i class="fa fa-globe"></i>
       <span>Extracteur de dalles</span>
@@ -79,8 +80,9 @@
       <span>Extracteur de dalles</span>
     </a>
     {% endif %}
+    {% endif %}
 
-    {% if res.data_type != 'service' and (res.extracting_service == 'True') and not res_api.lineage == 'idgo_resource_raster_tile' %}
+    {% if res.data_type != 'service' and res.extracting_service == 'True' and not res_api.lineage == 'idgo_resource_raster_tile' %}
     {% if (h.is_idgo_partner()) %}
     <a href="{{ h.idgotheme_get_url_extracteur() }}?resource={{ res.id }}" class="btn btn-primary" target="_blank">
       <i class="fa fa-lg fa-filter"></i>
