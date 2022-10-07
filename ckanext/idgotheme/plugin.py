@@ -174,7 +174,7 @@ def get_ihm_settings():
         # Résout #8789 avec try..except
         try:
             data.update(r.json())
-        except json.decoder.JSONDecodeError:
+        except Exception:
             pass
     return data
 
