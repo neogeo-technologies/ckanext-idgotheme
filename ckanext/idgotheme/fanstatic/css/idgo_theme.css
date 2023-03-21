@@ -4748,6 +4748,7 @@ footer .twitter > div > * {
 }
 footer .twitter > div > div {
 	width: calc(100% - 90px);
+	text-align: initial;
 }
 footer .twitter > div > div a {
 	display: inline-block;
