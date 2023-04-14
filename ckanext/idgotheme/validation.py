@@ -49,7 +49,7 @@ def generic_date_validator(metadata_key, key, data, errors, context):
         else:
             try:
                 date = datetime.datetime.strptime(value, '%Y-%m-%d')
-            except (TypeError, ValueError):
+            except (TypeError, ValueError, AttributeError):
                 raise Invalid(_('Date format incorrect'))
 
         data[(metadata_key, )] = date.isoformat()
