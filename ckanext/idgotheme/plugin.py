@@ -112,6 +112,10 @@ def get_matomo_site_id():
     return config.get('ckanext.idgotheme.matomo_site_id', '')
 
 
+def href_gdpr():
+    return config.get('ckanext.idgotheme.href_gdpr')
+
+
 # Traduction "Groupes" en "Thématiques"
 THEMATIQUE_MIN = u"thématique"
 THEMATIQUE_MAJ = u"Thématique"
