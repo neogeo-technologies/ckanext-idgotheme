@@ -114,7 +114,7 @@ def get_matomo_site_url():
 def get_matomo_site_id():
     return config.get('ckanext.idgotheme.matomo_site_id', '')
 
-
+  
 def get_url_rastertile_extract(id):
     url = config.get('ckanext.idgotheme.url_site_rastertile_extract', '')
     return url.replace('{uuid}', id)
@@ -182,7 +182,7 @@ def get_ihm_settings():
         # Résout #8789 avec try..except
         try:
             data.update(r.json())
-        except json.decoder.JSONDecodeError:
+        except Exception:
             pass
     return data
 
