@@ -68,18 +68,32 @@
     {% endif %}
     {% endblock %}
 
-    {% if res.data_type != 'service' and (res.extracting_service == 'True') and not res_api.lineage == 'idgo_resource_raster_tile' %}
-      {% if (h.is_idgo_partner()) %}
+    {% if res.rastertile_extract == 'True' %}
+    {% if h.is_idgo_partner() %}
+    <a href="{{ h.idgotheme_get_url_rastertile_extract(res.id) }}" class="btn btn-primary" target="_blank">
+      <i class="fa fa-globe"></i>
+      <span>Extracteur de dalles</span>
+    </a>
+    {% else %}
+    <a class="btn btn-primary" data-toggle="modal" data-target="#extractor-redirect-modal-res">
+      <i class="fa fa-globe"></i>
+      <span>Extracteur de dalles</span>
+    </a>
+    {% endif %}
+    {% endif %}
+
+    {% if res.data_type != 'service' and res.extracting_service == 'True' and not res_api.lineage == 'idgo_resource_raster_tile' %}
+    {% if (h.is_idgo_partner()) %}
     <a href="{{ h.idgotheme_get_url_extracteur() }}?resource={{ res.id }}" class="btn btn-primary" target="_blank">
       <i class="fa fa-lg fa-filter"></i>
       <span>Extracteur</span>
     </a>
-      {% else %}
+    {% else %}
     <a class="btn btn-primary" data-toggle="modal" data-target="#extractor-redirect-modal-res">
       <i class="fa fa-lg fa-filter"></i>
       <span>Extracteur</span>
     </a>
-      {% endif %}
+    {% endif %}
     <a class="btn btn-primary" data-toggle="modal" data-target="#my-modal-api-geo"><i class="fa fa-lg fa-flask"></i> API Géo</a>
     {% endif %}
 

@@ -38,8 +38,22 @@
     </a>
     {# endif #}
 
-    {% if res.data_type != "service" and ( res.extracting_service == 'True') %}
-    {% if (h.is_idgo_partner()) %}
+    {% if res.rastertile_extract == 'True' %}
+    {% if h.is_idgo_partner() %}
+    <a href="{{ h.idgotheme_get_url_rastertile_extract(res.id) }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Extracteur de dalles">
+      <i class="fa fa-globe"></i>
+    </a>
+    {% else %}
+    <span data-toggle="modal" data-target="#extractor-redirect-modal-res-list">
+      <a class="btn btn-primary" data-toggle="tooltip" title="Extracteur de dalles">
+        <i class="fa fa fa-globe"></i>
+      </a>
+    </span>
+    {% endif %}
+    {% endif %}
+
+    {% if res.data_type != "service" and res.extracting_service == 'True' %}
+    {% if h.is_idgo_partner() %}
     <a href="{{ h.idgotheme_get_url_extracteur() }}?{% if res_api.lineage == 'idgo_resource_raster_tile' %}resource_beta{% else %}resource{% endif %}={{ res.id }}" class="btn btn-primary" target="_blank" data-toggle="tooltip" title="Extracteur">
       <i class="fa fa-lg fa-filter"></i>
     </a>
