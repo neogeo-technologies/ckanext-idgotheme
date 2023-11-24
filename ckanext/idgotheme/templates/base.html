@@ -33,3 +33,8 @@ _paq.push(['enableLinkTracking']);
 {% resource 'idgotheme/css/idgo_theme.css' %}
 {% resource 'idgotheme/css/overload.css' %}
 {% endblock %}
+
+{% block head_extras %} 
+{{ super() }}
+<script defer data-domain="ckan.openig.org" src="https://plausible.openig.org/js/script.js"></script>
+{% endblock %}
