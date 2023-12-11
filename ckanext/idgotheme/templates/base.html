@@ -34,7 +34,24 @@ _paq.push(['enableLinkTracking']);
 {% resource 'idgotheme/css/overload.css' %}
 {% endblock %}
 
-{% block head_extras %} 
+{% block head_extras %}
 {{ super() }}
 <script defer data-domain="ckan.openig.org" src="https://plausible.openig.org/js/script.js"></script>
+<script defer data-domain="ckan.openig.org" src="https://plausible.openig.org/js/script.tagged-events.file-downloads.js"></script>
+<script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+{% endblock %}
+
+
+{% block body_extras %}
+{{ super() }}
+<script>
+  var boutons = document.querySelectorAll(".download-button-resource");
+  boutons.forEach(function(bouton) {
+    bouton.addEventListener('click', function(e) {
+        var url = e.currentTarget.href;
+        console.log(url);
+        plausible('Bouton', {props: {url: url}});
+    });
+  });
+</script>
 {% endblock %}
